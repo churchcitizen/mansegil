@@ -111,7 +111,7 @@ button.chip:active{transform:scale(.96)}
 .top-util > * + *::before{content:"";position:absolute;left:0;top:50%;width:1px;height:10px;margin-top:-5px;background:var(--line-2)}
 .top-util a:hover,.top-util button:hover{color:var(--ink)}
 .top-util .me{color:var(--ink);font-weight:600}
-.top-util .adm{color:var(--accent);font-weight:700}
+.top-util .adm-link{color:var(--accent);font-weight:700}
 .top-util > :last-child{padding-right:0}
 @media (max-width:560px){.top-util .opt{display:none}.top-util > *::before{display:none}}
 .brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.02em;white-space:nowrap}
@@ -711,21 +711,29 @@ button.chip:active{transform:scale(.96)}
 .toast .ic{width:18px;height:18px;color:#9fd3a8}
 
 /* ===================== 관리자 ===================== */
-.adm{min-height:100vh;background:#f1f1ec}
-.adm-top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:12px;height:64px;padding:0 var(--gutter);padding-top:env(safe-area-inset-top,0px);background:var(--glass-light);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.adm-top .brand{font-size:16px}
-.adm-top .brand small{opacity:1;color:var(--accent);font-weight:700}
-.adm-role{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted)}
-.adm-wrap{display:grid;grid-template-columns:232px minmax(0,1fr);gap:0;max-width:1480px;margin-inline:auto}
-.adm-nav{position:sticky;top:64px;align-self:start;height:calc(100vh - 64px);overflow:auto;padding:20px 12px 20px var(--gutter);display:flex;flex-direction:column;gap:2px}
-.adm-nav button{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 14px;border-radius:12px;font-size:15px;font-weight:500;color:var(--ink-2);text-align:left;transition:background-color var(--d-2),color var(--d-2)}
-.adm-nav button:hover{background:rgba(20,25,23,.05)}
-.adm-nav button[aria-current="page"]{background:var(--ink);color:#fff}
-.adm-nav button .n{margin-left:auto;font-size:12px;font-weight:700;opacity:.75}
-.adm-nav .ic{width:18px;height:18px}
-.adm-main{padding:26px var(--gutter) 80px 18px;min-width:0}
-.adm-main h2{margin:0;font-size:28px;letter-spacing:-.035em}
-.adm-sub{margin:6px 0 22px;color:var(--muted);font-size:14.5px}
+.adm{--adm-bg:#f3efe6;--adm-line:#e1dacb;--adm-side:#121212;--adm-side-2:#1d1d1d;--adm-side-3:#2b2b2b;--adm-side-line:#262626;
+  display:grid;grid-template-columns:224px minmax(0,1fr);min-height:100vh;background:var(--adm-bg);font-size:14px}
+.adm-side{position:sticky;top:0;align-self:start;display:flex;flex-direction:column;height:100vh;background:var(--adm-side);color:#e6e6e6}
+.adm-logo{display:flex;align-items:center;gap:11px;padding:20px 18px 18px;border-bottom:1px solid var(--adm-side-line);color:#fff}
+.adm-logo .brand-mark{flex:0 0 auto;width:34px;height:34px;border-color:rgba(255,255,255,.85)}
+.adm-logo b{display:flex;align-items:center;gap:6px;font-size:19px;font-weight:800;letter-spacing:-.04em;line-height:1.1}
+.adm-logo b i{font-style:normal;padding:1px 5px 2px;border-radius:2px;background:#d6201a;color:#fff;font-size:13px;font-weight:800;letter-spacing:-.01em}
+.adm-logo small{display:block;margin-top:4px;font-size:11.5px;color:#9b9b9b;letter-spacing:-.01em}
+.adm-nav{flex:1;overflow:auto;display:flex;flex-direction:column;padding:8px 0 24px;scrollbar-width:thin;scrollbar-color:#333 transparent}
+.adm-nav-h{display:block;padding:16px 18px 6px;font-size:11.5px;font-weight:600;letter-spacing:.02em;color:#8a8a8a}
+.adm-nav button{display:flex;align-items:center;gap:10px;width:100%;min-height:38px;padding:0 18px;font-size:14px;font-weight:500;color:#d9d9d9;text-align:left;transition:background-color var(--d-1),color var(--d-1)}
+.adm-nav button .ic{display:none}
+.adm-nav button:hover{background:var(--adm-side-2);color:#fff}
+.adm-nav button[aria-current="page"]{background:var(--adm-side-3);color:#fff;font-weight:700}
+.adm-nav button .n{display:grid;place-items:center;min-width:22px;height:22px;margin-left:auto;padding:0 6px;border-radius:999px;background:#fff;color:#111;font-size:12px;font-weight:700}
+.adm-side-foot{display:flex;align-items:center;gap:8px;padding:14px 18px;border-top:1px solid var(--adm-side-line);font-size:12px;color:#8a8a8a}
+.adm-side-foot a{color:#cfcfcf;font-weight:700;letter-spacing:.02em}
+.adm-body{display:flex;flex-direction:column;min-width:0}
+.adm-top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:56px;padding:0 28px;padding-top:env(safe-area-inset-top,0px);background:rgba(243,239,230,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--adm-line)}
+.adm-role{display:inline-flex;align-items:center;gap:8px;margin-right:auto;font-size:13px;color:var(--muted)}
+.adm-main{width:100%;max-width:1520px;padding:24px 28px 80px;min-width:0}
+.adm-main h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-.03em}
+.adm-sub{margin:5px 0 18px;color:var(--muted);font-size:13.5px}
 .adm-panel{animation:fade-up 360ms var(--ease-out) both}
 .kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;margin-bottom:18px}
 .kpi{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px}
@@ -789,18 +797,57 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
 .drawer-sec{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:var(--muted);margin-bottom:16px}
 .drawer-sec b{color:var(--ink)}
 .drawer-h{margin:22px 0 10px;font-size:15px}
+/* 관리자 부품: 각진 카드·표·단추 (ccn24 관리자 프로그램과 같은 결) */
+.adm .kpis{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.adm .kpi{border-radius:4px;border-color:var(--adm-line);padding:14px 16px}
+.adm .kpi small{font-size:12px}
+.adm .kpi b{margin-top:8px;font-size:clamp(18px,1.5vw,22px);font-weight:800;white-space:nowrap}
+.adm .kpi em{font-size:12px}
+.adm .card{border-radius:4px;border-color:var(--adm-line);padding:16px 18px;margin-bottom:14px}
+.adm .card h3{font-size:15.5px;font-weight:800}
+.adm .grid-2{gap:14px}
+.adm .tbl-wrap{border-radius:4px;border-color:var(--adm-line)}
+.adm .tbl{font-size:13.5px}
+.adm .tbl th{background:#f6f3ec;font-size:12px;color:#6b6457}
+.adm .tbl td{border-bottom-color:#ece7dc}
+.adm .tbl tbody tr.clickable:hover{background:#faf8f3}
+.adm .tbl tfoot td{background:#f6f3ec}
+.adm .btn,body.adm-mode .modal .btn{border-radius:4px;min-height:40px}
+.adm .btn.sm,body.adm-mode .modal .btn.sm{min-height:36px;padding:0 14px}
+.adm .btn.xs,body.adm-mode .modal .btn.xs{border-radius:3px;min-height:30px}
+.adm .btn:not(.btn-line):not(.btn-accent),body.adm-mode .modal .btn:not(.btn-line):not(.btn-accent){--bg-c:#111;--fg-c:#fff}
+.adm .btn-line,body.adm-mode .modal .btn-line{--bg-c:#fff;border-color:#cdc5b4}
+.adm .btn:hover,body.adm-mode .modal .btn:hover{box-shadow:none}
+.adm .pill,body.adm-mode .modal .pill{border-radius:3px}
+.adm .seg{border-radius:4px;padding:3px;background:#e9e3d6}
+.adm .seg button{border-radius:3px;min-height:34px}
+.adm .chip{border-radius:4px}
+.adm .input,.adm .select,.adm .textarea,.adm textarea.doc,body.adm-mode .modal .input,body.adm-mode .modal .select,body.adm-mode .modal .textarea{border-radius:4px}
+.adm .adm-note{border-radius:4px;background:#ebe5d8}
+.adm .pos,.adm .hq{border-radius:4px;border-color:var(--adm-line)}
+.adm .person{border-radius:3px}
+.adm .todo li{padding:12px 0}
+.adm .todo li .pill{min-width:44px;justify-content:center;border:1px solid currentColor;background:transparent}
+.adm .empty{border-bottom-color:var(--adm-line)}
+body.adm-mode .modal-panel{border-radius:6px}
+body.adm-mode .modal.drawer .modal-panel{border-radius:0}
+body.adm-mode .leave-guard{border-radius:4px}
 @media (max-width:980px){
-  .adm-wrap{grid-template-columns:minmax(0,1fr)}
-  .adm-nav{position:sticky;top:64px;z-index:30;height:auto;flex-direction:row;overflow-x:auto;padding:10px var(--gutter);background:#f1f1ec;border-bottom:1px solid var(--line);scrollbar-width:none}
-  .adm-nav button{flex:0 0 auto;min-height:40px}
-  .adm-nav button .n{display:none}
-  .adm-main{padding:20px var(--gutter) 80px}
-  .grid-2{grid-template-columns:minmax(0,1fr)}
+  .adm{grid-template-columns:minmax(0,1fr)}
+  .adm-side{position:sticky;top:0;z-index:50;height:auto}
+  .adm-logo{padding:12px 16px;border-bottom:0}
+  .adm-logo .brand-mark{width:30px;height:30px}
+  .adm-logo b{font-size:17px}
+  .adm-nav{flex-direction:row;overflow-x:auto;padding:0 8px 10px;scrollbar-width:none}
+  .adm-nav-h,.adm-side-foot{display:none}
+  .adm-nav button{flex:0 0 auto;width:auto;min-height:36px;padding:0 12px;border-radius:4px}
+  .adm-nav button .n{min-width:18px;height:18px;font-size:11px}
+  .adm-top{position:static;padding:8px 16px;min-height:0;flex-wrap:wrap}
+  .adm-main{padding:18px 16px 80px}
+  .adm .grid-2{grid-template-columns:minmax(0,1fr)}
   .adm-role .who{display:none}
 }
-@media (max-width:520px){.adm-top .brand .brand-mark{display:none}.adm-top .btn.sm{padding:0 12px}}
-/* 좁은 화면: 역할 표시와 '홈페이지' 단추를 숨긴다(로고를 누르면 홈페이지로 간다) */
-@media (max-width:560px){.adm-role,.adm-top a.btn{display:none}.adm-top .brand{margin-right:auto}}
+@media (max-width:560px){.adm-role,.adm-top a.btn{display:none}}
 
 /* ===================== 3·1운동 이야기 ===================== */
 .hist{--h-fg:#efe7d6;--h-mute:rgba(239,231,214,.68);--h-line:rgba(239,231,214,.16);--h-acc:#e0705c;background:#1d1912;color:var(--h-fg)}
@@ -1539,15 +1586,18 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
 
 <!-- ===================================================== 관리자 ===================================================== -->
 <div id="adminView" class="adm" hidden>
-  <header class="adm-top">
-    <a class="brand" href="#top" aria-label="홈페이지로"><span class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-flame"/></svg></span>삼일만세길 <small>관리자</small></a>
-    <div class="adm-role"><span class="who">로그인 역할</span><span class="pill ink" id="roleBadge">중앙 사무국 · 총괄</span></div>
-    <button class="btn btn-line sm" type="button" id="admRefresh" hidden>새로 고침</button>
-    <button class="btn btn-line sm" type="button" id="roleSwitch">역할 바꾸기</button>
-    <a class="btn sm" href="#top">홈페이지</a>
-  </header>
-  <div class="adm-wrap">
+  <aside class="adm-side">
+    <a class="adm-logo" href="#top" aria-label="홈페이지로"><span class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-flame"/></svg></span><span><b>삼일만세길<i>2027</i></b><small>대회 운영 프로그램</small></span></a>
     <nav class="adm-nav" id="admNav" aria-label="관리 메뉴"></nav>
+    <div class="adm-side-foot"><span>후원</span><a href="https://ccn24.com" target="_blank" rel="noopener">CCN24</a></div>
+  </aside>
+  <div class="adm-body">
+    <header class="adm-top">
+      <div class="adm-role"><span class="who">로그인 역할</span><span class="pill ink" id="roleBadge">중앙 사무국 · 총괄</span></div>
+      <button class="btn btn-line sm" type="button" id="admRefresh" hidden>새로 고침</button>
+      <button class="btn btn-line sm" type="button" id="roleSwitch">역할 바꾸기</button>
+      <a class="btn sm" href="#top">홈페이지</a>
+    </header>
     <main class="adm-main" id="admMain" tabindex="-1"></main>
   </div>
 </div>
@@ -2418,7 +2468,7 @@ function renderAuthUI() {
   const t = $('#topUtil'), sa = $('#sheetAuth');
   if (!REMOTE) { t.innerHTML = '<button type="button" class="opt" data-lookup="">신청 조회</button><a href="#admin">관리자</a>'; sa.innerHTML = '<a href="#admin" data-close-nav>관리자</a>'; return; }
   if (ME) {
-    t.innerHTML = `<span class="me">${esc(meName())}님</span><button type="button" data-lookup="">내 신청</button>${ME.admin ? '<a class="adm" href="#admin">관리자</a>' : ''}<button type="button" data-logout="">로그아웃</button>`;
+    t.innerHTML = `<span class="me">${esc(meName())}님</span><button type="button" data-lookup="">내 신청</button>${ME.admin ? '<a class="adm-link" href="#admin">관리자</a>' : ''}<button type="button" data-logout="">로그아웃</button>`;
     sa.innerHTML = `<span>${esc(meName())}님</span>${ME.admin ? '<a href="#admin" data-close-nav>관리자</a>' : ''}<button type="button" data-logout="">로그아웃</button>`;
   } else {
     t.innerHTML = '<button type="button" class="opt" data-lookup="">신청 조회</button><button type="button" data-login="">로그인</button><a class="opt" href="https://ccn24.com/member/join" target="_blank" rel="noopener">회원가입</a>';
@@ -3391,9 +3441,12 @@ const PERMITS = ['미신고', '준비중', '신고완료', '불요'];
 const PERMIT_PILL = { 미신고: 'bad', 준비중: 'warn', 신고완료: 'ok', 불요: '' };
 const HQ_STATUS = ['미지정', '구성중', '발족'];
 const HQ_PILL = { 미지정: 'bad', 구성중: 'warn', 발족: 'ok' };
-const ADM_TABS = [
-  ['dash', '총괄 대시보드', 'grid'], ['apps', '참가자', 'users'], ['secs', '구간·정원', 'route'], ['org', '조직 관리', 'org'],
-  ['prayer', '기도 릴레이', 'pray'], ['docs', '공문·집회신고', 'doc'], ['notify', '알림 발송', 'bell'], ['dons', '후원', 'heart'], ['inqs', '문의', 'mail'], ['accounts', '관리자 계정', 'users'], ['data', '데이터', 'db'],
+const ADM_TABS = [   // [id, 이름, 아이콘, 메뉴 묶음]
+  ['dash', '총괄 대시보드', 'grid', '운영'], ['apps', '참가자', 'users', '운영'], ['secs', '구간·정원', 'route', '운영'],
+  ['org', '조직 관리', 'org', '조직'], ['prayer', '기도 릴레이', 'pray', '조직'],
+  ['docs', '공문·집회신고', 'doc', '행정'], ['notify', '알림 발송', 'bell', '행정'],
+  ['dons', '후원', 'heart', '후원·문의'], ['inqs', '문의', 'mail', '후원·문의'],
+  ['accounts', '관리자 계정', 'users', '설정'], ['data', '데이터', 'db', '설정'],
 ];
 const REGION_TABS = ['dash', 'apps', 'secs', 'org', 'docs', 'notify'];
 let role = REMOTE ? null : (() => { try { return JSON.parse(sessionStorage.getItem('smg2_role')); } catch (e) { return null; } })();
@@ -3415,7 +3468,7 @@ const roleText = () => isSuper() ? '최고 관리자' : isHQ() ? (REMOTE ? '총�
 function route() {
   const admin = location.hash.startsWith('#admin');
   const wasAdmin = !$('#adminView').hidden;
-  $('#siteView').hidden = admin; $('#adminView').hidden = !admin;
+  $('#siteView').hidden = admin; $('#adminView').hidden = !admin; document.body.classList.toggle('adm-mode', admin);
   if (admin) {
     closeListbox(false);
     if (REMOTE) enterAdminRemote();
@@ -3546,7 +3599,11 @@ function renderAdmin() {
   $('#roleBadge').textContent = role ? roleText() : '역할 선택 전';
   const tabs = ADM_TABS.filter(t => (!role || isHQ() || REGION_TABS.includes(t[0])) && (t[0] !== 'accounts' || (REMOTE && isSuper())));
   const counts = { apps: scopeApps().filter(a => a.status === '접수').length, inqs: isHQ() ? S.inqs.filter(q => q.status === '접수').length : 0 };
-  $('#admNav').innerHTML = tabs.map(([id, t, ic]) => `<button type="button" data-tab="${id}" ${admTab === id ? 'aria-current="page"' : ''}>${icon(ic)}${id === 'dash' && role && !isHQ() ? '대시보드' : t}${counts[id] ? `<span class="n">${counts[id]}</span>` : ''}</button>`).join('');
+  let grp = '';
+  $('#admNav').innerHTML = tabs.map(([id, t, ic, g]) => {
+    const head = g !== grp ? `<span class="adm-nav-h">${g}</span>` : ''; grp = g;
+    return head + `<button type="button" data-tab="${id}" ${admTab === id ? 'aria-current="page"' : ''}>${icon(ic)}${id === 'dash' && role && !isHQ() ? '대시보드' : t}${counts[id] ? `<span class="n">${counts[id]}</span>` : ''}</button>`;
+  }).join('');
   const fn = { dash: admDash, apps: admApps, secs: admSecs, org: admOrg, prayer: admPrayer, docs: admDocs, notify: admNotify, dons: admDons, inqs: admInqs, accounts: admAccounts, data: admData }[admTab] || admDash;
   $('#admMain').innerHTML = `<div class="adm-panel">${role ? fn() : '<p class="adm-sub">역할을 고르면 관리 화면이 열립니다.</p>'}</div>`;
   if (admTab === 'docs') genDoc();
