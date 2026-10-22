@@ -9,7 +9,7 @@
 <meta property="og:title" content="전국 삼일만세길 걷기 2027">
 <meta property="og:description" content="제주 조천에서 파주 임진각까지, 1919년 만세길을 51일 동안 함께 걷습니다. 하루만 걸어도 됩니다.">
 <meta property="og:url" content="https://churchcitizen.github.io/mansegil/">
-<meta property="og:image" content="https://churchcitizen.github.io/mansegil/img/hero.jpg">
+<meta property="og:image" content="https://churchcitizen.github.io/mansegil/img/hero-march.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#3a2c17">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -150,12 +150,12 @@ button.chip:active{transform:scale(.96)}
 
 /* ===================== 히어로 ===================== */
 .hero{position:relative;height:max(660px,100svh);color:#fff;overflow:hidden;background:#3a2c17;isolation:isolate}
-.hero-media{position:absolute;inset:-14% 0 calc(var(--search-h,112px) * .55) 0;z-index:-2;will-change:transform}
+.hero-media{position:absolute;inset:-2% 0 calc(var(--search-h,112px) * .55) 0;z-index:-2;will-change:transform}
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 100%;animation:hero-settle 1400ms var(--ease-out) both}
-@media (max-width:760px){.hero-media{bottom:calc(var(--search-h,236px) * .7)}.hero-media img{object-position:68% 100%}}
+@media (max-width:760px){.hero-media{bottom:calc(var(--search-h,236px) * .7)}.hero-media img{object-position:43% 100%}}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
-  radial-gradient(ellipse 58% 42% at 50% 44%,rgba(44,28,8,.34),rgba(44,28,8,0) 72%),
-  linear-gradient(180deg,rgba(24,16,6,.52) 0%,rgba(24,16,6,.10) 26%,rgba(24,16,6,.06) 52%,rgba(18,13,7,.30) 74%,rgba(14,11,7,.62) 100%)}
+  radial-gradient(ellipse 58% 52% at 50% 42%,rgba(16,13,8,.58),rgba(16,13,8,0) 76%),
+  linear-gradient(180deg,rgba(18,15,10,.62) 0%,rgba(18,15,10,.32) 28%,rgba(18,15,10,.24) 52%,rgba(14,11,7,.40) 74%,rgba(14,11,7,.66) 100%)}
 .hero-copy{position:absolute;inset:var(--header-h) 0 var(--search-h,112px);display:grid;place-items:center;text-align:center;padding-inline:var(--gutter)}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;letter-spacing:.02em;opacity:.92;animation:soft-in 700ms var(--ease-out) 120ms both}
 .hero-eyebrow::before,.hero-eyebrow::after{content:"";width:22px;height:1px;background:currentColor;opacity:.6}
@@ -179,13 +179,11 @@ button.chip:active{transform:scale(.96)}
 .hero.s2 .hk{opacity:1;transform:none}
 .hk dt{font-size:12.5px;font-weight:600;letter-spacing:.04em;opacity:.82}
 .hk dd{display:flex;align-items:baseline;justify-content:center;gap:3px;margin:4px 0 0}
-.hk b{font-size:clamp(30px,3.6vw,48px);font-weight:700;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;text-shadow:0 6px 30px rgba(30,18,4,.3)}
+.hk b{font-size:clamp(30px,3.6vw,48px);font-weight:700;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.hk dt,.hk small{text-shadow:0 1px 10px rgba(0,0,0,.7)}
 .hk small{font-size:14px;font-weight:600;opacity:.86}
 .hero-chart{width:min(760px,100%);margin:16px auto 2px;padding:12px 16px 10px;border-radius:20px;text-align:left;background:rgba(24,16,6,.36);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .hc-cap{display:flex;align-items:center;justify-content:flex-start;gap:12px;min-height:30px;font-size:12.5px;font-weight:600}
-.hero-replay{min-height:28px;padding:0 11px;border-radius:999px;border:1px solid rgba(255,255,255,.4);font-size:12.5px;font-weight:600;color:#fff;opacity:0;visibility:hidden;transition:opacity var(--d-3),background-color var(--d-2)}
-.hero-replay:hover{background:rgba(255,255,255,.12)}
-.hero.s4 .hero-replay{opacity:1;visibility:visible}
 .hc{position:relative;height:clamp(84px,15vh,150px);margin:30px 8px 4px}
 .hc svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .hc-grid line{stroke:rgba(255,255,255,.16);stroke-width:1;stroke-dasharray:3 6;vector-effect:non-scaling-stroke}
@@ -224,6 +222,80 @@ button.chip:active{transform:scale(.96)}
 .hc-m em .s{display:none}
 @media (max-width:640px){.hc-m em .s{display:inline}}
 @media (max-height:700px) and (min-width:761px){.hc{height:72px}.hk b{font-size:34px}}
+
+/* 히어로 영상 이어지는 장면(15~30초): 1919 인쇄물 → 코스를 따라 가는 횃불 → 하나 된 불 → 로고 */
+.hero-cam{position:absolute;inset:0;transition:transform 5400ms cubic-bezier(.33,0,.2,1)}
+.hero-media img{transition:filter 700ms ease}
+.hero::before{transition:opacity 700ms ease}
+.hero-copy{transition:opacity 600ms var(--ease-out),visibility 0s linear 0s}
+.hero.fx .hero-copy{opacity:0;visibility:hidden;transition:opacity 500ms var(--ease-out),visibility 0s linear 500ms}
+.hero.s5 .hero-cam{transform:scale(1.14) translate(1.5%,2%)}
+.hero.s6 .hero-cam{transform:scale(1.08) translate(-2%,-1.5%)}
+.hero.s7 .hero-cam{transform:scale(1.2) translate(0,-3%)}
+.hero.s5 .hero-media img{filter:grayscale(1) sepia(.3) contrast(1.7) brightness(.8)}
+.hero.s6 .hero-media img,.hero.s7 .hero-media img{filter:grayscale(.35) brightness(.4)}
+.hero.s5::before{opacity:.55}
+.hero-fx{position:absolute;inset:0;z-index:1;pointer-events:none}
+.fx-paper,.fx-dots{position:absolute;inset:0;opacity:0;transition:opacity 500ms ease}
+.fx-paper{background:#bfa979;mix-blend-mode:multiply}
+.fx-dots{background:radial-gradient(circle,rgba(30,22,12,.85) 0 28%,transparent 32%) 0 0/5px 5px;mix-blend-mode:multiply}
+.hero.s5 .fx-paper{opacity:.55}
+.hero.s5 .fx-dots{opacity:.5;animation:xerox 240ms steps(2) infinite}
+@keyframes xerox{50%{transform:translate(1px,-1px)}}
+.fx-scene{position:absolute;inset:var(--header-h) 0 var(--search-h,112px);display:grid;place-items:center;padding-inline:var(--gutter);opacity:0;visibility:hidden;transition:opacity 600ms var(--ease-out),visibility 0s linear 600ms}
+.hero.s5 .fx-1919,.hero.s6 .fx-route,.hero.s7 .fx-route{opacity:1;visibility:visible;transition-delay:0s}
+.fx-clip{position:relative;max-width:min(760px,100%);padding:clamp(22px,3vw,36px) clamp(22px,3.4vw,44px);background:#f4eddc;color:#1d150b;text-align:center;box-shadow:0 30px 60px -30px rgba(0,0,0,.55);transform:rotate(-1.2deg) scale(.96);transition:transform 900ms var(--ease-out)}
+.hero.s5 .fx-clip{transform:rotate(-1.2deg)}
+.fx-clip::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(30,22,12,.12) 0 28%,transparent 32%) 0 0/4px 4px;pointer-events:none}
+.fx-stamp{position:absolute;right:clamp(10px,2vw,22px);top:-18px;padding:5px 12px;border:3px solid #b3261c;border-radius:6px;color:#b3261c;font-family:var(--serif);font-size:clamp(16px,1.8vw,22px);font-weight:600;letter-spacing:.04em;background:rgba(244,237,220,.7);opacity:0;transform:rotate(-9deg) scale(2.2)}
+.fx-1919.stamped .fx-stamp{animation:stamp-in 320ms cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes stamp-in{to{opacity:.92;transform:rotate(-9deg) scale(1)}}
+.fx-type{margin:8px 0 0;min-height:1.5em;font-family:var(--serif);font-size:clamp(22px,3vw,40px);font-weight:600;line-height:1.5;letter-spacing:.01em;word-break:keep-all}
+.fx-caret{display:inline-block;width:2px;height:1em;margin-left:3px;vertical-align:-.12em;background:currentColor;animation:caret 900ms steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.fx-trans{margin:12px 0 0;font-size:clamp(14px,1.4vw,17px);color:#4d4334;opacity:0;transform:translateY(8px);transition:opacity 700ms var(--ease-out),transform 700ms var(--ease-out)}
+.fx-1919.trans .fx-trans{opacity:1;transform:none}
+.fx-route-in{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(24px,5vw,80px);width:min(1100px,100%);height:100%;padding-block:12px;color:#fff}
+.fx-cap{display:flex;flex-direction:column;gap:8px;min-width:0}
+.fx-eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;color:#ffb36b}
+.fx-cap b{font-size:clamp(40px,6vw,88px);font-weight:700;line-height:1.05;letter-spacing:-.045em;word-break:keep-all}
+.fx-date{font-size:clamp(15px,1.5vw,19px);font-weight:600;opacity:.88;font-variant-numeric:tabular-nums}
+.fx-cap em{min-height:1.5em;font-style:normal;font-family:var(--serif);font-size:clamp(14px,1.4vw,17px);opacity:.8}
+.fx-cap.pop b,.fx-cap.pop .fx-date,.fx-cap.pop em{animation:cap-pop 520ms var(--ease-out)}
+@keyframes cap-pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.fx-mapbox{position:relative;width:min(34vw,420px);height:100%;min-height:0}
+.fx-map{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fx-map .base{fill:none;stroke:rgba(255,255,255,.2);stroke-width:2;stroke-linejoin:round;stroke-dasharray:2 5}
+.fx-map .trail{fill:none;stroke:#ffd29a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.fx-map .relay{fill:rgba(255,255,255,.4)}
+.fx-map .city{fill:#1d1912;stroke:rgba(255,255,255,.6);stroke-width:1.5;transition:fill 300ms,stroke 300ms}
+.fx-map .city.lit{fill:#ffb36b;stroke:#fff}
+.fx-map .glow{fill:url(#fxGlow)}
+.fx-map use{fill:#ff8a3d;stroke:#ffe2b8;stroke-width:1.3;stroke-linejoin:round}
+.fx-map .sf{opacity:0;transition:transform 1200ms cubic-bezier(.6,0,.2,1),opacity 400ms ease}
+.hero-fx.flames .sf{opacity:1}
+.hero-fx.merge .sf{opacity:0;transition:transform 1200ms cubic-bezier(.6,0,.2,1),opacity 300ms ease 1000ms}
+.fx-map .torch{transition:transform 900ms var(--ease-out)}
+.hero-fx.merge .fx-map .torch-in{transform:scale(1.9)}
+.fx-map .torch-in{transform-box:fill-box;transform-origin:center;transition:transform 900ms var(--ease-out)}
+.fx-fly{position:absolute;left:0;top:0;width:40px;height:40px;margin:-20px 0 0 -20px;opacity:0;z-index:4;transition:left 900ms cubic-bezier(.6,0,.2,1),top 900ms cubic-bezier(.6,0,.2,1),transform 900ms cubic-bezier(.6,0,.2,1),opacity 300ms ease}
+.fx-fly svg{width:100%;height:100%;fill:#ff8a3d;stroke:#ffe2b8;stroke-width:1.3;filter:drop-shadow(0 0 10px rgba(255,150,60,.9))}
+.fx-fly.no-tr{transition:none}
+.brand-mark.is-lit{animation:brand-lit 1500ms var(--ease-out)}
+@keyframes brand-lit{0%{box-shadow:0 0 0 0 rgba(255,160,70,.9);background:rgba(255,140,60,.55)}60%{background:rgba(255,140,60,.25)}100%{box-shadow:0 0 0 22px rgba(255,160,70,0);background:transparent}}
+.hero-ctrl{position:absolute;right:var(--gutter);top:calc(var(--header-h) + 14px);z-index:3;display:flex;gap:8px}
+.hero-ctrl button{min-height:34px;padding:0 14px;border-radius:999px;background:rgba(20,14,6,.42);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:12.5px;font-weight:600;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background-color var(--d-2),color var(--d-2)}
+.hero-ctrl button:hover{background:rgba(20,14,6,.62)}
+.hero-ctrl button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+@media (max-width:760px){
+  .fx-route-in{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:10px;justify-items:center;text-align:center}
+  .fx-cap{align-items:center}
+  .fx-cap b{font-size:40px}
+  .fx-mapbox{width:100%}
+  .fx-scene{inset:calc(var(--header-h) + 50px) 0 var(--search-h,236px)}
+  .fx-stamp{top:-22px}
+  .hero-ctrl{top:calc(var(--header-h) + 8px)}
+}
 
 /* 히어로 검색 바 */
 .hero-search{position:absolute;inset:auto 0 0;z-index:2;background:var(--glass-dark);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);border-top:1px solid rgba(255,255,255,.16);animation:soft-in 760ms var(--ease-out) 360ms both;padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -966,7 +1038,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
 <main id="main">
 <!-- ---------- 히어로 ---------- -->
 <section class="hero" id="top" aria-label="전국 삼일만세길 걷기 2027">
-  <div class="hero-media" id="heroMedia"><img src="img/hero.jpg" alt="겹겹의 산 능선 아래 굽이진 들길을 따라 걸어가는 행진 대열의 뒷모습" fetchpriority="high"></div>
+  <div class="hero-media" id="heroMedia"><div class="hero-cam"><img src="img/hero-march.jpg" alt="논 사이 강둑길을 따라 함께 걷는 수백 명의 행진 대열 뒷모습" fetchpriority="high"></div></div>
   <div class="hero-copy">
     <div class="hero-stage">
       <div class="hero-eyebrow">2027 전국 삼일만세길 걷기</div>
@@ -980,12 +1052,26 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
         <div class="hk" style="--k:3"><dt>횃불 릴레이</dt><dd><b data-hk="sido">17</b><small>개 시·도</small></dd></div>
       </dl></div></div>
       <div class="hs hs-chart"><div><figure class="hero-chart" role="img" aria-label="날짜별 누적 거리: 6월 26일 제주 출정부터 7월 22일 1차 합화, 8월 11일 2차 합화를 지나 8월 15일 임진각 완주까지 724km">
-        <figcaption class="hc-cap"><span>날짜별 누적 거리</span><button class="hero-replay" type="button" id="heroReplay">다시 보기</button></figcaption>
+        <figcaption class="hc-cap"><span>날짜별 누적 거리</span></figcaption>
         <div class="hc" id="heroChart"></div>
         <div class="hc-axis" aria-hidden="true"><span>6.26 제주</span><span>8.15 임진각</span></div>
       </figure></div></div>
     </div>
   </div>
+  <div class="hero-fx" aria-hidden="true">
+    <div class="fx-paper"></div><div class="fx-dots"></div>
+    <div class="fx-scene fx-1919"><div class="fx-clip">
+      <span class="fx-stamp">1919. 3. 1</span>
+      <p class="fx-type"><span id="fxType"></span><i class="fx-caret"></i></p>
+      <p class="fx-trans">우리는 이에 우리 조선이 독립한 나라임과 조선 사람이 자주적인 민족임을 선언한다.</p>
+    </div></div>
+    <div class="fx-scene fx-route"><div class="fx-route-in">
+      <div class="fx-cap"><span class="fx-eyebrow" id="fxEyebrow">108년 뒤, 그 길을 다시</span><b id="fxCity">제주 조천</b><span class="fx-date" id="fxDate">2027. 6. 26</span><em id="fxHist"></em></div>
+      <div class="fx-mapbox"><svg class="fx-map" id="fxRoute"></svg></div>
+    </div></div>
+    <span class="fx-fly" id="fxFly"><svg viewBox="0 0 24 24"><use href="#i-flame"/></svg></span>
+  </div>
+  <div class="hero-ctrl"><button type="button" id="heroSound" aria-pressed="false">소리 켜기</button><button type="button" id="heroSkip">건너뛰기</button></div>
   <form class="hero-search" id="heroSearch" role="search" aria-label="걷고 싶은 구간 찾기">
     <div class="wrap search-in">
       <div class="field"><span class="f-label" id="fl-mode">참가 방식</span><button type="button" class="f-trigger" data-filter="mode" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fl-mode fv-mode"><span id="fv-mode">모든 구간</span><svg class="ic"><use href="#i-down"/></svg></button></div>
@@ -1011,7 +1097,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     <div class="intro-grid">
       <div class="intro-copy reveal">
         <h3 class="h3">기억하는<br>다른 방법.</h3>
-        <p>1919년 3월, 만세의 함성은 장터와 역 광장, 교회와 학교 앞에서 시작되었습니다. 108년 뒤 우리는 그 자리들을 걸어서 잇습니다. 지역마다 선포식을 열고, 그날의 이름을 다시 부르며, 다음 세대와 함께 걷습니다.</p>
+        <p>1919년 3월, 만세의 함성은 장터와 역 광장, 학교와 마을에서 시작되었습니다. 108년 뒤 우리는 그 자리들을 걸어서 잇습니다. 지역마다 선포식을 열고, 그날의 이름을 다시 부르며, 다음 세대와 함께 걷습니다.</p>
         <a class="link-arrow" href="#history">그날의 이야기 <svg class="ic"><use href="#i-right"/></svg></a>
       </div>
       <div class="collage">
@@ -1024,7 +1110,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     <div class="stats">
       <div class="stat reveal" style="--i:0"><b>1919</b><span>그날의 함성이 시작된 해</span></div>
       <div class="stat reveal" style="--i:1"><b><span data-count data-total-km>724</span><small>km</small></b><span>서부 본대가 걷는 거리</span></div>
-      <div class="stat reveal" style="--i:2"><b><span data-count data-walk-days>44</span><small>일</small></b><span>걷는 날 (주일은 쉬어 갑니다)</span></div>
+      <div class="stat reveal" style="--i:2"><b><span data-count data-walk-days>44</span><small>일</small></b><span>걷는 날 (일요일은 쉬어 갑니다)</span></div>
       <div class="stat reveal" style="--i:3"><b><span data-count>17</span><small>개</small></b><span>시·도의 횃불이 하나로</span></div>
     </div>
   </div>
@@ -1036,7 +1122,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     <div class="hist-head reveal">
       <span class="eyebrow">3·1운동 역사</span>
       <h2 class="h2" id="histTitle" style="margin-top:14px">1919년 봄,<br>장터마다 만세가 울렸습니다.</h2>
-      <p class="lede">3월 1일 서울 탑골공원에서 시작된 만세는 두 달 사이 장터와 역 광장, 교회와 학교 앞을 건너 바다 건너 제주까지 전국 13도로 번졌습니다. 학생·농민·상인·여성 할 것 없이 함께 거리로 나선 큰 독립운동이었습니다.</p>
+      <p class="lede">3월 1일 서울 탑골공원에서 시작된 만세는 두 달 사이 장터와 역 광장, 학교와 마을을 건너 바다 건너 제주까지 전국 13도로 번졌습니다. 학생·농민·상인·여성 할 것 없이 함께 거리로 나선 큰 독립운동이었습니다.</p>
     </div>
 
     <div class="hist-grid">
@@ -1047,7 +1133,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
         <li class="tl-item" data-y="1919"><span class="tl-date">1919. 2. 8</span><h3>도쿄에서 먼저 울린 선언</h3><p>일본 도쿄의 조선인 유학생들이 조선기독교청년회관에 모여 독립을 선언합니다(2·8 독립선언). 이 소식이 국내 지도자들을 움직였습니다.</p></li>
         <li class="tl-item" data-y="1919"><span class="tl-date">1919. 2. 27</span><h3>몰래 찍은 3만 5천 장</h3><p>천도교·기독교·불교 지도자들이 뜻을 모아 민족대표 33인을 세우고, 보성사 인쇄소에서 독립선언서 약 3만 5천 장을 몰래 찍어 전국으로 나눠 보냈습니다.</p></li>
         <li class="tl-item" data-y="1919"><span class="tl-date">1919. 3. 1 오후 2시</span><h3>탑골공원의 만세</h3><p>민족대표들은 태화관에서 독립을 선언하고, 탑골공원에서는 학생 정재용이 선언서를 읽었습니다. 고종의 장례를 보러 올라온 사람들까지 ‘독립 만세’를 외치며 종로로 나섰고, 같은 날 평양·의주·원산 등지에서도 만세가 터졌습니다.</p></li>
-        <li class="tl-item" data-y="1919"><span class="tl-date">1919. 3 – 4</span><h3>장날마다, 마을마다</h3><p>선언서를 읽고 노래하고 만세를 부르는 ‘독립선언식’이 장날의 장터와 교회·학교 앞에서 이어졌습니다. 함성은 3월 21일 바다 건너 제주 조천에도 닿았습니다. 4월 1일 아우내 장터의 유관순, 4월 15일 제암리의 희생처럼 탄압은 잔혹했습니다.</p></li>
+        <li class="tl-item" data-y="1919"><span class="tl-date">1919. 3 – 4</span><h3>장날마다, 마을마다</h3><p>선언서를 읽고 노래하고 만세를 부르는 ‘독립선언식’이 장날의 장터와 학교, 마을 곳곳에서 이어졌습니다. 함성은 3월 21일 바다 건너 제주 조천에도 닿았습니다. 4월 1일 아우내 장터의 유관순, 4월 15일 제암리의 희생처럼 탄압은 잔혹했습니다.</p></li>
         <li class="tl-item" data-y="1945"><span class="tl-date">1945. 8. 15</span><h3>26년 만의 광복</h3><p>그날 뿌린 씨앗이 광복으로 이어졌습니다. 2027년 8월 15일, 만세길 걷기는 임진각에서 광복의 날을 맞습니다.</p></li>
       </ol>
     </div>
@@ -1065,7 +1151,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     </div>
 
     <div class="hist-mean">
-      <div class="hm reveal" style="--i:0"><span class="k">하나</span><h3>함께 일어선 사람들</h3><p>신분과 종교, 나이와 성별을 넘어 학생·농민·상인·노동자가 함께 거리로 나섰습니다. 장터와 교회, 학교와 마을이 저마다 그날의 자리가 되었습니다.</p></div>
+      <div class="hm reveal" style="--i:0"><span class="k">하나</span><h3>함께 일어선 사람들</h3><p>신분과 종교, 나이와 성별을 넘어 학생·농민·상인·노동자가 함께 거리로 나섰습니다. 장터와 학교, 마을이 저마다 그날의 자리가 되었습니다.</p></div>
       <div class="hm reveal" style="--i:1"><span class="k">둘</span><h3>씨앗을 뿌린 날</h3><p>민족대표들은 만세 한 번으로 곧바로 독립이 오지 않음을 알았습니다. 그래도 겨레의 가슴에 독립의 뜻을 심어야 한다고 믿었고, 그 씨앗은 26년 뒤 광복으로 열매를 맺었습니다.</p></div>
     </div>
 
@@ -1088,7 +1174,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     <div class="sec-head">
       <div class="reveal">
         <h2 class="h2">세 갈래 길,<br>하나의 불.</h2>
-        <p class="lede">서부 본대가 전 구간을 걷고, 동부·중부는 지역본부가 하루씩 횃불을 이어 본대와 합류합니다. 주일에는 걷지 않고 머문 곳에서 쉬어 갑니다.</p>
+        <p class="lede">서부 본대가 전 구간을 걷고, 동부·중부는 지역본부가 하루씩 횃불을 이어 본대와 합류합니다. 일요일에는 걷지 않고 머문 곳에서 쉬어 갑니다.</p>
       </div>
     </div>
     <div class="routes">
@@ -1153,7 +1239,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     <div class="sec-head">
       <div class="reveal">
         <h2 class="h2">참가 안내.</h2>
-        <p class="lede">개인은 하루 한 구간부터, 교회·학교·단체는 대표자 한 분이 최대 300명까지 한 번에 신청합니다.</p>
+        <p class="lede">개인은 하루 한 구간부터, 학교·기관·단체는 대표자 한 분이 최대 300명까지 한 번에 신청합니다.</p>
       </div>
       <div class="guide-cta reveal" style="--i:1"><button class="btn" type="button" data-apply="">개인 신청</button><button class="btn btn-line" type="button" data-apply="" data-mode="group">단체 신청</button><button class="btn btn-line" type="button" data-lookup="">신청 조회·취소</button></div>
     </div>
@@ -1384,7 +1470,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
         <p class="adm-note" id="acctNote" hidden style="margin:0 0 14px">로그인한 계정으로 신청합니다. 위쪽 <b>내 신청</b>에서 언제든 확인하고 취소할 수 있습니다.</p>
         <div class="form-grid">
           <div class="fld full" id="modeFld"><div class="seg mode-seg" role="group" aria-label="신청 방식" id="modeSeg"><button type="button" data-mode="solo" aria-pressed="true">개인 신청</button><button type="button" data-mode="group" aria-pressed="false">단체 신청 (2~300명)</button></div></div>
-          <p class="full adm-note" id="groupNote" data-only="group" hidden style="margin:0">교회·학교·단체가 한 구간을 함께 걸을 때 <b>대표자 한 분</b>이 신청합니다. 인원은 대표자를 포함해 2~300명이며, 30명이 넘으면 집결지와 차량을 따로 안내합니다. 보험 가입에 필요한 참가자 명단은 사무국이 따로 받습니다.</p>
+          <p class="full adm-note" id="groupNote" data-only="group" hidden style="margin:0">학교·기관·단체가 한 구간을 함께 걸을 때 <b>대표자 한 분</b>이 신청합니다. 인원은 대표자를 포함해 2~300명이며, 30명이 넘으면 집결지와 차량을 따로 안내합니다. 보험 가입에 필요한 참가자 명단은 사무국이 따로 받습니다.</p>
           <div class="fld full" id="typeFld" data-only="solo"><span id="typeLabel">참가 유형</span>
             <div class="type-seg" role="radiogroup" aria-labelledby="typeLabel" id="typeSeg">
               <button type="button" role="radio" data-type="section" aria-checked="true">구간 걷기</button>
@@ -1401,7 +1487,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
           <label class="fld"><span><span class="lbl" data-solo="생년월일" data-group="대표자 생년월일">생년월일</span><em>*</em></span><input class="input" name="birth" type="date" required min="1920-01-01" max="2025-12-31"><span class="err"></span></label>
           <label class="fld"><span><span class="lbl" data-solo="휴대전화" data-group="대표자 휴대전화">휴대전화</span><em>*</em></span><input class="input" name="phone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required><span class="err"></span></label>
           <label class="fld" id="emailFld"><span>이메일</span><input class="input" name="email" type="email" autocomplete="email" placeholder="선택"><span class="err"></span></label>
-          <label class="fld" id="orgFld"><span><span class="lbl" data-solo="소속 (교회·단체·학교)" data-group="단체 이름">소속 (교회·단체·학교)</span><em data-only="group" hidden>*</em></span><input class="input" name="org" placeholder="예: ○○교회 / 광복회 ○○지부" list="orgList" maxlength="80"><span class="err"></span></label>
+          <label class="fld" id="orgFld"><span><span class="lbl" data-solo="소속 (단체·학교·기관)" data-group="단체 이름">소속 (단체·학교·기관)</span><em data-only="group" hidden>*</em></span><input class="input" name="org" placeholder="예: ○○고등학교 / 광복회 ○○지부" list="orgList" maxlength="80"><span class="err"></span></label>
           <label class="fld" id="headsFld" data-show="section"><span><span class="lbl" data-solo="함께 오는 인원 (본인 포함)" data-group="참가 인원 (대표자 포함)">함께 오는 인원 (본인 포함)</span><em data-only="group" hidden>*</em></span><input class="input" name="heads" type="number" min="1" max="50" value="1" inputmode="numeric"><span class="err"></span></label>
           <label class="fld" data-show="section volunteer full"><span>비상 연락처<em>*</em></span><input class="input" name="emg" inputmode="tel" placeholder="가족·보호자 연락처"><span class="err"></span></label>
           <div class="fld full" id="guardianBox" hidden>
@@ -1520,7 +1606,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
 <script>
 'use strict';
 document.documentElement.classList.add('js');
-const D = {"points":{"jocheon":{"name":"제주 조천 만세동산·제주항일기념관","lat":33.5405,"lng":126.6422,"hist":"1919.3.21~24 조천 만세운동(제주 3·1운동 시발점)"},"jejuport":{"name":"제주항 연안여객터미널","lat":33.5208,"lng":126.53,"hist":"여객선 승선(만세동산→터미널 12.2km)"},"mokpoport":{"name":"목포항 연안여객선터미널","lat":34.7843,"lng":126.3827,"hist":"여객선 하선(→양동교회 2.0km)"},"mokpo":{"name":"목포역 광장·양동교회·정명여학교·유달산 3·1독립운동탑","lat":34.7922,"lng":126.3886,"hist":"1919.4.8 목포 만세운동"},"illo":{"name":"무안 일로역","lat":34.8484,"lng":126.4777,"hist":"경유"},"yeongsanpo":{"name":"나주 영산포(다시면 시위지)","lat":34.9997,"lng":126.7089,"hist":"1919.4.3 영산포 강가 시위"},"naju":{"name":"나주역 광장·옛 나주역·나주학생독립운동기념관","lat":35.0238,"lng":126.7122,"hist":"1919.3.15~16 나주 읍내 시위"},"gwangsan":{"name":"광주송정역","lat":35.138,"lng":126.793,"hist":"경유"},"gwangju":{"name":"광주 5·18민주광장·수피아여고 3·1만세운동기념비·3·1만세운동길·부동교","lat":35.147,"lng":126.919,"hist":"1919.3.10 광주 만세운동"},"jangseong":{"name":"장성역·3·1운동 열사 장성 의적비·3·1사","lat":35.302,"lng":126.785,"hist":"1919.3~4 장성 시위"},"baegyangsa":{"name":"장성 백양사역(북이면 모현리·사가리 시위지)","lat":35.4314,"lng":126.8081,"hist":"1919.4.3~4 모현리 시위"},"jeongeup":{"name":"정읍역 광장","lat":35.5755,"lng":126.8422,"hist":"정읍 만세운동"},"taein":{"name":"정읍 태인 3·1운동기념탑","lat":35.6549,"lng":126.9384,"hist":"1919.3.16 태인 장날 만세운동(호남 확산의 계기)"},"wonpyeong":{"name":"김제 원평장터 기미독립만세운동 기념비","lat":35.7132,"lng":126.9912,"hist":"1919.3.20 원평 장날 시위"},"jeonju":{"name":"전주 남부시장·풍남문·3·1운동 발상지비·신흥학교","lat":35.812,"lng":127.148,"hist":"1919.3.13 전주 만세운동"},"samnye":{"name":"완주 삼례 장터","lat":35.9107,"lng":127.0737,"hist":"1919.3.23 삼례장터 시위"},"iksan":{"name":"익산역 광장·4·4만세기념공원·순국열사비","lat":35.941,"lng":126.947,"hist":"1919.4.4 이리 만세운동(문용기 열사)"},"gunsan":{"name":"군산 구암동산(3·1운동 100주년기념관·구암교회)","lat":35.987,"lng":126.7424,"hist":"1919.3.5 군산 만세운동(호남 최초)"},"napo":{"name":"군산 나포면","lat":36.03,"lng":126.83,"hist":"경유"},"ganggyeong":{"name":"논산 강경 옥녀봉 항일독립만세 기념비·강경역","lat":36.158,"lng":127.01,"hist":"1919.3.10 강경 만세운동"},"nonsan":{"name":"논산역 광장","lat":36.19,"lng":127.094,"hist":"1919.3.12 논산읍 시위"},"noseong":{"name":"논산 노성면","lat":36.2782,"lng":127.1302,"hist":"경유"},"gongju":{"name":"공주 3.1중앙공원(유관순 열사 동상)·영명학교","lat":36.455,"lng":127.124,"hist":"1919.4.1 공주 만세운동"},"janggun":{"name":"세종 장군면(대교리 횃불시위지)","lat":36.535,"lng":127.225,"hist":"1919.4.3 대교리 횃불시위"},"jochiwon":{"name":"세종 조치원역 광장(구 장터)","lat":36.601,"lng":127.297,"hist":"1919.3.23 충남북 연합 횃불시위·3.30 조치원 장터"},"jeonui":{"name":"세종 전의역·전의 장터","lat":36.681,"lng":127.2,"hist":"1919.3.13 전의 장터(세종 최초)"},"aunae":{"name":"아우내장터·유관순열사 사적지(병천)","lat":36.7611,"lng":127.2984,"hist":"1919.4.1 아우내 독립만세운동"},"dokrip":{"name":"독립기념관 겨레의 집","lat":36.785,"lng":127.223,"hist":"1차 합화식(중부 횃불)"},"cheonan":{"name":"천안역 광장","lat":36.81,"lng":127.147,"hist":"1919.3.27 천안읍 시위"},"onyang":{"name":"아산 온양온천역 광장·온양장터","lat":36.78,"lng":127.003,"hist":"1919.3.12·14 온양장터 시위"},"dunpo":{"name":"아산 둔포","lat":36.9297,"lng":127.0376,"hist":"경유"},"pyeongtaek":{"name":"평택역 광장","lat":36.991,"lng":127.085,"hist":"1919.4.1 평택역 앞 시위"},"anseong":{"name":"안성 3.1운동기념관(원곡면 만세고개)","lat":37.0621,"lng":127.1742,"hist":"1919.4.1 원곡·양성 만세운동(3대 실력항쟁)"},"osan":{"name":"오산역 광장·오산장터","lat":37.146,"lng":127.066,"hist":"1919.3.29 오산장 만세운동"},"jeam":{"name":"화성시독립운동기념관(제암리)","lat":37.125,"lng":126.8903,"hist":"1919.4.15 제암리·고주리 순국지"},"joam":{"name":"화성 3.1운동 만세길 방문자센터(우정읍 화수리)","lat":37.1091,"lng":126.7992,"hist":"1919.4.3 우정·장안 만세운동(화수리 항쟁)"},"namyang":{"name":"화성시청(남양)","lat":37.199,"lng":126.831,"hist":"경유"},"suwon":{"name":"수원 화성행궁 광장·팔달산 3.1독립운동기념탑·광복회 경기도지부","lat":37.287,"lng":127.014,"hist":"1919.3 수원 만세운동(김향화)"},"ansan":{"name":"안산역 광장·수암동 비석거리 3·1운동기념비","lat":37.327,"lng":126.792,"hist":"1919.3.30 수암 만세운동"},"siheung":{"name":"시흥 군자초등학교(삼일독립운동 기념비·거모주재소 터)","lat":37.3439,"lng":126.7874,"hist":"1919.4.4 거모리 시위"},"bupyeong":{"name":"인천 부평역 광장","lat":37.4897,"lng":126.7236,"hist":"경유"},"hwangeo":{"name":"황어장터 3·1만세운동 기념관(계양구 장기동)","lat":37.5791,"lng":126.7353,"hist":"1919.3.24 황어장터 만세운동"},"bucheon":{"name":"부천역 광장·계남면사무소 터","lat":37.484,"lng":126.783,"hist":"1919.3.24 계남면 시위"},"gangseo":{"name":"서울 강서(방화)","lat":37.577,"lng":126.813,"hist":"경유"},"tapgol":{"name":"서울 탑골공원·3·1독립선언광장(3.1운동 발상지)","lat":37.5713,"lng":126.9884,"hist":"1919.3.1 독립선언·만세"},"seodaemun":{"name":"서대문형무소역사관·독립문","lat":37.5742,"lng":126.956,"hist":"유관순 열사 순국지"},"goyang":{"name":"고양시청(원당)·통일로","lat":37.6584,"lng":126.832,"hist":"1919.3.23 고양 시위"},"bongilcheon":{"name":"파주 봉일천 3·1운동 기념비(조리읍 공릉장터)","lat":37.74,"lng":126.77,"hist":"1919.3.28 봉일천 만세운동(8명 순국)"},"munsan":{"name":"파주 문산역","lat":37.859,"lng":126.785,"hist":"경유"},"imjingak":{"name":"임진각 평화누리 음악의 언덕","lat":37.889,"lng":126.74,"hist":"광복절 완주식·하나 된 불"}},"west":[{"date":"2027-06-26","from":"jocheon","to":"jejuport","km":12,"event":"출정식(조천 만세동산 10:00)·제주 횃불 채화 → 제주항 연안여객터미널 봉송"},{"date":"2027-06-27","from":null,"to":null,"km":0,"event":"주일 휴식(제주)"},{"date":"2027-06-28","from":"jejuport","to":"mokpo","km":2,"event":"여객선 제주항→목포항(13:40 출항, 씨월드고속훼리) → 저녁 목포 도착·양동교회 인근 숙영"},{"date":"2027-06-29","from":"mokpo","to":"illo","km":17,"event":"목포역 선포식(10:00) → 양동교회·정명여학교·유달산 3·1독립운동탑 → 일로역"},{"date":"2027-06-30","from":"illo","to":"yeongsanpo","km":22,"event":""},{"date":"2027-07-01","from":"yeongsanpo","to":"gwangsan","km":20,"event":"나주역 선포식(10:00)·옛 나주역·학생독립운동기념관"},{"date":"2027-07-02","from":"gwangsan","to":"gwangju","km":16,"event":"수피아 3·1만세운동기념비 → 3·1만세운동길 → 부동교 → 5·18민주광장 광주 선포식(16:00)"},{"date":"2027-07-03","from":"gwangju","to":"jangseong","km":25,"event":""},{"date":"2027-07-04","from":null,"to":null,"km":0,"event":"주일 휴식(장성)"},{"date":"2027-07-05","from":"jangseong","to":"baegyangsa","km":17,"event":"장성 의적비·3·1사 참배"},{"date":"2027-07-06","from":"baegyangsa","to":"jeongeup","km":22,"event":""},{"date":"2027-07-07","from":"jeongeup","to":"wonpyeong","km":23,"event":"정읍역 선포식(10:00) → 태인 3·1운동기념탑 → 원평장터 기념비"},{"date":"2027-07-08","from":"wonpyeong","to":"jeonju","km":21,"event":""},{"date":"2027-07-09","from":"jeonju","to":"samnye","km":14,"event":"전주 선포식(남부시장·풍남문 10:00)·발상지비·신흥학교 기념비"},{"date":"2027-07-10","from":"samnye","to":"iksan","km":14,"event":"익산역 선포식(16:00)·4·4만세기념공원·순국열사비"},{"date":"2027-07-11","from":null,"to":null,"km":0,"event":"주일 휴식(익산)"},{"date":"2027-07-12","from":"iksan","to":"gunsan","km":24,"event":""},{"date":"2027-07-13","from":"gunsan","to":"napo","km":15,"event":"군산 선포식(구암동산 3·1운동 100주년기념관 10:00)"},{"date":"2027-07-14","from":"napo","to":"ganggyeong","km":18,"event":"강경 옥녀봉 항일독립만세 기념비 참배"},{"date":"2027-07-15","from":"ganggyeong","to":"noseong","km":25,"event":"논산역 선포식(10:00)"},{"date":"2027-07-16","from":"noseong","to":"gongju","km":17,"event":""},{"date":"2027-07-17","from":"gongju","to":"janggun","km":14,"event":"공주 선포식(3.1중앙공원·영명학교 10:00)·제헌절"},{"date":"2027-07-18","from":null,"to":null,"km":0,"event":"주일 휴식(공주·세종)"},{"date":"2027-07-19","from":"janggun","to":"jochiwon","km":15,"event":"세종 선포식(조치원역 광장 16:00)·충남북 연합 횃불시위 기념"},{"date":"2027-07-20","from":"jochiwon","to":"jeonui","km":16,"event":"전의 장터(세종 최초 시위지) 참배"},{"date":"2027-07-21","from":"jeonui","to":"aunae","km":18,"event":"아우내 독립만세운동 기념행사(유관순열사 사적지·대한독립만세길 1.37km·매봉산 봉화탑 봉화)"},{"date":"2027-07-22","from":"aunae","to":"dokrip","km":9,"event":"독립기념관 겨레의 집 1차 합화식(중부 횃불: 충북·대전)·기념행사"},{"date":"2027-07-23","from":"dokrip","to":"cheonan","km":11,"event":"천안역 선포식(16:00)"},{"date":"2027-07-24","from":"cheonan","to":"onyang","km":17,"event":"아산 선포식(온양온천역·온양장터 16:00)"},{"date":"2027-07-25","from":null,"to":null,"km":0,"event":"주일 휴식(아산)"},{"date":"2027-07-26","from":"onyang","to":"dunpo","km":19,"event":""},{"date":"2027-07-27","from":"dunpo","to":"pyeongtaek","km":9,"event":"평택역 선포식(16:00, 1919.4.1 시위지)"},{"date":"2027-07-28","from":"pyeongtaek","to":"anseong","km":12,"event":"안성 3.1운동기념관 기념행사(원곡·양성 만세고개)"},{"date":"2027-07-29","from":"anseong","to":"osan","km":25,"event":""},{"date":"2027-07-30","from":"osan","to":"jeam","km":14,"event":"오산역·오산장터 선포식(10:00) → 제암리"},{"date":"2027-07-31","from":"jeam","to":"joam","km":18,"event":"제암리 순국 추모식(화성시독립운동기념관 10:00) → 화성 3.1운동 만세길 걷기 대회(장안·우정, 시민 대규모 참여)"},{"date":"2027-08-01","from":null,"to":null,"km":0,"event":"주일 휴식(화성)"},{"date":"2027-08-02","from":"joam","to":"namyang","km":20,"event":"만세길 화수리 주재소 터·쌍봉산"},{"date":"2027-08-03","from":"namyang","to":"suwon","km":20,"event":""},{"date":"2027-08-04","from":"suwon","to":"ansan","km":24,"event":"수원 선포식(화성행궁 광장 10:00)·팔달산 3.1독립운동기념탑·광복회 경기도지부 예방"},{"date":"2027-08-05","from":"ansan","to":"siheung","km":15,"event":"안산역 선포식(10:00) → 수암동 비석거리 기념비 → 시흥 군자초 기념비"},{"date":"2027-08-06","from":"siheung","to":"bupyeong","km":15,"event":""},{"date":"2027-08-07","from":"bupyeong","to":"bucheon","km":18,"event":"부평역 선포식(10:00) → 황어장터 3·1만세운동 기념관 → 부천"},{"date":"2027-08-08","from":null,"to":null,"km":0,"event":"주일 휴식(부천)"},{"date":"2027-08-09","from":"bucheon","to":"gangseo","km":12,"event":"부천역 선포식(10:00)·계남면사무소 터"},{"date":"2027-08-10","from":"gangseo","to":"tapgol","km":18,"event":"서울 입성(저녁 탑골공원 전야제)"},{"date":"2027-08-11","from":"tapgol","to":"seodaemun","km":8,"event":"서울 대회: 탑골공원 선포식(10:00) → 3·1독립선언광장 → 삼일대로 시민공간 → 안국역 → 서대문형무소 / 동·서 횃불 2차 합화식"},{"date":"2027-08-12","from":"seodaemun","to":"goyang","km":15,"event":"구파발·통일로"},{"date":"2027-08-13","from":"goyang","to":"bongilcheon","km":16,"event":"고양 선포식(고양시청 10:00) → 벽제관지 → 파주 봉일천 3·1운동 기념비"},{"date":"2027-08-14","from":"bongilcheon","to":"munsan","km":14,"event":"파주 선포식(문산역 16:00)"},{"date":"2027-08-15","from":"munsan","to":"imjingak","km":8,"event":"임진각 행진 → 광복절 완주식·17개 시·도 횃불 하나 된 불 점화(15:00)"}],"east":[{"date":"2027-06-26","region":"부산","site":"동래사적공원 3·1독립운동기념탑 → 동래시장 만세거리(동부 출정식·채화, 3.13 동래 시위)","lat":35.205,"lng":129.083,"km":6},{"date":"2027-06-29","region":"울산","site":"병영초·병영성·삼일사(4.4~5 병영 만세운동, 순국 4명)","lat":35.566,"lng":129.334,"km":6},{"date":"2027-07-01","region":"경남 양산","site":"양산 항일독립운동기념탑·시립독립기념관·남부시장(3.27)","lat":35.34,"lng":129.033,"km":7},{"date":"2027-07-03","region":"경남 밀양","site":"밀양관아·해천 항일운동 테마거리·의열기념관(3.13)","lat":35.493,"lng":128.747,"km":6},{"date":"2027-07-06","region":"경남 창녕","site":"영산 남산호국공원 3·1독립운동기념비·삼일만세길(3.13, 3·1민속문화제)","lat":35.454,"lng":128.529,"km":6},{"date":"2027-07-08","region":"경남 함안","site":"함안독립운동기념관·군북 3·1독립운동 기념탑(3.20, 순국 19~22명)","lat":35.257,"lng":128.329,"km":8},{"date":"2027-07-10","region":"대구","site":"서문시장 → 청라언덕·3·1만세운동길(90계단) → 국채보상운동기념공원(3.8)","lat":35.868,"lng":128.586,"km":5},{"date":"2027-07-13","region":"경북 구미","site":"인동 3·12 독립만세운동 기념탑(진평동, 인동 3·1문화제)","lat":36.105,"lng":128.42,"km":6},{"date":"2027-07-15","region":"경북 안동","site":"경상북도독립운동기념관·내앞마을·임청각(3.13~27, 피살 14명)","lat":36.596,"lng":128.845,"km":9},{"date":"2027-07-17","region":"경북 영덕","site":"영해로터리 3·18 독립만세운동 기념탑·영해만세시장(3.18, 2,000명)","lat":36.535,"lng":129.405,"km":8},{"date":"2027-07-20","region":"경북 영주","site":"영주역·구시장(3.21 쌀시장·어물시장 시위지)","lat":36.806,"lng":128.624,"km":5},{"date":"2027-07-24","region":"충북 충주","site":"신니면민 만세운동 유적비(용원장터 4.1)·충주역","lat":36.991,"lng":127.926,"km":6},{"date":"2027-07-27","region":"강원 횡성","site":"횡성 3·1공원·횡성장터 만세시위지(4.1, 순국 5명)","lat":37.491,"lng":127.985,"km":8},{"date":"2027-07-31","region":"강원 춘천","site":"강원광복기념관·항일애국선열 추모탑(강원 횃불 집결)","lat":37.933,"lng":127.75,"km":6},{"date":"2027-08-03","region":"강원 철원","site":"철원역사문화공원 애국선열 추모비(강원 최초 3.10~11 철원역 시위)","lat":38.147,"lng":127.313,"km":6},{"date":"2027-08-07","region":"경기 양주·의정부","site":"가래비 3·1운동 기념공원(광적면)·의정부역","lat":37.785,"lng":127.045,"km":8},{"date":"2027-08-11","region":"서울","site":"탑골공원 2차 합화식 합류","lat":37.5713,"lng":126.9884,"km":8}],"mid":[{"date":"2027-07-10","region":"충북 괴산","site":"괴산 3.1운동 7인 열사비·괴산장터(홍명희 주도)","lat":36.815,"lng":127.79,"km":6},{"date":"2027-07-17","region":"충북 청주","site":"삼일공원(민족대표 5인 동상)·미원 쌀안장터 기념탑","lat":36.645,"lng":127.495,"km":6},{"date":"2027-07-20","region":"대전","site":"인동 만세로광장(3·16 인동장터 독립만세운동 기념탑)·대전역","lat":36.32,"lng":127.435,"km":6},{"date":"2027-07-22","region":"충남 천안","site":"독립기념관 1차 합화식 합류","lat":36.785,"lng":127.223,"km":0}]};
+const D = {"points":{"jocheon":{"name":"제주 조천 만세동산·제주항일기념관","lat":33.5405,"lng":126.6422,"hist":"1919.3.21~24 조천 만세운동(제주 3·1운동 시발점)"},"jejuport":{"name":"제주항 연안여객터미널","lat":33.5208,"lng":126.53,"hist":"여객선 승선(만세동산→터미널 12.2km)"},"mokpoport":{"name":"목포항 연안여객선터미널","lat":34.7843,"lng":126.3827,"hist":"여객선 하선(→양동교회 2.0km)"},"mokpo":{"name":"목포역 광장·양동교회·정명여학교·유달산 3·1독립운동탑","lat":34.7922,"lng":126.3886,"hist":"1919.4.8 목포 만세운동"},"illo":{"name":"무안 일로역","lat":34.8484,"lng":126.4777,"hist":"경유"},"yeongsanpo":{"name":"나주 영산포(다시면 시위지)","lat":34.9997,"lng":126.7089,"hist":"1919.4.3 영산포 강가 시위"},"naju":{"name":"나주역 광장·옛 나주역·나주학생독립운동기념관","lat":35.0238,"lng":126.7122,"hist":"1919.3.15~16 나주 읍내 시위"},"gwangsan":{"name":"광주송정역","lat":35.138,"lng":126.793,"hist":"경유"},"gwangju":{"name":"광주 5·18민주광장·수피아여고 3·1만세운동기념비·3·1만세운동길·부동교","lat":35.147,"lng":126.919,"hist":"1919.3.10 광주 만세운동"},"jangseong":{"name":"장성역·3·1운동 열사 장성 의적비·3·1사","lat":35.302,"lng":126.785,"hist":"1919.3~4 장성 시위"},"baegyangsa":{"name":"장성 백양사역(북이면 모현리·사가리 시위지)","lat":35.4314,"lng":126.8081,"hist":"1919.4.3~4 모현리 시위"},"jeongeup":{"name":"정읍역 광장","lat":35.5755,"lng":126.8422,"hist":"정읍 만세운동"},"taein":{"name":"정읍 태인 3·1운동기념탑","lat":35.6549,"lng":126.9384,"hist":"1919.3.16 태인 장날 만세운동(호남 확산의 계기)"},"wonpyeong":{"name":"김제 원평장터 기미독립만세운동 기념비","lat":35.7132,"lng":126.9912,"hist":"1919.3.20 원평 장날 시위"},"jeonju":{"name":"전주 남부시장·풍남문·3·1운동 발상지비·신흥학교","lat":35.812,"lng":127.148,"hist":"1919.3.13 전주 만세운동"},"samnye":{"name":"완주 삼례 장터","lat":35.9107,"lng":127.0737,"hist":"1919.3.23 삼례장터 시위"},"iksan":{"name":"익산역 광장·4·4만세기념공원·순국열사비","lat":35.941,"lng":126.947,"hist":"1919.4.4 이리 만세운동(문용기 열사)"},"gunsan":{"name":"군산 구암동산(3·1운동 100주년기념관·구암교회)","lat":35.987,"lng":126.7424,"hist":"1919.3.5 군산 만세운동(호남 최초)"},"napo":{"name":"군산 나포면","lat":36.03,"lng":126.83,"hist":"경유"},"ganggyeong":{"name":"논산 강경 옥녀봉 항일독립만세 기념비·강경역","lat":36.158,"lng":127.01,"hist":"1919.3.10 강경 만세운동"},"nonsan":{"name":"논산역 광장","lat":36.19,"lng":127.094,"hist":"1919.3.12 논산읍 시위"},"noseong":{"name":"논산 노성면","lat":36.2782,"lng":127.1302,"hist":"경유"},"gongju":{"name":"공주 3.1중앙공원(유관순 열사 동상)·영명학교","lat":36.455,"lng":127.124,"hist":"1919.4.1 공주 만세운동"},"janggun":{"name":"세종 장군면(대교리 횃불시위지)","lat":36.535,"lng":127.225,"hist":"1919.4.3 대교리 횃불시위"},"jochiwon":{"name":"세종 조치원역 광장(구 장터)","lat":36.601,"lng":127.297,"hist":"1919.3.23 충남북 연합 횃불시위·3.30 조치원 장터"},"jeonui":{"name":"세종 전의역·전의 장터","lat":36.681,"lng":127.2,"hist":"1919.3.13 전의 장터(세종 최초)"},"aunae":{"name":"아우내장터·유관순열사 사적지(병천)","lat":36.7611,"lng":127.2984,"hist":"1919.4.1 아우내 독립만세운동"},"dokrip":{"name":"독립기념관 겨레의 집","lat":36.785,"lng":127.223,"hist":"1차 합화식(중부 횃불)"},"cheonan":{"name":"천안역 광장","lat":36.81,"lng":127.147,"hist":"1919.3.27 천안읍 시위"},"onyang":{"name":"아산 온양온천역 광장·온양장터","lat":36.78,"lng":127.003,"hist":"1919.3.12·14 온양장터 시위"},"dunpo":{"name":"아산 둔포","lat":36.9297,"lng":127.0376,"hist":"경유"},"pyeongtaek":{"name":"평택역 광장","lat":36.991,"lng":127.085,"hist":"1919.4.1 평택역 앞 시위"},"anseong":{"name":"안성 3.1운동기념관(원곡면 만세고개)","lat":37.0621,"lng":127.1742,"hist":"1919.4.1 원곡·양성 만세운동(3대 실력항쟁)"},"osan":{"name":"오산역 광장·오산장터","lat":37.146,"lng":127.066,"hist":"1919.3.29 오산장 만세운동"},"jeam":{"name":"화성시독립운동기념관(제암리)","lat":37.125,"lng":126.8903,"hist":"1919.4.15 제암리·고주리 순국지"},"joam":{"name":"화성 3.1운동 만세길 방문자센터(우정읍 화수리)","lat":37.1091,"lng":126.7992,"hist":"1919.4.3 우정·장안 만세운동(화수리 항쟁)"},"namyang":{"name":"화성시청(남양)","lat":37.199,"lng":126.831,"hist":"경유"},"suwon":{"name":"수원 화성행궁 광장·팔달산 3.1독립운동기념탑·광복회 경기도지부","lat":37.287,"lng":127.014,"hist":"1919.3 수원 만세운동(김향화)"},"ansan":{"name":"안산역 광장·수암동 비석거리 3·1운동기념비","lat":37.327,"lng":126.792,"hist":"1919.3.30 수암 만세운동"},"siheung":{"name":"시흥 군자초등학교(삼일독립운동 기념비·거모주재소 터)","lat":37.3439,"lng":126.7874,"hist":"1919.4.4 거모리 시위"},"bupyeong":{"name":"인천 부평역 광장","lat":37.4897,"lng":126.7236,"hist":"경유"},"hwangeo":{"name":"황어장터 3·1만세운동 기념관(계양구 장기동)","lat":37.5791,"lng":126.7353,"hist":"1919.3.24 황어장터 만세운동"},"bucheon":{"name":"부천역 광장·계남면사무소 터","lat":37.484,"lng":126.783,"hist":"1919.3.24 계남면 시위"},"gangseo":{"name":"서울 강서(방화)","lat":37.577,"lng":126.813,"hist":"경유"},"tapgol":{"name":"서울 탑골공원·3·1독립선언광장(3.1운동 발상지)","lat":37.5713,"lng":126.9884,"hist":"1919.3.1 독립선언·만세"},"seodaemun":{"name":"서대문형무소역사관·독립문","lat":37.5742,"lng":126.956,"hist":"유관순 열사 순국지"},"goyang":{"name":"고양시청(원당)·통일로","lat":37.6584,"lng":126.832,"hist":"1919.3.23 고양 시위"},"bongilcheon":{"name":"파주 봉일천 3·1운동 기념비(조리읍 공릉장터)","lat":37.74,"lng":126.77,"hist":"1919.3.28 봉일천 만세운동(8명 순국)"},"munsan":{"name":"파주 문산역","lat":37.859,"lng":126.785,"hist":"경유"},"imjingak":{"name":"임진각 평화누리 음악의 언덕","lat":37.889,"lng":126.74,"hist":"광복절 완주식·하나 된 불"}},"west":[{"date":"2027-06-26","from":"jocheon","to":"jejuport","km":12,"event":"출정식(조천 만세동산 10:00)·제주 횃불 채화 → 제주항 연안여객터미널 봉송"},{"date":"2027-06-27","from":null,"to":null,"km":0,"event":"일요일 휴식(제주)"},{"date":"2027-06-28","from":"jejuport","to":"mokpo","km":2,"event":"여객선 제주항→목포항(13:40 출항, 씨월드고속훼리) → 저녁 목포 도착·양동교회 인근 숙영"},{"date":"2027-06-29","from":"mokpo","to":"illo","km":17,"event":"목포역 선포식(10:00) → 양동교회·정명여학교·유달산 3·1독립운동탑 → 일로역"},{"date":"2027-06-30","from":"illo","to":"yeongsanpo","km":22,"event":""},{"date":"2027-07-01","from":"yeongsanpo","to":"gwangsan","km":20,"event":"나주역 선포식(10:00)·옛 나주역·학생독립운동기념관"},{"date":"2027-07-02","from":"gwangsan","to":"gwangju","km":16,"event":"수피아 3·1만세운동기념비 → 3·1만세운동길 → 부동교 → 5·18민주광장 광주 선포식(16:00)"},{"date":"2027-07-03","from":"gwangju","to":"jangseong","km":25,"event":""},{"date":"2027-07-04","from":null,"to":null,"km":0,"event":"일요일 휴식(장성)"},{"date":"2027-07-05","from":"jangseong","to":"baegyangsa","km":17,"event":"장성 의적비·3·1사 참배"},{"date":"2027-07-06","from":"baegyangsa","to":"jeongeup","km":22,"event":""},{"date":"2027-07-07","from":"jeongeup","to":"wonpyeong","km":23,"event":"정읍역 선포식(10:00) → 태인 3·1운동기념탑 → 원평장터 기념비"},{"date":"2027-07-08","from":"wonpyeong","to":"jeonju","km":21,"event":""},{"date":"2027-07-09","from":"jeonju","to":"samnye","km":14,"event":"전주 선포식(남부시장·풍남문 10:00)·발상지비·신흥학교 기념비"},{"date":"2027-07-10","from":"samnye","to":"iksan","km":14,"event":"익산역 선포식(16:00)·4·4만세기념공원·순국열사비"},{"date":"2027-07-11","from":null,"to":null,"km":0,"event":"일요일 휴식(익산)"},{"date":"2027-07-12","from":"iksan","to":"gunsan","km":24,"event":""},{"date":"2027-07-13","from":"gunsan","to":"napo","km":15,"event":"군산 선포식(구암동산 3·1운동 100주년기념관 10:00)"},{"date":"2027-07-14","from":"napo","to":"ganggyeong","km":18,"event":"강경 옥녀봉 항일독립만세 기념비 참배"},{"date":"2027-07-15","from":"ganggyeong","to":"noseong","km":25,"event":"논산역 선포식(10:00)"},{"date":"2027-07-16","from":"noseong","to":"gongju","km":17,"event":""},{"date":"2027-07-17","from":"gongju","to":"janggun","km":14,"event":"공주 선포식(3.1중앙공원·영명학교 10:00)·제헌절"},{"date":"2027-07-18","from":null,"to":null,"km":0,"event":"일요일 휴식(공주·세종)"},{"date":"2027-07-19","from":"janggun","to":"jochiwon","km":15,"event":"세종 선포식(조치원역 광장 16:00)·충남북 연합 횃불시위 기념"},{"date":"2027-07-20","from":"jochiwon","to":"jeonui","km":16,"event":"전의 장터(세종 최초 시위지) 참배"},{"date":"2027-07-21","from":"jeonui","to":"aunae","km":18,"event":"아우내 독립만세운동 기념행사(유관순열사 사적지·대한독립만세길 1.37km·매봉산 봉화탑 봉화)"},{"date":"2027-07-22","from":"aunae","to":"dokrip","km":9,"event":"독립기념관 겨레의 집 1차 합화식(중부 횃불: 충북·대전)·기념행사"},{"date":"2027-07-23","from":"dokrip","to":"cheonan","km":11,"event":"천안역 선포식(16:00)"},{"date":"2027-07-24","from":"cheonan","to":"onyang","km":17,"event":"아산 선포식(온양온천역·온양장터 16:00)"},{"date":"2027-07-25","from":null,"to":null,"km":0,"event":"일요일 휴식(아산)"},{"date":"2027-07-26","from":"onyang","to":"dunpo","km":19,"event":""},{"date":"2027-07-27","from":"dunpo","to":"pyeongtaek","km":9,"event":"평택역 선포식(16:00, 1919.4.1 시위지)"},{"date":"2027-07-28","from":"pyeongtaek","to":"anseong","km":12,"event":"안성 3.1운동기념관 기념행사(원곡·양성 만세고개)"},{"date":"2027-07-29","from":"anseong","to":"osan","km":25,"event":""},{"date":"2027-07-30","from":"osan","to":"jeam","km":14,"event":"오산역·오산장터 선포식(10:00) → 제암리"},{"date":"2027-07-31","from":"jeam","to":"joam","km":18,"event":"제암리 순국 추모식(화성시독립운동기념관 10:00) → 화성 3.1운동 만세길 걷기 대회(장안·우정, 시민 대규모 참여)"},{"date":"2027-08-01","from":null,"to":null,"km":0,"event":"일요일 휴식(화성)"},{"date":"2027-08-02","from":"joam","to":"namyang","km":20,"event":"만세길 화수리 주재소 터·쌍봉산"},{"date":"2027-08-03","from":"namyang","to":"suwon","km":20,"event":""},{"date":"2027-08-04","from":"suwon","to":"ansan","km":24,"event":"수원 선포식(화성행궁 광장 10:00)·팔달산 3.1독립운동기념탑·광복회 경기도지부 예방"},{"date":"2027-08-05","from":"ansan","to":"siheung","km":15,"event":"안산역 선포식(10:00) → 수암동 비석거리 기념비 → 시흥 군자초 기념비"},{"date":"2027-08-06","from":"siheung","to":"bupyeong","km":15,"event":""},{"date":"2027-08-07","from":"bupyeong","to":"bucheon","km":18,"event":"부평역 선포식(10:00) → 황어장터 3·1만세운동 기념관 → 부천"},{"date":"2027-08-08","from":null,"to":null,"km":0,"event":"일요일 휴식(부천)"},{"date":"2027-08-09","from":"bucheon","to":"gangseo","km":12,"event":"부천역 선포식(10:00)·계남면사무소 터"},{"date":"2027-08-10","from":"gangseo","to":"tapgol","km":18,"event":"서울 입성(저녁 탑골공원 전야제)"},{"date":"2027-08-11","from":"tapgol","to":"seodaemun","km":8,"event":"서울 대회: 탑골공원 선포식(10:00) → 3·1독립선언광장 → 삼일대로 시민공간 → 안국역 → 서대문형무소 / 동·서 횃불 2차 합화식"},{"date":"2027-08-12","from":"seodaemun","to":"goyang","km":15,"event":"구파발·통일로"},{"date":"2027-08-13","from":"goyang","to":"bongilcheon","km":16,"event":"고양 선포식(고양시청 10:00) → 벽제관지 → 파주 봉일천 3·1운동 기념비"},{"date":"2027-08-14","from":"bongilcheon","to":"munsan","km":14,"event":"파주 선포식(문산역 16:00)"},{"date":"2027-08-15","from":"munsan","to":"imjingak","km":8,"event":"임진각 행진 → 광복절 완주식·17개 시·도 횃불 하나 된 불 점화(15:00)"}],"east":[{"date":"2027-06-26","region":"부산","site":"동래사적공원 3·1독립운동기념탑 → 동래시장 만세거리(동부 출정식·채화, 3.13 동래 시위)","lat":35.205,"lng":129.083,"km":6},{"date":"2027-06-29","region":"울산","site":"병영초·병영성·삼일사(4.4~5 병영 만세운동, 순국 4명)","lat":35.566,"lng":129.334,"km":6},{"date":"2027-07-01","region":"경남 양산","site":"양산 항일독립운동기념탑·시립독립기념관·남부시장(3.27)","lat":35.34,"lng":129.033,"km":7},{"date":"2027-07-03","region":"경남 밀양","site":"밀양관아·해천 항일운동 테마거리·의열기념관(3.13)","lat":35.493,"lng":128.747,"km":6},{"date":"2027-07-06","region":"경남 창녕","site":"영산 남산호국공원 3·1독립운동기념비·삼일만세길(3.13, 3·1민속문화제)","lat":35.454,"lng":128.529,"km":6},{"date":"2027-07-08","region":"경남 함안","site":"함안독립운동기념관·군북 3·1독립운동 기념탑(3.20, 순국 19~22명)","lat":35.257,"lng":128.329,"km":8},{"date":"2027-07-10","region":"대구","site":"서문시장 → 청라언덕·3·1만세운동길(90계단) → 국채보상운동기념공원(3.8)","lat":35.868,"lng":128.586,"km":5},{"date":"2027-07-13","region":"경북 구미","site":"인동 3·12 독립만세운동 기념탑(진평동, 인동 3·1문화제)","lat":36.105,"lng":128.42,"km":6},{"date":"2027-07-15","region":"경북 안동","site":"경상북도독립운동기념관·내앞마을·임청각(3.13~27, 피살 14명)","lat":36.596,"lng":128.845,"km":9},{"date":"2027-07-17","region":"경북 영덕","site":"영해로터리 3·18 독립만세운동 기념탑·영해만세시장(3.18, 2,000명)","lat":36.535,"lng":129.405,"km":8},{"date":"2027-07-20","region":"경북 영주","site":"영주역·구시장(3.21 쌀시장·어물시장 시위지)","lat":36.806,"lng":128.624,"km":5},{"date":"2027-07-24","region":"충북 충주","site":"신니면민 만세운동 유적비(용원장터 4.1)·충주역","lat":36.991,"lng":127.926,"km":6},{"date":"2027-07-27","region":"강원 횡성","site":"횡성 3·1공원·횡성장터 만세시위지(4.1, 순국 5명)","lat":37.491,"lng":127.985,"km":8},{"date":"2027-07-31","region":"강원 춘천","site":"강원광복기념관·항일애국선열 추모탑(강원 횃불 집결)","lat":37.933,"lng":127.75,"km":6},{"date":"2027-08-03","region":"강원 철원","site":"철원역사문화공원 애국선열 추모비(강원 최초 3.10~11 철원역 시위)","lat":38.147,"lng":127.313,"km":6},{"date":"2027-08-07","region":"경기 양주·의정부","site":"가래비 3·1운동 기념공원(광적면)·의정부역","lat":37.785,"lng":127.045,"km":8},{"date":"2027-08-11","region":"서울","site":"탑골공원 2차 합화식 합류","lat":37.5713,"lng":126.9884,"km":8}],"mid":[{"date":"2027-07-10","region":"충북 괴산","site":"괴산 3.1운동 7인 열사비·괴산장터(홍명희 주도)","lat":36.815,"lng":127.79,"km":6},{"date":"2027-07-17","region":"충북 청주","site":"삼일공원(민족대표 5인 동상)·미원 쌀안장터 기념탑","lat":36.645,"lng":127.495,"km":6},{"date":"2027-07-20","region":"대전","site":"인동 만세로광장(3·16 인동장터 독립만세운동 기념탑)·대전역","lat":36.32,"lng":127.435,"km":6},{"date":"2027-07-22","region":"충남 천안","site":"독립기념관 1차 합화식 합류","lat":36.785,"lng":127.223,"km":0}]};
 const SB = {"url": "https://kagncjrulzvmqwrlduvz.supabase.co", "key": "sb_publishable_iuf_wlUGidzMjUYXVYcQ1Q_BbDuwfT_"};
 const PATHS = {"W01":{"poly":"q|ukE{x}cWYxAxBlElB{APZt@gAbInNhHtIjDrHjBtKOxFcBfJb@rK{BlH|@lUrNhZdH|FClEsEhK^`AO|c@jCrLa@lTbARs@`HzBrFgAtGtAlTh@~@bDj@hBpCzAMg@dA`Yle@qA|Af@~Dm@dChAlCi@fEtBjEy@vA@lBfAdBdA~GmAjAG`Je@xB^~@`B`@_AxINxDs@t@pBdNS~Bj@jAUfBj@vFOxAbBjEdHjh@Dj@sAv@r@vDQrDxA\\pBWl@`@{@dF^|BxH|@b@`BIxCjBvFhAlIkA~FZvG`A`BWj@RbDw@EmAlCkBL{ClHRrAxC~CvDxHzBfIPnAq@L|@zFZxMu@dAaBAKr@b@vEfBbCg@KeD`DAdAwJfJ"},"W02":{"poly":"{xhsE{bkbWEaCwJ\\IiFyTyWOl@iBoCH}B_AECsBoLG@mBwDAgBvDtEbAlEJ","sea":[[33.5208,126.53],[34.7843,126.3827]]},"W03":{"poly":"{ijsEmllbWmEKuEcAAeHeNk@wB}HoGK}@qBOgFyFqC}DiF{Oe_@a@_C}A}BBkBoCoKaALvC_VuB}HeBAiAgOw@aA{@sFiBqDsFmDka@eNqJuECaAcJsFqEyGaC}HR_A}@qEQiFdAI_AiWsJb@E}LvCeDw@kYv@qDQoRu@gAsBmKiIqOqBeKmAsAyFwBoEsH}@cDqFeHkAoH_AuNcCkHyFqGhBa@b@{@y@eJc@}Sy@kGd@mBiWcONyDc@qAuQgDsNkN}BsFmCSmD|@}K}H}N{Bw@m@iDlBaA~Bd@l@"},"W04":{"poly":"{husEyu}bWe@m@`A_ChDmBoJik@{^}kA}I}CPm@mUuFIl@iQwEkAyCmOqMkkA}jAmVgMuKMqd@hFaDE}HsDmLaQ_BaFwBmCoA_Ful@ogA}DgJoAwHoDuFcAaFXmGs@e@mBeFuAqN{IeOlBkE\\eCzCiAe@cCfDiE_BaCtBwFqIiFcFkKkHuGq@eBs@oH}GvBkCsMm@FsC}AwKYkAuDDkCwAmH?cDkCuAyC_FsDmBXaB}BuKmJvCuEiW{EjB}AgFqHsBuDuD{EcAmFa]E_Cj@cBaAgCaAb@oAYwAoAsAaDyHtAyBqFmI_KsMmHaI}AmKuIc@o@_@sEiC{BcBAcDqAq@q@UgBeB`AcH}@g@f@cEe@uDb@}BsAcEeEd@iA[sA{C}AIkIqBwAgCb@a@qLaBJyCeE_SkNaH_JRSgIcF_HwHmFyDm@yBKwG_DoFQiCiCkEw@sHkDkGk@eCiOhDsJeAi@i@s@uBHkKgOse@sTub@sSs\\eEsMeAcNReJzFys@yAqJcHgMwEwDaD}F_GcEy@yBce@wa@yP{VSyAgEcEaA}DsDsD]}FjCcDrBkI}CqBg@~@iAs@i@uA^oDu@sBP_LdGsHu@wKj@wDgAcAt@oB~GcFlK_MhBkHi@cAYuHeE}C_B{C}@kUeAaFq@yK~@yDhFcG{SaKcO}NwGkBoD~@p@dF"},"W05":{"poly":"{zrtEwyjdW}@_FwWhLcE_MsEMuB~A}AgCiEiCoU_JMx@qLwFeJ_@wBpB@l@gMjAOiEoBJgOkHuj@wNwEr@e@sBkDKgA_AcEv@aNe_@cF~Ao@cAmDXoC{CeQeZoEcMaB}Bqb@oU_MgOeDkA}F`C{CKqDmHkLqDuDmCc@v@_CVcSyAyRoRkNiH{u@uLwR|@}IyBeNlH}c@yNqEUyIkHiAfBDfA}Iq@mEx@aMgDuDv@oBiCgDvDz@vCa@pBmCJuCk@lAyDaBUDkBqAoD{E}H@kJsE\\mBcBw@Jt@mAOc@cEgA}FaDyDw@{@x@iFI`@uFoMgI}@\\sAs@}@`A}[yi@E}@iEiHq@UgG_KkE{Jy@_@cOeWtB{BeHwLbDkF_AcCqWeYEb@a^uVqe@qVZaA}BoAbB_C"},"W06":{"poly":"q{muEig{dWnD{C_Zul@\\S[wAVoAlG_SiYi[l@s@@eAe@k@JiCfGyz@d@w@nC{ZhGuZQi@pAmJuE_BmAoRtDmDAmA}IwU{Ryx@kFeLw@oG~CkJNcE[{@oCOa@s@~@KwByKR_ExAkEjB}ABy@uBmCnDoBaB}s@qBuHA_RiAw@bCgBUoRcAoDbEuCZmAmSmg@tE}CkBkEoAcLx@DZyPbAuDWcEvBw@e@gM_Ay@x@_LoAMP_Bw@wEa@ShDeJkBgNfE{KiJmZpPyXJm@w@o@"},"W07":{"poly":"ctouE_zseWv@n@Kl@qPxXzCdJ{QtU~BbDmBpCjAhA_h@bu@gFhJqFhRwC~[yBfEyIhFaAjDe@xIaLlb@qB`ZDjJu@fFF|NkDf]gMWQlG{@GkFfGBxCkCGeAbJsAvDyJcBgRzuABxAcCzBQk@o@C[dAaAHPdBgLlA[j@TdGf@jAeAGrDhDcHvLxCnDoFnJ[xHsFZ?hAaBHuB`Bs@hRuXSI`AiG?e@`^wKl@cKrCuGvEsg@hRaBtAcNb]mA`A_e@eCoON_BPsQfIoCVyMfHeNjDkQnAcTy@CxBmAKOnFk@?eRxs@uAuBsCoAqOu@BtAuKdJsOpHjA`Eun@jZhB|H`BhBsVlZkDzKiD|CKhAf@xB{Br@`ApFkDdLdCnHg^b]}GrAuH|GqN|Bz@jAiEmA{Ar@mDWiAr@cE~G\\nAaCbH{@n@kAS}BfSgNeCyD~FmDnAmCaAkQ}Y|@_AOq@{G{I{Ba@maAa{@{BoH_GaKom@}EqLwOn@wA"},"W08":{"poly":"a{mvEmsydWo@vAoOsSsAm@yMa@o@o@c@XcByBcFY{FcF{@qCsGgDcLaAa_@e@{QsAuAwBAsDaCg@wBaFiIgMsDrFyFsHkIuFaCZoEa@uBd@wCm@yCh@}UlRoGVqKbHwHq@eBuDmEiEcA{CoDwE}BIyEfBT\\bBS}FvE_@~BmEhIJbAaApCcJu@wB{CwE{@rAcB{NkDiHGmGnGi@YiBzAl@nFsDaHyDaDsSiF}HeHqN{@s^uJaRsBuOYo_@tEg@tEyLeBaDsBsCeEaN}\\{FwJeJoFiL|@wSfHi@WwAh@eXwCcJj@uHxD}NrDuBhFeE~Bu@{BgXrLiCqA{BgDAuAgDsBkS_DkFxAwC~DqIsFyLGEw@uEILgBsDcAiD}DkPuGq@fA"},"W09":{"poly":"_egwEgg~dWp@gAkGoCmBp@}HeDcE@uEgAoDKu@`BcEY{HlByA[uEyEmAMeXtByD}Ap@iHMsCp@QkAqH}MtDol@lVoDlBiAdBa@~BDnGuALsA`DiD|Nc@rHbAxBkBdPnGfP`@fCnErHx@~Dg@nAcF~CuLfM}CxA}AbCoHzAwFoEsEpAw@gCeCmAgCAaDnAcFWqLlHgBdCyDoAkAfC{Bp@y@jBgE[a@~CqAhA_Fp@yCs@qBb@kCwC}DAcC_D_AWm@|@DhGgAtBgEzAsEo@sBjEuAViDkCmQ{FcGGsIyHkC{GeDgBkEcFmLoF{RyG?ePaFeKgFoEwFuAuFTyAkBcCD{E_FiG_BWu@wJoBmCLgCoBqd@wJcBsDkBjBuBqH]gNyGkUcQyJyFqB{EmF_OgCwKwQ_Ds@_JRuKcD{CqFqA{F{D}CeMKwJdBeJCmC~@uCbDuEl@_CcNyGcQGyCm`@{M^oBs@PaDuAkAd@eQwF@mA{q@oS{Dc@qEgD^wBaMsG{AwCua@e^wBpF"},"W10":{"poly":"olcxEy|deWxDkJgWwa@jEaIoy@iu@}DtCeIgRoC_Lwj@e`AoDw@gBHeFcJqAs@wBoF@gAs@AmHaTXuFsDcBaH}JcQo^kBkBkLqEuE]sKh@}CaAqDaDsLc@wHeBcH{K}G}F{IaLqDsHiGgEqOkYe[oScNcZ_MaJkJoDcKmGge@og@oAiCiIsg@mBsGyCqQwCzG}BgAKsDoDJoCqHxA{CLmC{Av@iDMhDLzAw@Js@qA}ExBkAyJce@g@kSmIeIyNyWaEqFmEsDiEmHyGwFeBNeDwF\\qD_NcUeCiHqDgEcRo\\eQoL}VmMmCb@_KO_WuD_HrA_CAuJ}EgE@wHeDoLmBKZm[kBSa@sGHRwBoMkEiDcGoHmGqAmQaH}GyN}DsTfABgBgBE@q@"},"W11":{"poly":"ef~xE_~afWTqEkJiF|BgHmAyAQcCsD_Me@k\\qBi\\_IcUwDqBL{@dFwG}C}N{CsGfBuL{B}HiFsKgAeFY}WjCsKuCiEgAqEsAa_@wO}M{KuBiHaDaHqGeH{@aOeG_EU{GkCoCaEaE{CkNiCwG\\sGYkD{BoC_EeDoNu@aAuEmByB}IaCsBgDaGqGcCqK|@oBeAOg@|@iAt@yFg@oCB{CwA_Ge@wFDqC`AkCkKsBaFl@uDbBiCq@qHEqJmDqAgBgLkAkAgCaB@oEoJmDgBm@fA_FoPQcIoAgFaCyEwFuC]w@H{En@mBMkFoB{I`@Q_@eB{CyDeA_ITwFi@kDuCuFkCgIBeEy@kA{CyWn@_LeCeJ_B_QeA[_@aFoFyGcFcLeEiDyIw@uBwAgHwIgJrAyEe@?}Jk]oKv@yPwCeAmAcDaJBAgAeXH?eMkDAmDmAaE?oAoDAsB{KkOwBoHiD{CwFeBeH_FmRe{@kEwIoDu@VwK{ASdC}S{HcBnC{LgANQ_A"},"W12":{"poly":"oqqyEkq`gWY}AuDbCoAa@_@|AegAtY{TfPkDp@}EpFyL|I}CRwIxKYm@wStQsByBgLfMiMnSi@McFdIsBHe@y@cHvBcAAE_@c@v@aC[eBj@B|C}Al@sD~SsClDcWhD_PhEaIdAuDtFuMvJaKh@cRWmLiAmFLaD|@eHlE_e@`IomBfoAyJ~EiArJf@`CgEtGoaA`xBzApC"},"W13":{"poly":"kwdzEacrfWlAzB{_@vb@wEtOwNjUsC`I\\Z_C`J{HpO_@dIbA~NcAjsAoBbOiAc@}@lFiF_BbBzAoAe@gUpi@}BbCOfUd@jIlA|QvBfDe|@~qE|G`LzLlHq@zIuAbEhApALdBSdGeAvGfBrBx@`D_LdVmHzr@sEjR_Aj@yChGd@jBOzAgKpn@"},"W14":{"poly":"uujzEyjyeWL}@fD~@_Hlc@oEnT{Ac@wFbNo@QuOlO}Aj@mEw@{CJkI_FaEbMkIz]eFdEqOzDqF~D_Uv^JhFcD^cTlU`@z@oIhJv@rAoZx[kAdT`@nBEdu@V`CqX`ZbFpIq@vFoDpE_BjF|@xBObBoF~JeFrFtCjHP|D{ArIVhHmBlZhDlIMdDj@nJWzHeAjGvBvCgAdCuBfMeDbF}GrFcExLoNpStA~QPdKeAl[xDlZ{EvTCx^oDbBmAjEpDhEhA|RmPhOoG`Ps@nCFbDkC[w@bHu@~@NpC[fCqErMkAlMoAzEwEnINrHhBxAjBfFk@fFXtF_Bf@aC`J{DdFvChLWvVaCzHqElFgEfC{ChD}BjF`@tBpNdQ`DpF`Jba@MpBuBzEj@|LrAbCs@pDX|CkDjOrBtIc@|@nD|E~@zE_@dEV~_@{Hne@c@Og@hCrL`H`KpLhB~CbGxQxAe@@o@t@?@k@"},"W15":{"poly":"kuszE_kqdWAj@u@?An@yAd@cGyQiB_DaKqLsLaHf@iCb@NjHka@Nq_@WqC^eE_A{EoD}Eb@}@sBuIjDkOY}Cr@qDsAcCk@}LtB{ELqBaJca@aDqFqNeQy@wCiRuIoH_GcH}IsLiSmCmBcGsBaEiGyHwAsDC_@ePeB[h@iLiNmCyICoIyF{DaE}GkN{aA}~AZ[sNqUbTiUe@q@"},"W16":{"poly":"ma|zE}mbeWd@p@cThUeN_UUX{@iAqP{FyBjCOoA}Cw@sByByNc[aU}m@gHiJ}@_MwEyLuEgDImDgJeROoByDuCkBmGiAyAu@yIj@uBwA{DvEcDaEwDoBeHiB_CIiBxA}DQsBkFsBsYwYcTkJ{HgHyCcIuGiGob@aJ{XWcGsB}CeDgDtB{FEsPhEcFQKhB_n@LeQyD}F{Bea@}B~@{Ta@G}B_GoAeNu@a@eGRO}FtB{CaEyJyGy@{HoDa@cChBmLuA}BuKwCaKzAdCmPwDkQwCjF_FeVcFqIyG{FYcByCsEkDoCcFkBiCeCsHaU?gCoBsN{JyJI^wHgF_BPiBkIYcP}DsDiFdAkJgSkQaUfNgh@eA_Dw@cKtCkAJ_C|@_A{@qAi@mEaMwSkC_N_GuStDi@pFwCjCqCrCsIt@_FnEuFuBm@uDcE_K_HaBwCm@gRyPknB_Dy@mHqG_Fm\\_\\cuA{V_OoIiBiGgCuDLuIaAuFsE"},"W17":{"poly":"cbu{EatefWgHkDuDd@cPmEuDzFyADu@m@gFdHuDa@eCiC{E{QoDwAy@wCgAWsCn@_CmCoLk[eJel@_EuRe`@sqAkMoi@oG{O}GkJwg@cf@wXoUqToOcCk@mHlLa@E_~@gZiDSyX{o@m@^mp@k|AiA}AgS_Lu@kBmIyEVmDm@A_BsEaAe@}HSOj@kd@{d@gCfBUoD{CsElBqE[]uGiEyChAcSaIuMw@sFaFmIgFiFcG_RkJ_BcEsBuN}ReZyJ_KqFgCwFiE{M}EkNdCwKrD_KOqMwPSwG{A_E_BrAkAhE"},"W18":{"poly":"gnl|Es_}fWjAiEvDoCTcUkAuG}EuGcDmHsDmEHgCaEwBgFsFcBs@SZkDoBac@qCkEnCc@rBwCWSxEuLF}A}EsETG}AqHrCeNiBwO~Gq]fF_KtCkN~GcErCmBlD_DrCgErB_@oAZQoAeDfBsAiACiGtBgFXwJaA{GiFsNdK}BBy@h@u\\yNcD}@uEACe@_F?wHaJuD{BsDNqAhB}@PyB}@oCfAuYf@ms@Gio@uTs@nBwKgCqU_Da@fHyPNeJdDc@ITWga@oHsFkD_@eDc@KuNtA_OQubAyJcGsCwk@~A{\\fFeCMw@`C{\\g@uJl@@fB}@BqLa@w`@gFqMiDgn@kHUzI]|AgA^mBfIkAp@wBDmCjCgAvDqAD_AnB}@zF_H\\{Ak@{BHf@pBgKv@w@xAs@y@w@gEgFoAmDC\\dC[nC\\t@H|KqM|@{AtAmEb@yBnA{E\\}BvC{GW@bAcAFvCfN^hEWnAgAtA{IhEoC|CaCjAuDLeAtAgKn@iA~NHbIaBC"},"W19":{"poly":"wbo}Ec|{fW`BBIcIp@_JuHwReI}\\cFsK|@}@k\\oNyLqCyJuEwa@sm@bIqQcRuQwGgK]cDwDwD[cDj@sAs@yCR{ArIgJB{@y@}BoNgG`AcAxAO_CmCg@cFXyFy@uEcBcFaB_KgEsGkBT{@eCwIgb@{AeA}H}ReFaGaD_BeBqBgBl@@rAm@Ku@fByBd@{A_HsHsAsJmOqAAkAeCcDyAwBMMaBwA_DaCCsAuKt@sEqCgCeBiDh@uDbAoBFkFiB{BcAyCw@aSsCwFeD}Nd@_@oU_^eK}QyJqEcBgBcGaPeBaNyCeH{DuDiGgLm@qB[qHuM[qGmBa@jA}JuIeAtAuAaBmBbCkEsEk@b@aP}^{@sDcEbAuAeAUuCnDiEkCoA{DzBq@hIyG|DsDZeGvHqAyBu@aIwCcEiKuC}EyCe@fAkAcBwCk@gCoCy@wFaEUwAy@y@fA}E`AaBo@g@_Ew@aAgFRqJeFqIxTjCpVxC|DvC~AM\\jB~Bn@Gc@`EP`BdLnSXrHtCfEfAb@d@rCrBj@f@lAtErAbBxBjFbA^}@"},"W20":{"poly":"ow~}EysogW_@|@}E}@qB_CuEsAg@mAgB]u@aBB_A_DgC}@cBYsHeLoSQaBb@aEo@FkB_CL]wC_ByC}DgBuNwCbAiI]uBkAaD}DaNqCaOxEmDy@yELyAlAkBTgAwRL}C~AgG_AwVy@pCyD~Bc@{TuCwC_AeD_Bw@wGkNiKbI{ADkIsBiKPyDk@eSmK{@wAG_EmEgIaAwDiB}ATuBmEyAu@iD}GyEjC{EqBeByC{OFyAcHlBg@yDqBR}GiSYz@eBoBcGa@yDaC_AXaBeAiA{BsCvBiDi@o@sCyEqCeA_BS{AvByFqBkDmKmD}J_LuNmK_A}BwC{h@g@aSqDmIiBRN_DgAkF_VlB"},"W21":{"poly":"msk~E_u}gWu@s@IuBa@a@ic@vEoWdAw@dAuHoDsVdDf@hGcVjDKaAuNlGaFtEwH|BmPpBue@eA}DDoAn@[vDrAdOnFbG`AhDt@`KKjOwE|KaI|FFp\\}DzEiCpAy@lFcCfC{@`DpB|Sk@dLiGrJaGjAwGi@Kb@}@vNp@hZ~@~CEvBuAxFf@dJ_@vDj@pG}BrDyB`@_A`DN~BmAxUzChAgAXE|@mBnBJ|Ai@tAx@t@EjG{@vDu@bLeDb@aDwAsDvDGnEwIhCw@IEf@en@qGKy@sOfGoAIdDzE|HxSvBlVwAjDYnEbBfF\\hD~BjDfFrAuQ|AuDtDcClEsFdC_a@~B{Bl@iZvPt@bDkT~MsBxGe@hKgDO@cEkA_@aCx@DjAiGhB}Bpc@iFiB"},"W22":{"poly":"{g{~EyujgWhFhBf@mIg@@WsEoJkBeB}BwCpBgG|AwBfEcClACsBmM{IiF{ID_B{Nz@}B[sCqBoHwIkWoOePYkZwOwEB_PtLk]_G}MhBaSyJmMuJcCEaIvBwQg@yGfCoMp@qJ_BcKkIiGSmBaAwAaKyKgTmEoBuHsJaGcEmAqCS_Db@mDc@_FnEcZ\\eNoAkAiA_EeAoBsFmAkFL{Bc@}E}GyGeFgE_MaD}CiPsDuEW{B}FuDcEk@kBIiBx@aFa@iEs@oAaC}@eCgIz@qB`B}JvB}CZsDjDaJwBqC_@}BnAmDKkIb@iDa@s@jAmDaF]aF{AxBaEr@qDlBaXtDcXz@}VlAyA\\mBN}GmAcIwG_NcFqToAmXBuV[}@_QwM_@|@"},"W23":{"poly":"_}j_F}~}gWqBlFaEwBaI`L{Hlz@y@hCeHlL}If`@qChQi@`PPjgAdBnv@YdG}EhUAbFfAlL_OzS}C|Bf@pFYnB\\xCl@l@cCrDm@fE{Cv@wDtCyEzFDnA{CnF{GZHtBaBJZzCqHfMkBc@gHxCq@nDaCzBZ\\iBbDk@[oArBn@hE"},"W24":{"poly":"kqo_F{fogWoAjAc@hDtAvFqFjJhAxAs@v@YlFqB~E@lB_AXElAeCMoFpBsDaB}AuBiCYKcCiBlAaAO}ApAu@`D{@bAu@fF}DpIi@QcBlBaBj@kCk@~@lJ}EVgAz@g@xCmEnBaBy@w@TsCzGuB|@}AxIkBzAeB@q@fAt@jCoCe@m@`BYI|@tDUz@aELuAbAgEvIAlCgH~CF~AsCnC`@nBe@vBPhE}BvA`@tDkBpGsCrDaB|@}DVwFtIkCNcBpDw@vIaGrHyAJObBs@l@bDzL\\fOhE|G`FpVvFpLl@?d@z@ObAn@jDQtHeAHC|@pAbJnJlRg@?Ffb@V|@}@`@f@bCuErAx@pDsEl_@lJ|Bm@dC{@Bq@hA"},"W25":{"poly":"{lt_Fep`gWp@iAbBFxWdGyAjE|DrG`@nDtHN`BpQrC\\AlHrEj@NbIpDnJfCbObDh@b@vHhCb@bGpI]j@j@nApIpLmDxCdAxGxCpH_Ah@ZtAtEpLoBhGnDpGlEN~LvG|HnXjIp~@_@pQPlMsFPRbOcE~@Jz@aFfAj@pGwCl@bCfV`Lxd@vPhy@\\zE]xEmEzJB~@dIzGrCrE{N|[wBvk@~Bh@}BbRfGtWbJtUnDzE`GhBh@t^bBbCkBrDq@rDz@|AqDzAvClVtA|Bc@lFfFpk@GjAmEtAf@hHmChZx@t@eAhJzCx@Ph@oDb`@jAVj@|B`Bn@ErB"},"W26":{"poly":"orn_F}gdfWDsBaBo@k@}ByA[cA`AmZyI{N}Bcg@gMsb@lFm`@vHaAqKyLbAmPaGsEbAiICgC{BiPsEKoBkAcBsFaCyFl@iDQyBlIoMoFil@`MkGeBe@aA}VqFwDSaHh@J}CuMXyH{CqMnEgKzAsG}F{Q{KsZwFyFiBy@}@mCkImEsGeEwKqFqT_LcIcFe@k@aIaOzDa[oCo@l@?vAcQuDcVuHsIeFgFJ{@l@iMyBcDwA_DcDo@|AaG_G_EdDgGtAio@EInCiQxHaEJ_C~CkBd@qq@EmCe@kBsAoNaReDeHuIr@o@iAwDy@oj@qAgHcCo@Tk@kBgJuGqCeAeAz@b@\\"},"W27":{"poly":"_zk`Fg_kfW[U_Bz@OcGwKqF_XwYgBaGmHkE_NmQcI{FeBqEwC{D_EHoGyB{JG}GkGqDeHeGvAs@iF}AZ{CmCeIeBWuD{C\\Go@iOfBaEw@{MCsDuBkAvAeJ_NqDrC{MuIaF]UyCoBCwBmA~@mE_BeFej@aw@sAy@bAeNsZuJKXmQgJsALMeA}Cx@iJb@oOm["},"W28":{"poly":"gww`FqitfWwA}Cv@s@{AqCu@p@Wa@iAVgPyDmOuBa@TOa@aUuE_IaHeBw@s@VaD_QkFqOkBsCmL{K_G_TmByAcUgB{ByBiCcIsKgGeDiOCuGoAi@CsE}DoHnAaB`@uB_w@y^eAvDuC{Hih@sVzAcC{AkFCcCi@USsA}MkG}GOoHcEs@sAgBuKoAv@eCoJsBi]jEyLk@eZoAyEwA_Cq@_GaAiBu@uI}Cs@iAZ{@q@kCp@eFcDiA}C_BP_G{MR}A|@}@}@w@Jo@`AwAeIoOSgJgEcHkE}CoAqHkBeDaU_VeIiHwBg@]{C_CeGiF[FaEvBgAV{B}FxA"},"W29":{"poly":"_veaFuxegWxBm@KgBmEuAsJ|FiD_@qDf@c@rCJvFyA~Ee@`H}BfGgFtTuBpD}EhDkDvLaGjJ_ChJBhD_]pUcIrNaHnCgLzAgIcCiFlE_JiByEdAUmBoHpAuAjAq@zFiBzG{J~FuBxDIZ`Az@g@xAoBfFyGbL^hH_|@bZk@HDw@oIlJiEjKoAzVc@?uAjFsWlc@i@nBg@zN}BdHiC`DaC`H@rA}X~ZoAdFRtLqAvEuMjQqFzK}B|B}AbDaHfFeNtRyClTsAbEuVhb@_ItHgCpE}@lMoD|OgQ|D{DfD}BHy@|BgRhO{FEEvD}BRCxB_GCo@|PnKH`@c@B}AtAD"},"W30":{"poly":"_evaF}rpfWuAEC|A_@?Ab@l@DAdL{Ch@|b@`AjGSAnFpGTvHtB`GlE~HvI`DfH`B`HpH~NiCpOAvJ`AdMiAh]vA`HIhDt@|D\\vIo@xHf@dLcFvIaBtHoB`@Q}@aAb@UnBcCxB{@zEeC`@a@rBJ|De@zHr@zF[?hAzRnBpJRM~Uvl@fDgCxAlB~@|M|BnFbRbOpJxDfGhZ^lBaAbG`ApGoBzG`@|AvArAAbAiAzCc@tGgBnHwAzD_DrCk@zGFxBvAOEpEfAhNo@vI~@dKH`Vi@nD`@tAYjD^bEgA|ILnH~AlFHpCnDnBd@nBhDbAxClJdB~NlA`CbLnKlAA^gA~Ixf@m@bQkAdFaDnGv@lGEzG{N~R}BpBqCr@pArFaFhCgF~Ki@zDlApD`@~H{DxQvA`JiBbJ`@bHbCvN^pM|AxQcMvm@}I`_@~HrO~FdT`I`QsPvQtClFcBnB"},"W31":{"poly":"u|qaFmfneWuAxCwDbCqCPiBrEAxCyAjA~AjGDxDYl@cBZb@zBKvCn@dFzBYXtCiEh@GpCpARs@tAFxAhAnA`CvIjBzAGdGpA|GhBjDCbDtAvGs@dCfFtDjAhFtG`HhCrAo@jAB~DyD|E{Bl@sDrEqD|HsMbb@eB`d@fEi@hCh@fB]m@|AeDv@d@fK|B^vCnD^zBu@pBRtFtElMg@tAv@tE[`EoC|D}GjB@dHlBX~BgAhAHrCvFlCpApC`FtFnCfNxL`GbDrCl@vArA`E~@hDzDfDCe@jDrCdHpA`H@|CbFhInAnE]pBlEtD`BlK^vPn@vDvLzMeOrGw@r@g@lDqAbCv@tB^`OpBnJDdDpCnI"},"W32":{"poly":"aznaFkn|dWqBcFe@qGqBoJ}EQaN`AoBoFeC^y@}AuB{@yBC}JoHeHo@gBwBsBJwHuBaAoBVmAyHkLMkDkAmA[aB]TyAsAiABqEfCg@aCqC\\aD}@yCj@JsAcGYkL`GeFjAqC@gEiByHgQcFkHiQbOqJiLgBdBqFvp@y@fAmk@|QuHb@iDkL_DaBiFm@kBgAwOgg@}NmUaI~DaFt@k@zA_Ae@YyBkCNsDkBwCLsEo@oA}B{A{@s@iB?yA~@aGwBOg@gBl@_Fc@}Bj@wCk@aFsA}@o@iCqAI@eAeCgE{A]wA}AoFcAeDoB}Kk@aE{AcCnBeCZ_HzDeFhAwE_G}GqAqBuAeFwOqBsLaOcC_AF{BfBoA~GsEBgDsAkCb@sBcAkDjE_MrTiGiHd@u@q@y@]h@"},"W33":{"poly":"}l`bF}tbeWaA~Ap@x@iAxBsCr@}NsU{CqBkCg@wHd@Im@eU~Cew@nD?[eCBoD}BgDoE_B}E}Cm[e@m@eFy]a@yHfAqViAgKgDcBmAaBoDmRwMoRyHiDsY}D_DwDwC}TvA{]MuDwF_PqIcO}DmQyAqB{DoTZcOkBmECwIqBiGbA}DBeD{A}BO_FpF}GrBkIhFsHxAsHEa@cBHtAmDqByEy@[CsLuDmByBaFMaD}AeDmBkDiE_DaA_IyFu@qAw@}Dn@eCeKfAaIEaOlBkKV}O`B}HqAi@n@kDQoHsOkNiCxBcAqDeAy@MeFg@Qo@}BiBoAoBAeAcAmEBsCo@MqAkCiCkAI}DqGsA{@E}AW\\sBOaBdAiCSi@x@iBDmEwByB}DoBw@gBmD_AWYsFyE}Ey@wCgBWMyBn@gB{AoCaAaRwHaOk_@uCaBx@aEiA@_EiAaAGmBl@gEeCaTh@oHu@yBgB_@qAsCNqDxDuLmByGqCoh@uDiQkJ{x@wAiDvC_K{EgFUeAuI}CyC`@sAmCGiAp@UwAoId@oD_@eAx@a@iCsGrB{@yDfByFoTdBkBs@cE`D{@a@mA`AkADih@sIgFr@mCaBy@oAuDsCqAk@wAyC_CTeA]E@aBw@UaF{LvAO{@}H]G"},"W34":{"poly":"srqbFemffW\\Fz@|HwAN`FzLv@TA`B\\Dy@fHZhAOjBgMr[kJ~JbA~EaNlK~CjMgApDz@`Dw@`@l@|BsEvB~CjJiDhKfArGqI~D|ApGoAr@J^yHhEd@~AiMhGvAtFkDlCnBdEeAbBhFzIs@rGrA|Kg@fGoA`AmA|PdBlAjDdJi@hCKtK_BzANzJuCzBsGnIS~Nm@bEwA|CcEgAIpBmBdC\\xDu@bw@_BNwC|B{Co@_ARuArFeBpAiC_Aq@yB_CZaAhDgGzFm@hHiB~@cAdK}BrBu@nCfCfFhCpA`BrBwAzFgCx@q@jB_@bCl@jDuExL`ElAOvDnBx@pEVjBvArAtIrDpM@pJv@pDKrCoA~IY~LeCbK~BjTzCjLxB|Ch@~Tu@nCuLxNmKrJyCpG_IjHeLtHoEdBeAzBwQjL{AvEbAfGgBbMv@vQz@zCl@vIYpMr@`@Ah@gCpA|@lGc@fB`E~ClAoAvC`GqDnD{@xD{EpJEe@w@rBqEtBuDjI{BtNL~ApChAYdBnApCxExC`ChEwAlGJ~CqCbCI`Bf@tFrD|AXpBWjCjAlBYlB{@l@c@[b@zAS~JlKx@e@dUXb@GfB]@wBbgAj@j@QnLs@xD{@zWwBliAs@hEcJlWsBn@oFSw@b@kd@feArB`Bu@tBhAt@sB|FlGdEc@nApBtAwBfF"},"W35":{"poly":"}lybFca{dWcKvVUnB_A\\YrBwBLqIcG{@xB{DmBu`@w@aBXeC`FwDtEoHw@qEJCzCqBeBTe@cCoC"},"W36":{"poly":"ox|bFeazdWg@C}BlC\\dGo@PVtBqG|BaFrHcAgAyDpLoOpUwJtGeHbBoTxNmRByBb@cVhc@sq@oAe_@~YoSjA{A`AeEdHkGfQsApGyBlDYlC~@fKOzBuAPk@nCoFxFeDt@kD`CYpDa_@nZcHdEgYdJcNvBsGb@[aAsB@iCp@uu@hFqUtCkCOmKhAUl@ePp@cFpBe@uAoQy@oAb@_GdJsC`Ay^uBkLsB{KtGUoFqc@BqLjVIhBmCMUdL]TE~AcIhO}SfHoKtPQpB}]g@D]Y\\mRQ_@rFuIm@}Ua[mVsH{JaC}_AsF{HyA}Mo@y@bCwAbYw@tDAl@`@@X}Dt@RTdA"},"W37":{"poly":"afycFexmdWUeAu@SY|Da@As@tAkJFKuCs[xBuCsFmZyAIgBYb@cDI@m@a]cAD_ByBO?eAuAHuDuXLiByBkKyBwEwDuCcB}Do@fAyA`@T`AiBNy_@iAwC{Lx@_FkSkFHu@g]oI_QwFymA{MMjBuJiAcRgDm[eIeFMaDmByE_@{CBmFzBsFbI}AdE{TrPmFb@FwJkDiCsCEeDfBsGZsGiAgLXiAxMQdReFfC[rCSoCqFnBUhAKq@]nAcLpHeEdBYcA{FnBzFoBXbAdEeBbLqH\\oAJp@TiAdGoBW{Oj@yAa@u]dCCpAcBrAkRFuUjAaEhBgC~CuApMm@xUeG`FzAzAyElOcAIsGxAI~Jyh@fQj@|QpJzYfI~MrAhSjFt@cFbPrEvPt@jCfAbGT|m@\\la@s@`AuAb]Vn@_A?_EnD`@fAiMdJeAx@mLlDwCvYbDvCqc@`O`BLa@z|@|KtGcA``@{NlEuE`AqELmF~KpAnB_TV_LkCU@a@uAo@KyD"},"W38":{"poly":"s_xcFihydWdA_I?yHhAJVcNY_@_b@aG_B~Bar@yKwHA_a@_LuBZaB}Su@LMoAaBqB}SkC_HwByDgEiHmD{J_LqO_LggAGgWkGsHi@wOuEmF`AiXoKuGuLsIuEqQqTcAiCqRIkGcHq@v@gIsLoGHue@cEoC`A{GvFgCt@}Y}@_BpAy@|BcElAuFrEuQWGdVsBCSlA[K"},"W39":{"poly":"ggjdFgd_eWZJRmArBBFeVbMTlAy@Ri[fDilArV_j@^EzDuIRLpFyL{@qB[qEyCsNf@{DEqD`McQdHuOyDgEe|@al@pBeClFkP~FiLHeBZVx`@{y@l@CpAwB@cBdOa[dB}A`Ca@dA}Cn@NR_D|A}EaAaChAmEIy@w@q@{BKUy@sBkAJaBw@uB`AaCAmCh@gAy@}Fd@cKaD{G_Yk~AqFcKkEiC_h@kt@yNg\\YsAz@_DoK}ZzBNDu@n@HRyC`AL|@qC`@wIfBo@n@sCnAC~A}Cc@a@jCcIjBS|A}BjA{HAmEu@iEiBwCUsBzAsAYq@n@o@`@kD~A_AY{CdBqA\\i@Y_@dB_Cw@uI`AyBGeBh@Bj@_F_AcCjBsDbDuBeD_Ga@LJkVwGyHkDqLiDeFmBaAX}BQcOf@MRsBWcHh@wFbBmFcBoEQ_E}A{A?o@dAy@z@oSr@JtDiExGkKxLqH[cDq@G"},"W40":{"poly":"}cidF}lafWp@FZbDyLpHyGjKuDhEs@K{@nSeAx@?n@|AzAP~DbBnEcBlFi@vFVbHSrBg@LPbOY|BdCzApDxFjCbK~G`JSbU`@Mh@`AwFxFd@x@sGrIT^"},"W41":{"poly":"ixidFee{eWOUyGxGyAq@cQpOoFzG_@w@eDlDuNfFuDjGsKdFeI|F@j@eBZeFmCcClDkD`Cy@vFsAf@R`@u@`@GfA_BhCsBa@W{@uAh@}A`D}BfBZjBeCrCeJjDaJpK{FvC]`LeACeAdCoGvViBvPArF_KxIOWeBhBw@DJf@mOdLuDnE{AxCf@h@sL|UuAxFhAl@wH|Y}@p@YSoJfOwAmBoNfHkArAcDfLv@lEUfGgKtEoGlHe@k@kA^yNjRj@rNvAfGQjH]dCoBvAc@lAgBtHK`FaDvEo@rEaBpEJpCcE@uB`CuFbPo]~q@m@B_NdVqErKsEpG_JxP{Spd@}DrE}AzHaDlIsFbHaAWqFp@sB`Bq@|Ao@jHz@r@kArEoEtEqBhMkEtIs@tFkBzDv@rHcClQg@t@}HdB"},"W42":{"poly":"}bzdF_{beW?aAsAAoAkA{HbOsB`@eEu@q@vOyCzNpApEuA`FcEf[aEjBcA|BkB~L]nJwP`RgI|FeXlYkBjEiCbP_HvLBt@kA`CSxLyA~IoK`^iEdI{ArHk@vXsJxx@_@P}CjRuNdd@a@jE}H\\s@nAmDJknAJ?xAgAJwsAQmJyCmC{BgFWeFqC}AIgCbBiVeSeG{CqF}@yPa@kE`GkKaT_EaBgOv@WgIuAF"},"W43":{"poly":"_|ieFg~vdWtAGf@rJdPf^eInGdLlX[RNn@{B`B`@bAeA|@`BdK}FrBkJpGiWhJuAVeHgB_GIuEx@sB_@dAmDi`@w@iF{@_EkDcTm`@URkByAe_@ob@kSlFeDEyCsCmNgUc@oImH\\uAaB}FqC}EvByD}AOwBsBiCuJoA}KcFmAz@gDbGkTB?}C_C}AcA`@eFqA{AHaDkCcIk@}CjA{BvCuEdA{B`EwE`EoE_@{@uA}F[wEpGuD~BY`EgCdEWhC}FaHeJuCmBmB_BqD_A}Gf@wKqCmGIuAwBiBiCJmLoEwCmLo@yK}J_@_GcEur@lAf@}Hi}ApGaDq@qPwImU_FuRpHaAaBqAb@j@nBgRdHGyV_Gs@_CAkFjDmGp@_QjEuAc@oB{BaB`D"},"W44":{"poly":"siafFcuydWMXdEnEnAdWh@jEn@_@qG`IkBbEBhAaLtg@qExMyBlf@oB[oAt@qBm@sCvK}EgA}AtO}BlGqC~DaFtDcq@nVkRbMyGz@uVeBKzEwSpf@"}}; // 서부 본대 구간별 실제 걷는 길 (build_routes.py, OpenStreetMap 보행자 길찾기)
 
@@ -1871,11 +1957,45 @@ function countUp(el) {
 }
 
 /* ================================================================
+   히어로 소리 — 기본은 꺼져 있고, '소리 켜기'를 누르면 박자(0.6초)에 맞춰 합성한다.
+   ================================================================ */
+const HeroSound = (() => {
+  let ctx = null, master = null, buf = null;
+  const api = { on: false, start, stop };
+  function noise() { if (!buf) { buf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate); const d = buf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; } const s = ctx.createBufferSource(); s.buffer = buf; s.loop = true; return s; }
+  function env(g, t, peak, a, r) { g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(.0001, t + a + r); }
+  function kick(t, v = .8) { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.setValueAtTime(115, t); o.frequency.exponentialRampToValueAtTime(42, t + .2); env(g, t, v, .005, .4); o.connect(g).connect(master); o.start(t); o.stop(t + .45); }
+  function hat(t) { const s = noise(), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'highpass'; f.frequency.value = 7500; env(g, t, .12, .002, .05); s.connect(f).connect(g).connect(master); s.start(t); s.stop(t + .07); }
+  function thud(t) { kick(t, 1); const s = noise(), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'lowpass'; f.frequency.value = 1100; env(g, t, .5, .003, .25); s.connect(f).connect(g).connect(master); s.start(t); s.stop(t + .3); }
+  function sweep(t, dur, from, to, v) { const s = noise(), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'bandpass'; f.Q.value = 1.4; f.frequency.setValueAtTime(from, t); f.frequency.exponentialRampToValueAtTime(to, t + dur); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + dur * .85); g.gain.exponentialRampToValueAtTime(.0001, t + dur); s.connect(f).connect(g).connect(master); s.start(t); s.stop(t + dur + .05); }
+  function pad(t, t1, freqs) { freqs.forEach(fq => { const o = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain(); o.type = 'sawtooth'; o.frequency.value = fq; f.type = 'lowpass'; f.frequency.value = 640; g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(.03, t + 1.5); g.gain.setValueAtTime(.03, Math.max(t + 1.5, t1 - 1.2)); g.gain.linearRampToValueAtTime(.0001, t1); o.connect(f).connect(g).connect(master); o.start(t); o.stop(t1 + .05); }); }
+  function bell(t) { [880, 1318.5, 1760].forEach((fq, i) => { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = fq; env(g, t, .22 / (i + 1), .01, 2.6); o.connect(g).connect(master); o.start(t); o.stop(t + 2.8); }); }
+  function start(elapsedMs) {
+    stop();
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+    ctx = new AC(); master = ctx.createGain(); master.gain.value = .55; master.connect(ctx.destination);
+    const base = ctx.currentTime + .05 - elapsedMs / 1000, at = ms => base + ms / 1000, due = ms => ms >= elapsedMs;
+    [[0, 15000, [146.83, 220, 293.66]], [15000, 20400, [123.47, 185, 246.94]], [20400, 30000, [196, 246.94, 293.66]]]
+      .forEach(([a, b, f]) => { if (b > elapsedMs) pad(at(Math.max(a, elapsedMs)), at(b), f); });
+    for (let ms = 4200; ms < 15000; ms += 1200) if (due(ms)) kick(at(ms), .45);          // 숫자·그래프: 두 박마다 낮게
+    for (let ms = 15600; ms < 28800; ms += 600) { if (due(ms)) kick(at(ms), .7); if (due(ms + 300)) hat(at(ms + 300)); }
+    if (due(15600)) thud(at(15600));                                                      // 날짜 도장
+    if (due(20100)) sweep(at(20100), .6, 300, 3200, .25);                                 // 코스 장면으로
+    if (due(25800)) sweep(at(25800), 1.2, 200, 5000, .3);                                 // 불이 모인다
+    if (due(28800)) bell(at(29700));                                                      // 로고에 내려앉을 때
+  }
+  function stop() { if (!ctx) return; const c = ctx; master.gain.setTargetAtTime(.0001, c.currentTime, .05); setTimeout(() => c.close().catch(() => {}), 300); ctx = null; master = null; buf = null; }
+  return api;
+})();
+
+/* ================================================================
    히어로 모션(약 15초) — 만세 → 대회 숫자 → 날짜별 누적 거리 그래프 → 임진각 완주.
    움직임 줄이기 설정이면 마지막 장면을 바로 보여 준다.
    ================================================================ */
 const HeroMotion = (() => {
   const box = $('#heroChart'); if (!box) return null;
+  const heroEl = $('.hero');
+  /* ---- 1. 누적 거리 그래프 ---- */
   let sum = 0;
   const pts = D.west.map((w, i) => { sum += w.km; return { i, date: w.date, cum: sum, ev: w.event || '' }; });
   const n = pts.length, total = sum, W = 1000, H = 300;
@@ -1896,9 +2016,10 @@ const HeroMotion = (() => {
       <g clip-path="url(#hcClip)"><path class="hc-area" d="${line}L${W} ${H}L0 ${H}Z"/><path class="hc-line" d="${line}"/></g></svg>
     ${MS.map(m => `<span class="hc-m ${m.cls}" data-mi="${m.i}" style="left:${(X(m.i) / W * 100).toFixed(2)}%;top:${(Y(pts[m.i].cum) / H * 100).toFixed(2)}%" aria-hidden="true"><i></i><em><span class="l">${esc(m.label)}</span><span class="s">${esc(m.short)}</span></em></span>`).join('')}
     <span class="hc-dot" id="hcDot" aria-hidden="true"><span class="hc-tip" id="hcTip"></span></span>`;
-  const heroEl = $('.hero'), clip = $('#hcClipRect'), dot = $('#hcDot'), tip = $('#hcTip'), marks = $$('.hc-m', box);
+  const clip = $('#hcClipRect'), dot = $('#hcDot'), tip = $('#hcTip'), marks = $$('.hc-m', box);
   const KP = { days: D.west.length, km: TOTAL_KM, secs: SECTIONS.length, sido: 17 };
-  let timers = [], raf = 0;
+  let timers = [], rafs = new Set(), playing = false, t0 = 0;
+  const loop = fn => { const id = requestAnimationFrame(now => { rafs.delete(id); fn(now); }); rafs.add(id); };
   function setP(f) {
     const c = cumAt(f);
     clip.setAttribute('width', (X(f) + 10).toFixed(1));
@@ -1906,30 +2027,120 @@ const HeroMotion = (() => {
     tip.textContent = `${mdDot(pts[Math.round(f)].date)} · ${fmt(Math.round(c))}km`;
     marks.forEach(m => m.classList.toggle('on', f >= +m.dataset.mi - .01));
   }
-  function draw(dur) {
-    const t0 = performance.now(), ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-    const step = now => { const t = Math.min(1, (now - t0) / dur); setP(ease(t) * (n - 1)); if (t < 1) raf = requestAnimationFrame(step); };
-    raf = requestAnimationFrame(step);
-  }
+  const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  function tween(dur, fn) { const s0 = performance.now(); const step = now => { const t = Math.min(1, (now - s0) / dur); fn(t); if (t < 1) loop(step); }; loop(step); }
   function count(dur) {
     $$('[data-hk]', heroEl).forEach((el, k) => {
-      const to = KP[el.dataset.hk], t0 = performance.now() + k * 120;
-      const step = now => { const t = Math.max(0, Math.min(1, (now - t0) / dur)); el.textContent = fmt(Math.round(to * (1 - Math.pow(1 - t, 3)))); if (t < 1) requestAnimationFrame(step); };
-      requestAnimationFrame(step);
+      const to = KP[el.dataset.hk];
+      setTimeout(() => tween(dur, t => { el.textContent = fmt(Math.round(to * (1 - Math.pow(1 - t, 3)))); }), k * 120);
     });
   }
-  function finish() { heroEl.classList.add('s2', 's3', 's4'); $$('[data-hk]', heroEl).forEach(el => { el.textContent = fmt(KP[el.dataset.hk]); }); setP(n - 1); }
+
+  /* ---- 2. 이어지는 장면: 코스 지도(실제 거점 좌표를 평면에 옮김) ---- */
+  const fx = $('.hero-fx'), map = $('#fxRoute'), fly = $('#fxFly');
+  const chain = [WEST[0].fk];
+  WEST.forEach(s => chain.push(...(HIST_VIA[s.fk + '>' + s.tk] || []), s.tk));
+  const SIDO_LL = {};
+  SECTIONS.forEach(s => { if (!SIDO_LL[s.sido]) SIDO_LL[s.sido] = s.axis === 'west' ? [D.points[s.fk].lat, D.points[s.fk].lng] : s.ll; });
+  const LLs = [...chain.map(k => [D.points[k].lat, D.points[k].lng]), ...Object.values(SIDO_LL)];
+  const lat0 = Math.min(...LLs.map(p => p[0])), lat1 = Math.max(...LLs.map(p => p[0])), lng0 = Math.min(...LLs.map(p => p[1])), lng1 = Math.max(...LLs.map(p => p[1]));
+  const KX = Math.cos(36 * Math.PI / 180), SC = 100, PAD = 22;
+  const MW = (lng1 - lng0) * KX * SC + PAD * 2, MH = (lat1 - lat0) * SC + PAD * 2;
+  const P = ([la, ln]) => [(ln - lng0) * KX * SC + PAD, (lat1 - la) * SC + PAD];
+  const RP = chain.map(k => P([D.points[k].lat, D.points[k].lng]));
+  const segLen = RP.map((p, k) => k ? Math.hypot(p[0] - RP[k - 1][0], p[1] - RP[k - 1][1]) : 0);
+  const cumLen = []; segLen.reduce((a, v, k) => (cumLen[k] = a + v), 0);
+  const routeLen = cumLen[cumLen.length - 1];
+  const at = d => { let k = 1; while (k < RP.length - 1 && cumLen[k] < d) k++; const a = RP[k - 1], b = RP[k], u = segLen[k] ? (d - cumLen[k - 1]) / segLen[k] : 0; return [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u]; };
+  const dateOf = k => { const s = k === WEST[0].fk ? WEST[0] : WEST.find(x => x.tk === k); return s ? `2027. ${+s.date.slice(5, 7)}. ${+s.date.slice(8, 10)}` : ''; };
+  const histOfPt = k => { const h = (D.points[k] || {}).hist || ''; return /^1919\./.test(h) ? h.replace(/^1919\.(\d+)\.(\d+)/, '1919. $1. $2') : h; };
+  const CITIES = [['jocheon', '제주 조천'], ['mokpo', '목포'], ['gwangju', '광주'], ['jeonju', '전주'], ['gunsan', '군산'], ['gongju', '공주'], ['dokrip', '천안 독립기념관'], ['jeam', '화성 제암리'], ['tapgol', '서울 탑골공원'], ['imjingak', '파주 임진각']]
+    .map(([k, name]) => ({ k, name, i: chain.indexOf(k) })).filter(c => c.i >= 0).map(c => ({ ...c, d: cumLen[c.i], xy: RP[c.i], date: dateOf(c.k), hist: histOfPt(c.k) }));
+  const END = RP[RP.length - 1];
+  map.setAttribute('viewBox', `0 0 ${MW.toFixed(1)} ${MH.toFixed(1)}`);
+  const routeD = RP.map((p, k) => `${k ? 'L' : 'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join('');
+  const SF = Object.entries(SIDO_LL).map(([sd, ll]) => ({ sd, xy: P(ll) }));
+  map.innerHTML = `<defs><radialGradient id="fxGlow"><stop offset="0" stop-color="#ffb36b" stop-opacity=".75"/><stop offset="1" stop-color="#ffb36b" stop-opacity="0"/></radialGradient></defs>
+    ${SF.map(f => `<circle class="relay" cx="${f.xy[0].toFixed(1)}" cy="${f.xy[1].toFixed(1)}" r="2.2"/>`).join('')}
+    <path class="base" d="${routeD}"/><path class="trail" id="fxTrail" d="${routeD}" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+    ${CITIES.map((c, k) => `<circle class="city" data-ci="${k}" cx="${c.xy[0].toFixed(1)}" cy="${c.xy[1].toFixed(1)}" r="3.6"/>`).join('')}
+    ${SF.map((f, k) => `<g class="sf" data-sf="${k}" style="transform:translate(${f.xy[0].toFixed(1)}px,${f.xy[1].toFixed(1)}px)"><use href="#i-flame" x="-7" y="-9" width="14" height="14"/></g>`).join('')}
+    <g class="torch" id="fxTorch"><g class="torch-in"><circle class="glow" r="16"/><use href="#i-flame" x="-10" y="-13" width="20" height="20"/></g></g>`;
+  const trail = $('#fxTrail'), torch = $('#fxTorch'), cityDots = $$('.city', map), sfs = $$('.sf', map);
+  const cap = $('.fx-cap'), capEye = $('#fxEyebrow'), capCity = $('#fxCity'), capDate = $('#fxDate'), capHist = $('#fxHist');
+  function setCap(eye, city, date, hist) {
+    capEye.textContent = eye; capCity.textContent = city; capDate.textContent = date; capHist.textContent = hist;
+    cap.classList.remove('pop'); void cap.offsetWidth; cap.classList.add('pop');
+  }
+  function setRoute(p) {
+    const d = p * routeLen, xy = at(d);
+    trail.setAttribute('stroke-dashoffset', (1 - p).toFixed(4));
+    torch.setAttribute('transform', `translate(${xy[0].toFixed(1)} ${xy[1].toFixed(1)})`);
+    let last = 0; CITIES.forEach((c, k) => { const lit = d >= c.d - .01; cityDots[k].classList.toggle('lit', lit); if (lit) last = k; });
+    if (last !== setRoute.cur) { setRoute.cur = last; const c = CITIES[last]; setCap('108년 뒤, 그 길을 다시', c.name, c.date, c.hist); }
+  }
+  function typeLine(text, per) {
+    const el = $('#fxType'); el.textContent = '';
+    [...text].forEach((ch, k) => timers.push(setTimeout(() => { el.textContent += ch; }, k * per)));
+  }
+  function land() {
+    const brand = $('#siteHeader .brand-mark'), hr = heroEl.getBoundingClientRect();
+    const m = map.getScreenCTM(); if (!m || !brand) return;
+    const sx = END[0] * m.a + m.e - hr.left, sy = END[1] * m.d + m.f - hr.top;
+    const br = brand.getBoundingClientRect();
+    fly.classList.add('no-tr'); fly.style.left = sx + 'px'; fly.style.top = sy + 'px'; fly.style.transform = 'scale(1.3)'; fly.style.opacity = '1';
+    void fly.offsetWidth; fly.classList.remove('no-tr');
+    torch.style.opacity = '0';
+    fly.style.left = (br.left + br.width / 2 - hr.left) + 'px'; fly.style.top = (br.top + br.height / 2 - hr.top) + 'px'; fly.style.transform = 'scale(.45)';
+    timers.push(setTimeout(() => { fly.style.opacity = '0'; brand.classList.remove('is-lit'); void brand.offsetWidth; brand.classList.add('is-lit'); }, 900));
+  }
+  function resetFx() {
+    heroEl.classList.remove('fx', 's5', 's6', 's7'); fx.classList.remove('flames', 'merge');
+    $('.fx-1919').classList.remove('stamped', 'trans'); $('#fxType').textContent = '';
+    setRoute.cur = -1; setRoute(0); torch.style.opacity = '';
+    sfs.forEach((g, k) => { g.style.transform = `translate(${SF[k].xy[0].toFixed(1)}px,${SF[k].xy[1].toFixed(1)}px)`; });
+    fly.classList.add('no-tr'); fly.style.opacity = '0';
+  }
+
+  /* ---- 3. 시간표 (한 박 = 0.6초) ---- */
+  const skipBtn = $('#heroSkip'), soundBtn = $('#heroSound');
+  function stopAll() { timers.forEach(clearTimeout); timers = []; rafs.forEach(cancelAnimationFrame); rafs.clear(); }
+  function finish() {
+    stopAll(); resetFx(); playing = false; HeroSound.stop();
+    heroEl.classList.add('s2', 's3', 's4');
+    $$('[data-hk]', heroEl).forEach(el => { el.textContent = fmt(KP[el.dataset.hk]); }); setP(n - 1);
+    skipBtn.textContent = '다시 보기';
+  }
   function play() {
-    timers.forEach(clearTimeout); timers = []; cancelAnimationFrame(raf);
+    stopAll(); resetFx();
     heroEl.classList.remove('s2', 's3', 's4'); setP(0);
     $$('[data-hk]', heroEl).forEach(el => { el.textContent = '0'; });
+    playing = true; t0 = performance.now(); skipBtn.textContent = '건너뛰기';
+    if (HeroSound.on) HeroSound.start(0);
     const T = (ms, fn) => timers.push(setTimeout(fn, ms));
-    T(4200, () => { heroEl.classList.add('s2'); count(1700); });       // 4.2초: 만세가 작아지고 숫자가 오른다
-    T(6600, () => { heroEl.classList.add('s3'); T(600, () => draw(6200)); });   // 6.6초: 그래프가 6월 26일부터 그려진다
-    T(13600, () => heroEl.classList.add('s4'));                          // 13.6초: 임진각 완주, 다시 보기
+    T(4200, () => { heroEl.classList.add('s2'); count(1700); });                 // 만세가 작아지고 숫자가 오른다
+    T(6600, () => heroEl.classList.add('s3'));
+    T(7200, () => tween(6200, t => setP(ease(t) * (n - 1))));                    // 6월 26일부터 누적 거리 그래프
+    T(13600, () => heroEl.classList.add('s4'));                                  // 임진각 완주
+    T(15000, () => heroEl.classList.add('fx', 's5'));                            // 1919년 인쇄물로 넘어간다
+    T(15600, () => $('.fx-1919').classList.add('stamped'));                     // 날짜 도장
+    T(16200, () => typeLine('吾等은 玆에 我 朝鮮의 獨立國임과 朝鮮人의 自主民임을 宣言하노라.', 52));
+    T(18000, () => $('.fx-1919').classList.add('trans'));
+    T(20400, () => { heroEl.classList.replace('s5', 's6'); setRoute.cur = -1; tween(4800, t => setRoute(ease(t))); });   // 횃불이 코스를 따라 간다
+    T(25800, () => { heroEl.classList.replace('s6', 's7'); fx.classList.add('flames'); setCap('열일곱 개의 불이 하나로', '2027. 8. 15', '파주 임진각에서 만납니다', '17개 시·도에서 채화한 횃불이 하나 된 불로 타오릅니다'); });
+    T(27000, () => { fx.classList.add('merge'); sfs.forEach(g => { g.style.transform = `translate(${END[0].toFixed(1)}px,${END[1].toFixed(1)}px)`; }); });
+    T(28800, land);                                                               // 하나 된 불이 로고에 내려앉는다
+    T(30000, () => { resetFx(); playing = false; skipBtn.textContent = '다시 보기'; });
   }
-  $('#heroReplay').addEventListener('click', play);
-  if (reduceMotion) finish(); else play();
+  skipBtn.addEventListener('click', () => { if (playing) finish(); else play(); });
+  soundBtn.addEventListener('click', () => {
+    const on = !HeroSound.on;
+    HeroSound.on = on; soundBtn.setAttribute('aria-pressed', String(on)); soundBtn.textContent = on ? '소리 끄기' : '소리 켜기';
+    if (!on) HeroSound.stop(); else if (playing) HeroSound.start(performance.now() - t0); else play();
+  });
+  // 히어로를 벗어나면 마지막 장면으로 정리한다
+  new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting && playing) finish(); }), { threshold: 0.2 }).observe(heroEl);
+  if (reduceMotion) { $('.hero-ctrl').hidden = true; finish(); } else play();
   return { play, finish };
 })();
 
@@ -2549,10 +2760,10 @@ renderHistPlaces();
 const FAQ = [
   ['하루만 걸어도 되나요?', '네. 구간 참가는 하루 단위로 신청합니다. 전 구간을 걷는 종주단은 따로 지원을 받아 면담과 건강 확인을 거쳐 선발합니다.'],
   ['참가비는 얼마인가요?', '구간 참가비는 1만 원이며 단체 상해보험, 기념 손수건, 물이 포함됩니다. 온라인 참가는 참가비가 없습니다.'],
-  ['주일에도 걷나요?', '아니요. 주일에는 걷지 않고 머무는 지역에서 쉬어 갑니다. 일정표의 회색 줄이 쉬는 날입니다.'],
+  ['일요일에도 걷나요?', '아니요. 일요일에는 걷지 않고 머무는 지역에서 쉬어 갑니다. 일정표의 회색 줄이 쉬는 날입니다.'],
   ['날씨가 나쁘면 어떻게 되나요?', '비가 와도 걷는 것이 원칙이며, 폭우·낙뢰나 폭염특보 때는 구간을 줄이거나 멈추고 문자로 바로 알립니다. 여름이라 새벽에 출발해 오전 11시 전에 주요 구간을 마칩니다.'],
   ['미성년자도 참가할 수 있나요?', '참가할 수 있습니다. 만 19세 미만은 신청서에 보호자 이름과 연락처를 적고 보호자 동의를 받아야 합니다.'],
-  ['교회나 단체로 함께 신청할 수 있나요?', '‘단체 신청’에서 대표자 한 분이 단체 이름과 인원(대표자 포함 2~300명)을 적으면 한 번에 신청됩니다. 30명이 넘는 단체는 집결지와 차량을 따로 안내합니다. 50명 이하라면 개인 신청의 ‘함께 오는 인원’으로도 됩니다.'],
+  ['단체로 함께 신청할 수 있나요?', '‘단체 신청’에서 대표자 한 분이 단체 이름과 인원(대표자 포함 2~300명)을 적으면 한 번에 신청됩니다. 30명이 넘는 단체는 집결지와 차량을 따로 안내합니다. 50명 이하라면 개인 신청의 ‘함께 오는 인원’으로도 됩니다.'],
   ['신청 내역을 확인하거나 취소하려면?', '‘신청 조회·취소’에서 신청할 때 적은 이름(단체는 대표자 이름)과 휴대전화로 찾을 수 있고, 걷는 날 전까지 직접 취소할 수 있습니다.'],
   ['후원금은 어디에 쓰이나요?', '독립유공자 후손의 주거 개선과 지역 만세길 정비에 쓰이며, 사단법인 명의 기부금영수증을 발급합니다. 사용 내역은 분기마다 홈페이지에 공개합니다.'],
 ];
@@ -2963,7 +3174,7 @@ addEventListener('beforeunload', e => { if (inqDirty && (inqForm.elements.title.
    ===================== 관리자 모드 =====================
    ================================================================ */
 const POSITIONS = ['고문', '증경대회장', '명예대회장', '대회장', '연합단체장', '공동대회장', '연합단체 사무총장', '부대회장', '준비위원장', '공동준비위원장', '특별위원장', '전문위원장', '특별대외협력위원장', '특별기도회위원장', '국토순례특별위원장', '재정감사위원장', '사무총장', '공동사무총장', '대변인', '종주단 대장', '종주단 대원', '팀장', '간사'];
-const COMMITTEES = ['진행', '시설', '예전', '홍보', '부스', '의료', '동원', '안내', '질서', '법률', 'SNS', '교육', '방송', '종단연합', '여성', '다음세대', '학생', '안전경호', '공공', '퍼레이드', '국제', '청년', '기수단', '공연', '언론'];
+const COMMITTEES = ['진행', '시설', '홍보', '부스', '의료', '동원', '안내', '질서', '법률', 'SNS', '교육', '방송', '종단연합', '여성', '다음세대', '학생', '안전경호', '공공', '퍼레이드', '국제', '청년', '기수단', '공연', '언론'];
 const TITLES = ['목사', '장로', '교수', '박사', '대표', '회장', '사무총장', '변호사', '집사', '권사', '사모', '전도사', '선교사', '이사', '총무', '국장', '원장'];
 const TYPE_KO = { section: '구간', full: '종주단', volunteer: '봉사', online: '온라인' };
 const STATUS_PILL = { 접수: '', 승인: 'ok', 대기: 'warn', 취소: 'bad' };
@@ -3154,7 +3365,7 @@ function admDash() {
   const noPermit = secs.filter(s => !['신고완료', '불요'].includes(meta(s.id).permit));
   if (noPermit.length) { const s0 = noPermit[0], d0 = dObj(s0.date); const from = new Date(d0 - 30 * 864e5), to = new Date(d0 - 2 * 864e5);
     todo.push(['bad', `옥외집회 신고 미완료 ${noPermit.length}개 구간`, `가장 빠른 ${secLabel(s0)} — 신고 기간 ${from.getMonth() + 1}/${from.getDate()}~${to.getMonth() + 1}/${to.getDate()}`, 'docs']); }
-  const noStay = secs.filter(s => s.axis === 'west' && !meta(s.id).stay); if (noStay.length) todo.push(['warn', `숙영지(교회) 미정 ${noStay.length}개 구간`, '구간·정원에서 숙영지를 입력하세요', 'secs']);
+  const noStay = secs.filter(s => s.axis === 'west' && !meta(s.id).stay); if (noStay.length) todo.push(['warn', `숙영지 미정 ${noStay.length}개 구간`, '구간·정원에서 숙영지를 입력하세요', 'secs']);
   const noMarshal = secs.filter(s => !meta(s.id).marshals); if (noMarshal.length) todo.push(['warn', `질서유지인 미배정 ${noMarshal.length}개 구간`, '집회신고서에 명단이 필요합니다', 'secs']);
   const pending = apps.filter(a => a.status === '접수'); if (pending.length) todo.push(['', `승인 대기 신청 ${pending.length}건`, '참가자에서 일괄 승인할 수 있습니다', 'apps']);
   if (isHQ()) {
@@ -3286,7 +3497,7 @@ function openDrawer(id) {
       <label class="fld"><span>정원 (명)</span><input class="input" name="cap" type="number" min="0" value="${capOf(s)}"></label>
       <label class="fld"><span>모집</span><select class="select" name="status"><option value="">자동 (정원 차면 마감)</option><option ${m.status === '마감' ? 'selected' : ''}>마감</option></select></label>
       <label class="fld full"><span>집결지·시간</span><input class="input" name="meet" value="${esc(m.meet || '')}" placeholder="예: 목포역 광장 06:00 (선포식 09:30)"></label>
-      <label class="fld"><span>숙영지 (교회)</span><input class="input" name="stay" value="${esc(m.stay || '')}" placeholder="○○교회"></label>
+      <label class="fld"><span>숙영지</span><input class="input" name="stay" value="${esc(m.stay || '')}" placeholder="숙영 장소 이름"></label>
       <label class="fld"><span>숙영지 연락처</span><input class="input" name="stayPhone" inputmode="tel" value="${esc(m.stayPhone || '')}"></label>
       <label class="fld"><span>질서유지인 (명)</span><input class="input" name="marshals" type="number" min="0" value="${esc(m.marshals || '')}" placeholder="${Math.max(5, Math.ceil(capOf(s) / 30))} 권장"></label>
       <label class="fld"><span>관할 경찰서</span><input class="input" name="police" value="${esc(m.police || '')}" placeholder="○○경찰서"></label>
@@ -3320,7 +3531,7 @@ function admOrg() {
   const tabs = isHQ() ? [['chart', '조직도'], ['comms', '분과위원회'], ['hq', '지역본부'], ['groups', '참여 단체·인원 파악']] : [['hq', '지역본부'], ['groups', '참여 단체·인원 파악']];
   if (!tabs.find(t => t[0] === orgTab)) orgTab = tabs[0][0];
   const body = { chart: orgChart, comms: orgComms, hq: orgHq, groups: orgGroups }[orgTab]();
-  return `<h2>조직 관리</h2><p class="adm-sub">${isHQ() ? '대회 조직도와 분과위원회, 17개 시·도 지역본부, 참여 교회·단체를 한곳에서 관리합니다.' : role.sido + '지역본부와 우리 지역 참여 단체를 관리합니다.'}</p>
+  return `<h2>조직 관리</h2><p class="adm-sub">${isHQ() ? '대회 조직도와 분과위원회, 17개 시·도 지역본부, 참여 단체를 한곳에서 관리합니다.' : role.sido + '지역본부와 우리 지역 참여 단체를 관리합니다.'}</p>
   <div class="adm-note">조직도·분과위원장·지역본부장의 <b>이름·직분·소속</b>은 홈페이지 ‘함께 준비하는 사람들’에 바로 공개됩니다. 연락처와 메모는 공개되지 않습니다. 본인 동의를 받은 뒤 올려 주세요.</div>
   <div class="seg subtabs" role="tablist">${tabs.map(([k, t]) => `<button type="button" role="tab" data-org="${k}" aria-selected="${orgTab === k}">${t}</button>`).join('')}</div>${body}`;
 }
@@ -3332,7 +3543,7 @@ function orgChart() {
 function personForm(p, pos) {
   openForm({ title: p ? `${p.name} ${p.title || ''}` : `${pos} 추가`, sub: p ? p.pos : '이름과 직분, 소속을 적어 주세요.',
     fields: [{ name: 'pos', label: '직위', type: 'select', options: POSITIONS.map(x => [x, x]), value: p ? p.pos : pos }, { name: 'name', label: '이름', required: true, value: p && p.name },
-      { name: 'title', label: '직분', list: TITLES, value: p ? p.title : '목사' }, { name: 'aff', label: '소속 (교회·단체)', value: p && p.aff },
+      { name: 'title', label: '직분', list: TITLES, value: p ? p.title : '목사' }, { name: 'aff', label: '소속 (단체)', value: p && p.aff },
       { name: 'phone', label: '연락처', tel: true, value: p && p.phone }, { name: 'memo', label: '메모', value: p && p.memo }],
     onDelete: p ? () => { S.people = S.people.filter(x => x.id !== p.id); save('people'); renderAdmin(); toast('삭제했습니다'); } : null,
     onSubmit: v => { if (p) Object.assign(p, v); else S.people.push({ id: uid(), ...v }); save('people'); renderAdmin(); toast('저장했습니다'); } });
@@ -3390,7 +3601,7 @@ function orgGroups() {
   const aggRows = Object.entries(agg).sort((a, b) => b[1].heads - a[1].heads);
   const known = new Set(S.groups.map(g => g.name));
   return `<div class="toolbar"><span style="color:var(--muted);font-size:14px">참여 단체 <b style="color:var(--ink)">${groups.length}곳</b> · 인원 <b style="color:var(--ink)">${fmt(heads)}명</b> · 후원 <b style="color:var(--ink)">${fmt(money)}원</b></span><span class="spacer"></span><button class="btn xs btn-line" type="button" data-act="csv-groups">인원 파악표 CSV</button><button class="btn xs" type="button" data-act="add-group">${icon('plus')}단체 추가</button></div>
-  <div class="tbl-wrap" style="margin-bottom:22px"><table class="tbl"><thead><tr><th>#</th><th>단체(교회)</th><th>대표</th><th>시·도</th><th class="num">인원</th><th class="num">후원금</th><th>참여 구간·역할</th><th>비고</th></tr></thead><tbody>
+  <div class="tbl-wrap" style="margin-bottom:22px"><table class="tbl"><thead><tr><th>#</th><th>단체</th><th>대표</th><th>시·도</th><th class="num">인원</th><th class="num">후원금</th><th>참여 구간·역할</th><th>비고</th></tr></thead><tbody>
   ${groups.length ? groups.map((g, i) => `<tr class="clickable" data-group="${g.id}"><td>${i + 1}</td><td><b>${esc(g.name)}</b></td><td>${esc(g.rep || '')}</td><td>${esc(g.sido || '')}</td><td class="num">${fmt(g.heads)}</td><td class="num">${g.donation ? fmt(g.donation) : ''}</td><td>${esc(g.secs || '')}</td><td>${esc(g.memo || '')}</td></tr>`).join('') : `<tr><td colspan="8">${empty('등록된 단체가 없습니다', '‘단체 추가’를 누르거나, 아래 신청서 집계에서 바로 등록하세요.')}</td></tr>`}
   </tbody>${groups.length ? `<tfoot><tr><td colspan="4">소계</td><td class="num">${fmt(heads)}명</td><td class="num">${fmt(money)}원</td><td colspan="2"></td></tr></tfoot>` : ''}</table></div>
   <div class="card"><h3>신청서 소속별 자동 집계</h3><p style="margin:-4px 0 12px;font-size:13.5px;color:var(--muted)">참가 신청서의 ‘소속’ 칸을 모아 단체별 인원을 셉니다. 전체 인원 파악에 그대로 쓸 수 있습니다.</p>
@@ -3399,8 +3610,8 @@ function orgGroups() {
   </tbody></table></div></div>`;
 }
 function groupForm(g, preset = {}) {
-  openForm({ title: g ? g.name : '참여 단체 추가', sub: '교회·단체별 참여 인원과 후원금을 기록합니다.',
-    fields: [{ name: 'name', label: '단체(교회)명', required: true, value: g ? g.name : preset.name }, { name: 'rep', label: '대표 (이름 직분)', value: g && g.rep },
+  openForm({ title: g ? g.name : '참여 단체 추가', sub: '단체별 참여 인원과 후원금을 기록합니다.',
+    fields: [{ name: 'name', label: '단체명', required: true, value: g ? g.name : preset.name }, { name: 'rep', label: '대표 (이름 직분)', value: g && g.rep },
       { name: 'sido', label: '시·도', type: 'select', options: (isHQ() ? SIDO : [role.sido]).map(x => [x, x]), value: g ? g.sido : (isHQ() ? '경기' : role.sido) },
       { name: 'heads', label: '참여 인원', type: 'number', value: g ? g.heads : (preset.heads || '') }, { name: 'donation', label: '후원금 (원)', type: 'number', value: g && g.donation },
       { name: 'phone', label: '연락처', tel: true, value: g && g.phone }, { name: 'secs', label: '참여 구간·역할', full: true, value: g && g.secs, placeholder: '예: 8.05 안산역 선포식 · 음향·행사팀' },
@@ -3417,7 +3628,7 @@ function admPrayer() {
   <div class="toolbar"><span class="spacer"></span><button class="btn xs btn-line" type="button" data-act="copy-prayer">단톡방용 글 복사</button></div>
   <datalist id="peopleList">${names.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
   <div class="tbl-wrap"><table class="tbl"><thead><tr><th>날짜</th><th>그날의 길</th><th style="min-width:200px">담당</th><th style="min-width:240px">기도 제목</th></tr></thead><tbody>
-  ${D.west.map(w => { const p = S.prayer[w.date] || {}; const s = WEST.find(x => x.date === w.date); return `<tr><td class="nowrap">${mdKo(w.date)}</td><td>${s ? esc(s.title) : `<span style="color:var(--faint)">${esc(w.event)}</span>`}</td><td><input class="input" style="min-height:38px;font-size:14px" list="peopleList" data-pray="${w.date}" data-k="who" value="${esc(p.who || '')}" placeholder="이름 직분"></td><td><input class="input" style="min-height:38px;font-size:14px" data-pray="${w.date}" data-k="topic" value="${esc(p.topic || '')}" placeholder="${s && isCeremony(s) ? '선포식과 지역 교회를 위하여' : '안전과 건강을 위하여'}"></td></tr>`; }).join('')}
+  ${D.west.map(w => { const p = S.prayer[w.date] || {}; const s = WEST.find(x => x.date === w.date); return `<tr><td class="nowrap">${mdKo(w.date)}</td><td>${s ? esc(s.title) : `<span style="color:var(--faint)">${esc(w.event)}</span>`}</td><td><input class="input" style="min-height:38px;font-size:14px" list="peopleList" data-pray="${w.date}" data-k="who" value="${esc(p.who || '')}" placeholder="이름 직분"></td><td><input class="input" style="min-height:38px;font-size:14px" data-pray="${w.date}" data-k="topic" value="${esc(p.topic || '')}" placeholder="${s && isCeremony(s) ? '선포식과 지역 공동체를 위하여' : '안전과 건강을 위하여'}"></td></tr>`; }).join('')}
   </tbody></table></div>`;
 }
 
@@ -3426,7 +3637,7 @@ function admDocs() {
   const secs = scopeSecs(); if (!secs.find(s => s.id === docSecId)) docSecId = secs[0].id;
   return `<h2>공문·옥외집회 신고서</h2><p class="adm-sub">구간을 고르면 구간 정보(집결지·질서유지인·신청 인원)가 채워진 초안이 만들어집니다. 옥외집회 신고는 시작 720시간 전부터 48시간 전까지, 관할 경찰서장(두 곳 이상이면 시·도경찰청장)에게 냅니다.</p>
   <div class="toolbar"><select class="select" id="docSec" style="max-width:320px">${secs.map(s => `<option value="${s.id}" ${s.id === docSecId ? 'selected' : ''}>${esc(secLabel(s))}</option>`).join('')}</select>
-  <select class="select" id="docKind"><option value="police">옥외집회(행진) 신고서</option><option value="city">지자체 협조 공문</option><option value="church">숙영 교회 협조 요청</option></select>
+  <select class="select" id="docKind"><option value="police">옥외집회(행진) 신고서</option><option value="city">지자체 협조 공문</option><option value="church">숙영지 협조 요청</option></select>
   <span class="spacer"></span><button class="btn xs btn-line" type="button" data-act="copy-doc">복사</button><button class="btn xs btn-line" type="button" data-act="save-doc">텍스트로 저장</button><button class="btn xs" type="button" data-act="permit-done">신고 완료로 표시</button></div>
   <textarea class="doc" id="docOut" aria-label="공문 초안"></textarea>`;
 }
@@ -3469,13 +3680,13 @@ function genDoc() {
 4. 붙임 : 행사 개요 1부, 구간 약도 1부, 안전관리계획 1부.  끝.
 
 사단법인 삼일만세길(가칭) 대표 (직인)`;
-  else t = `수신 : ${m.stay || s.toS + ' 지역 ○○교회'} 담임목사님
+  else t = `수신 : ${m.stay || s.toS + ' 지역 숙영지'} 담당자님
 제목 : 2027 전국 삼일만세길 종주단 숙영 협조 요청 (${+mo}월 ${+d}일 1박)
 
 1. 주님의 이름으로 문안드립니다.
 2. 종주단(대장·사무국·대원 약 25명)이 ${+mo}월 ${+d}일(${wd(s.date)}) 저녁 ${s.to || s.from}에 도착하여 다음 날 06:00 출발합니다.
 3. 협조 요청 : 교육관·체육관 숙박 공간, 샤워 시설, 석식·조식(가능한 범위), 세탁, 차량 2대 주차.
-4. 종주단은 저녁 7시 교회에서 ‘삼일 정신 나눔(30분)’을 드리고, 교회 이름을 홈페이지와 일일 보고에 ‘숙영 후원 교회’로 기록합니다.
+4. 종주단은 저녁 7시 숙영지에서 ‘삼일 정신 나눔(30분)’을 갖고, 숙영지 이름을 홈페이지와 일일 보고에 ‘숙영 후원처’로 기록합니다.
 5. 담당 : 사무국 숙영팀 ${m.stayPhone ? '(' + m.stayPhone + ')' : '(연락처)'}
 
 사단법인 삼일만세길(가칭) 사무총장`;
@@ -3597,7 +3808,7 @@ const TABLES = ['apps', 'dons', 'subs', 'meta', 'people', 'comms', 'hq', 'groups
 function seedSamples() {
   const fam = '김이박최정강조윤장임한오서신권황안송류홍전고문양손배백허유남심노하곽성차주우구민진나지엄채원천방공현함변염여추도소석선설마길연위표명기반왕금옥육인맹제모탁국어은편용'.split('');
   const giv = ['민준', '서연', '지호', '하은', '도윤', '수아', '예준', '지우', '현우', '서윤', '성민', '영숙', '정희', '상철', '은주', '동현', '미경', '재훈', '순자', '태호', '경민', '혜진', '준서', '유진', '광수'];
-  const orgs = ['○○교회', '△△교회', '□□교회', '◇◇선교회', '○○고등학교', '청년 기자단', '광복회 ○○지부', '○○시 기독교연합회', '', '', ''];
+  const orgs = ['○○단체', '△△협회', '□□청년회', '◇◇봉사단', '○○고등학교', '청년 기자단', '광복회 ○○지부', '○○시 시민연대', '', '', ''];
   const rnd = a => a[Math.floor(Math.random() * a.length)];
   const now = Date.now();
   for (let i = 0; i < 160; i++) {
