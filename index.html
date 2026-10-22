@@ -267,20 +267,104 @@ button.chip:active{transform:scale(.96)}
 .deps-more{display:flex;justify-content:center;margin-top:28px}
 .empty{padding:48px 20px;text-align:center;color:var(--muted);border-bottom:1px solid var(--line)}
 .empty b{display:block;color:var(--ink);font-size:18px;margin-bottom:6px}
-@media (max-width:900px){
+/* 목록 칸 너비에 맞춰 줄 배치를 바꾼다(지도 옆에 놓이면 좁아진다) */
+.list-col{container-type:inline-size;container-name:deps;min-width:0}
+.deps{margin-inline:-14px}
+.dep{padding:22px 14px;border-radius:16px;transition:background-color var(--d-2) var(--ease-out),box-shadow var(--d-2)}
+.dep[data-sec]{cursor:pointer}
+.dep[data-sec]:hover{background:rgba(20,25,23,.03)}
+.dep.is-selected{background:rgba(178,58,44,.07);box-shadow:inset 3px 0 0 var(--accent)}
+.dep-actions{display:flex;align-items:center;gap:8px}
+.dep-map{width:40px;height:40px}
+.dep-map .ic{width:17px;height:17px}
+.dep.is-selected .dep-map{background:var(--accent);border-color:var(--accent);color:#fff}
+@container deps (max-width:780px){
   .dep{grid-template-columns:72px minmax(0,1fr) auto;gap:8px 16px}
   .dep-date b{font-size:24px}
   .dep-km{grid-column:2;grid-row:2;display:flex;gap:2px;align-items:baseline}
   .dep-km small{display:inline;margin-left:8px}
   .dep-cap{grid-column:2;grid-row:3}
-  .dep-apply{grid-column:3;grid-row:1/4;align-self:center}
+  .dep-actions{grid-column:3;grid-row:1/4;align-self:center}
   .dep.rest{grid-template-columns:72px minmax(0,1fr)}
 }
-@media (max-width:480px){
+@container deps (max-width:440px){
   .dep{grid-template-columns:60px minmax(0,1fr)}
-  .dep-apply{grid-column:2;grid-row:auto;justify-self:start;margin-top:6px}
+  .dep-actions{grid-column:2;grid-row:auto;justify-self:start;margin-top:6px}
   .dep.rest{grid-template-columns:60px minmax(0,1fr)}
 }
+
+/* ===================== 코스 지도 ===================== */
+.sched-split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,3vw,44px);align-items:start}
+.map-col{position:sticky;top:calc(var(--header-h) + 16px);min-width:0}
+.map-card{position:relative;height:calc(100vh - var(--header-h) - 32px);min-height:540px;max-height:860px;border-radius:var(--r-lg);overflow:hidden;background:#e8e4d8;box-shadow:var(--shadow-2);isolation:isolate}
+.map-canvas{position:absolute;inset:0;z-index:0}
+.map-status{position:absolute;inset:0;z-index:1;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);font-size:14.5px}
+.map-panel{position:absolute;z-index:600;left:14px;right:14px;bottom:24px;max-height:48%;overflow:auto;overscroll-behavior:contain;padding:14px 16px;border-radius:20px;background:var(--glass-light);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--line);box-shadow:var(--shadow-2)}
+.map-panel.is-entering{animation:pop-in 240ms var(--ease-out)}
+.mp-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.mp-head b{font-size:17px;letter-spacing:-.02em}
+.mp-head span{font-size:13px;color:var(--muted)}
+.mp-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.mp-row .chip{min-height:32px;padding:0 11px;font-size:13px}
+.mp-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.mp-legend span{display:inline-flex;align-items:center;gap:6px}
+.lg-line{display:inline-block;width:22px;height:3px;border-radius:2px;background:var(--west)}
+.lg-dash{display:inline-block;width:22px;height:0;border-top:2.5px dashed var(--east)}
+.lg-flame .ic{width:15px;height:15px;color:#d9822b}
+.mp-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mp-top .icon-btn{width:36px;height:36px}
+.mp-top .icon-btn .ic{width:16px;height:16px}
+.mp-mid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;margin-top:8px}
+.mp-date b{display:block;font-size:30px;font-weight:600;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.mp-date span{display:block;margin-top:5px;font-size:12.5px;color:var(--muted)}
+.mp-sel h3{margin:0 0 3px;font-size:18px;letter-spacing:-.025em;line-height:1.35}
+.mp-sel h3 .arr{color:var(--faint);font-weight:400;margin:0 4px}
+.mp-meta{font-size:13.5px;color:var(--muted)}
+.mp-meta b{color:var(--ink);font-size:15px}
+.mp-ev{margin:10px 0 0;font-size:13.5px;color:var(--muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mp-ev .pill{margin-right:6px}
+.mp-cap small{display:block;margin-top:7px;font-size:12.5px;color:var(--muted)}
+.mp-bottom{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;margin-top:12px}
+.mp-actions{display:flex;align-items:center;gap:8px}
+.mp-actions .icon-btn{flex:0 0 auto;width:44px;height:44px}
+.mp-actions .icon-btn[disabled]{opacity:.35;pointer-events:none}
+.mp-top .mp-step{margin-left:auto;font-size:12px;color:var(--faint);white-space:nowrap}
+@media (max-width:1099px){
+  .sched-split{grid-template-columns:minmax(0,1fr)}
+  .map-col{position:relative;top:auto}
+  .map-card{height:min(72vh,640px);min-height:460px}
+}
+@media (max-width:640px){
+  .map-panel{left:10px;right:10px;max-height:56%;border-radius:18px}
+  .mp-date b{font-size:26px}
+  .mp-bottom{grid-template-columns:minmax(0,1fr)}
+  .mp-actions .btn{flex:1}
+}
+/* Leaflet 다듬기 */
+.leaflet-container{font-family:var(--font);background:#e8e4d8;outline:0}
+.leaflet-tile-pane{filter:grayscale(.88) sepia(.22) contrast(.88) brightness(1.07)}
+.leaflet-bar{border:0!important;box-shadow:var(--shadow-1)!important;border-radius:14px!important;overflow:hidden}
+.leaflet-bar a{width:40px!important;height:40px!important;line-height:40px!important;font:500 20px/40px var(--font)!important;color:var(--ink)!important;background:var(--glass-light)!important;border-bottom-color:var(--line)!important}
+.leaflet-control-attribution{font-size:10.5px!important;background:rgba(250,249,245,.8)!important;border-radius:8px 0 0 0}
+.leaflet-tooltip.mtip{padding:7px 11px;border:0;border-radius:10px;background:var(--ink);color:#fff;font:600 12.5px/1.4 var(--font);box-shadow:0 10px 24px -12px rgba(0,0,0,.55);white-space:nowrap}
+.leaflet-tooltip.mtip small{display:block;font-weight:500;opacity:.72;font-size:11.5px}
+.leaflet-tooltip-top.mtip::before{border-top-color:var(--ink)}
+.leaflet-tooltip-right.mtip::before{border-right-color:var(--ink)}
+.leaflet-tooltip.mtip-flame{background:rgba(250,249,245,.94);color:var(--accent-2);box-shadow:var(--shadow-1);font-size:12px;padding:4px 9px}
+.leaflet-tooltip-right.mtip-flame::before{border-right-color:rgba(250,249,245,.94)}
+.mdot{transform-box:fill-box;transform-origin:center}
+.map-card .mdot,.map-card .mroute,.map-card .mflame,.map-card .mtorch,.map-card .leaflet-tooltip-pane{opacity:0}
+.map-card.is-live .mdot{animation:mpop 560ms var(--ease-out) both}
+.map-card.is-live .mroute-west{opacity:1}
+.map-card.is-live .mroute-relay,.map-card.is-live .mroute-ferry,.map-card.is-live .mflame,.map-card.is-live .mtorch,.map-card.is-live .leaflet-tooltip-pane{opacity:1;transition:opacity 900ms var(--ease-out) 1200ms}
+@keyframes mpop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:none}}
+.mpulse{transform-box:fill-box;transform-origin:center;animation:mpulse 1.8s ease-out infinite}
+@keyframes mpulse{from{transform:scale(.7);opacity:1}to{transform:scale(2.2);opacity:0}}
+.mtorch{filter:drop-shadow(0 0 5px rgba(255,166,50,.95))}
+.mflame{display:grid!important;place-items:center}
+.mflame svg{position:relative;z-index:1;width:22px;height:22px;fill:#ffb24a;stroke:#b23a2c;stroke-width:1.4;filter:drop-shadow(0 2px 4px rgba(120,40,10,.35))}
+.mflame-ring{position:absolute;inset:3px;border-radius:50%;background:rgba(255,170,60,.38);animation:mring 2.4s ease-out infinite}
+@keyframes mring{from{transform:scale(.6);opacity:.9}to{transform:scale(2.2);opacity:0}}
 
 /* ===================== 왜 걷는가 ===================== */
 .why{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,5vw,80px);align-items:center}
@@ -615,7 +699,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
       삼일만세길<small>2027</small>
     </a>
     <nav class="nav" aria-label="주 메뉴">
-      <a href="#routes">코스</a><a href="#schedule">일정</a><a href="#torch">횃불 합화</a><a href="#news">소식</a><a href="#donate">후원</a><a href="#faq">묻고 답하기</a>
+      <a href="#routes">코스</a><a href="#schedule">지도·일정</a><a href="#torch">횃불 합화</a><a href="#news">소식</a><a href="#donate">후원</a><a href="#faq">묻고 답하기</a>
     </nav>
     <button class="btn sm header-cta" type="button" data-apply="">참가 신청 <svg class="ic go"><use href="#i-right"/></svg></button>
     <button class="icon-btn menu-btn" type="button" id="menuBtn" aria-label="메뉴 열기" aria-haspopup="dialog" aria-controls="menuSheet"><svg class="ic"><use href="#i-menu"/></svg></button>
@@ -710,7 +794,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
         <a class="link-arrow" href="#schedule" data-route-filter="mid">중부 릴레이 보기 <svg class="ic"><use href="#i-right"/></svg></a>
       </article>
     </div>
-    <div class="routes-foot reveal"><a class="btn btn-line sm" href="map.html" target="_blank" rel="noopener">전국 코스 지도 열기 <svg class="ic"><use href="#i-out"/></svg></a></div>
+    <div class="routes-foot reveal"><a class="btn btn-line sm" href="#schedule">지도에서 구간 고르기 <svg class="ic"><use href="#i-pin"/></svg></a></div>
   </div>
 </section>
 
@@ -720,15 +804,26 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     <div class="sec-head">
       <div class="reveal">
         <h2 class="h2">걷고 싶은 날을<br>고르세요.</h2>
-        <p class="lede">하루 단위로 신청합니다. 구간마다 집결지·시간·준비물 안내가 문자로 갑니다. 선포식이 있는 날은 정원이 더 넉넉합니다.</p>
+        <p class="lede">지도에서 점이나 길을 누르거나, 목록에서 고르세요. 하루 단위로 신청하고, 집결지·시간·준비물 안내는 문자로 갑니다.</p>
       </div>
       <div class="seg reveal" role="group" aria-label="월 선택" id="monthSeg">
         <button type="button" data-when="all" aria-pressed="true">전체</button><button type="button" data-when="6" aria-pressed="false">6월</button><button type="button" data-when="7" aria-pressed="false">7월</button><button type="button" data-when="8" aria-pressed="false">8월</button>
       </div>
     </div>
-    <div class="filters-bar" id="filtersBar" aria-live="polite"></div>
-    <ol class="deps" id="deps"></ol>
-    <div class="deps-more"><button class="btn btn-line" type="button" id="moreBtn" hidden>더 보기</button></div>
+    <div class="sched-split">
+      <div class="map-col">
+        <div class="map-card" id="mapCard" role="region" aria-label="전국 삼일만세길 코스 지도">
+          <div id="courseMap" class="map-canvas"></div>
+          <div class="map-status" id="mapStatus">지도를 불러오는 중…</div>
+          <div class="map-panel" id="mapPanel"></div>
+        </div>
+      </div>
+      <div class="list-col">
+        <div class="filters-bar" id="filtersBar" aria-live="polite"></div>
+        <ol class="deps" id="deps"></ol>
+        <div class="deps-more"><button class="btn btn-line" type="button" id="moreBtn" hidden>더 보기</button></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -852,7 +947,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand"><a class="brand" href="#top"><span class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-flame"/></svg></span>삼일만세길</a><p>1919년의 길을 2027년에 다시 걷습니다. 제주 조천에서 파주 임진각까지.</p></div>
-      <div class="foot-col"><h4>걷기</h4><a href="#routes">세 갈래 길</a><a href="#schedule">구간 일정</a><a href="#torch">횃불 합화</a><a href="map.html" target="_blank" rel="noopener">전국 코스 지도 ↗</a></div>
+      <div class="foot-col"><h4>걷기</h4><a href="#routes">세 갈래 길</a><a href="#schedule">구간 일정</a><a href="#torch">횃불 합화</a><a href="#schedule">코스 지도</a><a href="map.html" target="_blank" rel="noopener">인쇄용 전체 지도 ↗</a></div>
       <div class="foot-col"><h4>함께하기</h4><a href="#" data-apply="">참가 신청</a><a href="#donate">1km 1만 원 후원</a><a href="#news">소식 받기</a><a href="#faq">묻고 답하기</a></div>
       <div class="foot-col"><h4>사무국</h4><span>사단법인 삼일만세길(가칭)</span><span>대표번호 000-0000-0000</span><span>info@example.org</span><a href="#admin">관리자 모드</a></div>
     </div>
@@ -867,7 +962,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     <div class="sheet-head"><span class="brand"><span class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-flame"/></svg></span>삼일만세길</span><button class="icon-btn" type="button" data-close aria-label="메뉴 닫기"><svg class="ic"><use href="#i-x"/></svg></button></div>
     <nav class="sheet-nav" aria-label="모바일 메뉴">
       <a href="#routes" data-close-nav>코스 <svg class="ic"><use href="#i-right"/></svg></a>
-      <a href="#schedule" data-close-nav>일정 <svg class="ic"><use href="#i-right"/></svg></a>
+      <a href="#schedule" data-close-nav>지도·일정 <svg class="ic"><use href="#i-right"/></svg></a>
       <a href="#torch" data-close-nav>횃불 합화 <svg class="ic"><use href="#i-right"/></svg></a>
       <a href="#news" data-close-nav>소식 <svg class="ic"><use href="#i-right"/></svg></a>
       <a href="#donate" data-close-nav>후원 <svg class="ic"><use href="#i-right"/></svg></a>
@@ -1180,13 +1275,13 @@ const REST = [];
     n++;
     SECTIONS.push({ id: 'W' + pad(n), axis: 'west', date: w.date, km: w.km, cum, event: w.event || '',
       from: D.points[w.from].name, to: D.points[w.to].name, title: `${short(w.from)} → ${short(w.to)}`,
-      fromS: short(w.from), toS: short(w.to), sido: SIDO_OF[w.from], sidoTo: SIDO_OF[w.to] });
+      fromS: short(w.from), toS: short(w.to), sido: SIDO_OF[w.from], sidoTo: SIDO_OF[w.to], fk: w.from, tk: w.to });
   });
   const relay = (arr, axis, p) => arr.forEach((e, i) => {
     const place = e.site.split('(')[0].trim();
     const paren = (e.site.match(/\(([^)]*)\)/) || [])[1] || '';
     SECTIONS.push({ id: p + pad(i + 1), axis, date: e.date, km: e.km, cum: 0, event: paren || e.site,
-      from: e.site, to: '', title: place, fromS: e.region, toS: '', region: e.region, sido: e.region.split(' ')[0], sidoTo: '' });
+      from: e.site, to: '', title: place, fromS: e.region, toS: '', region: e.region, sido: e.region.split(' ')[0], sidoTo: '', ll: [e.lat, e.lng] });
   });
   relay(D.east, 'east', 'E'); relay(D.mid, 'mid', 'M');
   SECTIONS.sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id));
@@ -1480,13 +1575,13 @@ function depRow(s, i) {
   const title = s.axis === 'west' ? `${esc(s.fromS)}<span class="arr">→</span>${esc(s.toS)}` : esc(s.title);
   const chips = chipLabels(s).map(c => `<span class="pill">${c}</span>`).join('');
   const kmTxt = s.km ? `<b>${s.km}</b>km${s.axis === 'west' ? `<small>누적 ${s.cum}km</small>` : ''}` : `<b>합류</b>`;
-  return `<li class="dep is-entering" style="--i:${i}">
+  return `<li class="dep is-entering ${MAPX.sel === s.id ? 'is-selected' : ''}" data-sec="${s.id}" style="--i:${i}">
     <div class="dep-date"><b>${mdDot(s.date)}</b><span>${wd(s.date)}요일</span></div>
     <div class="dep-main"><div class="dep-axis"><i class="dot ${s.axis === 'west' ? '' : s.axis}"></i>${esc(sub)}</div>
       <h3 class="dep-title">${title}</h3>${s.event ? `<p class="dep-ev">${chips}${esc(s.event)}</p>` : ''}</div>
     <div class="dep-km">${kmTxt}</div>
     <div class="dep-cap"><div class="cap-bar"><i class="${pct >= 80 ? 'hot' : ''}" style="width:${pct}%"></i></div><small>${full ? '마감되었습니다' : `${fmt(n)} / ${fmt(cap)}명 · 잔여 ${fmt(cap - n)}`}</small></div>
-    <button class="btn sm ${full ? 'btn-line' : ''} dep-apply" type="button" data-apply="${s.id}" ${full ? 'disabled' : ''} aria-label="${esc(secLabel(s))} 신청">${full ? '마감' : '신청'}</button>
+    <div class="dep-actions"><button class="icon-btn dep-map" type="button" data-map="${s.id}" aria-label="${esc(secLabel(s))} 지도에서 보기">${icon('pin')}</button><button class="btn sm ${full ? 'btn-line' : ''} dep-apply" type="button" data-apply="${s.id}" ${full ? 'disabled' : ''} aria-label="${esc(secLabel(s))} 신청">${full ? '마감' : '신청'}</button></div>
   </li>`;
 }
 function renderFiltersBar() {
@@ -1501,15 +1596,20 @@ $('#filtersBar').addEventListener('click', e => {
   if (b.dataset.clear === 'all') Object.assign(F, { mode: 'all', area: 'all', when: 'all', dist: 'all', axis: 'all' }); else F[b.dataset.clear] = 'all';
   shown = 12; updateSearchUI(); renderDeps(true);
 });
-function renderDeps(animate) {
-  renderFiltersBar();
+function depRows() {
   const list = SECTIONS.filter(s => matches(s));
   const unfiltered = F.mode === 'all' && F.area === 'all' && F.dist === 'all' && F.axis === 'all';
   const rows = list.map(s => ({ t: 'sec', s, date: s.date }));
   if (unfiltered) REST.filter(r => matchWhen(r.date, F.when)).forEach(r => rows.push({ t: 'rest', r, date: r.date }));
   rows.sort((a, b) => a.date.localeCompare(b.date) || (a.t === 'rest' ? 1 : -1));
+  return rows;
+}
+function renderDeps(animate) {
+  renderFiltersBar();
+  const rows = depRows();
   const ul = $('#deps');
-  if (!list.length) {
+  syncMap();
+  if (!rows.some(r => r.t === 'sec')) {
     ul.innerHTML = `<li class="empty"><b>맞는 구간이 없습니다</b>조건을 하나 지우거나 권역·시기를 넓혀 보세요.</li>`;
     $('#moreBtn').hidden = true; return;
   }
@@ -1522,6 +1622,255 @@ function renderDeps(animate) {
   $('#moreBtn').textContent = `더 보기 (${rest}개 남음)`;
 }
 $('#moreBtn').addEventListener('click', () => { shown += 12; renderDeps(false); });
+
+/* ================================================================
+   코스 지도 — 지도에서 구간을 고르면 목록·신청과 이어진다.
+   Leaflet 은 지도가 화면에 가까워질 때 불러온다.
+   ================================================================ */
+const MAPX = { map: null, state: 'idle', sel: null, pending: null, markers: {}, hits: {}, hl: null, ring: null, torch: null, lastFit: '', visible: false, ratio: 0, live: false };
+const AXIS_COLOR = { west: '#b23a2c', east: '#2f5d8a', mid: '#4f7a52' };
+const MERGES = [{ k: 'dokrip', sec: 'W23', label: '7.22 1차 합화' }, { k: 'tapgol', sec: 'W40', label: '8.11 2차 합화' }, { k: 'imjingak', sec: 'W44', label: '8.15 하나 된 불' }];
+const ptLL = k => [D.points[k].lat, D.points[k].lng];
+const startLL = s => s.axis === 'west' ? ptLL(s.fk) : s.ll;
+const splitWide = () => matchMedia('(min-width:1100px)').matches;
+function segOf(s) {
+  if (s.axis === 'west') return [ptLL(s.fk), ptLL(s.tk)];
+  const arr = SECTIONS.filter(x => x.axis === s.axis).sort((a, b) => a.id.localeCompare(b.id));
+  const i = arr.indexOf(s);
+  return i > 0 ? [arr[i - 1].ll, s.ll] : [s.ll];
+}
+function tipHtml(s) {
+  const t = s.axis === 'west' ? `${s.fromS} → ${s.toS}` : `${s.region} 릴레이`;
+  return `${mdDot(s.date)}(${wd(s.date)}) ${esc(t)}<small>${s.km ? s.km + 'km · ' : ''}${isFull(s) ? '마감' : '잔여 ' + fmt(remainOf(s)) + '명'}</small>`;
+}
+function loadAsset(tag, attrs) {
+  return new Promise((res, rej) => { const el = document.createElement(tag); Object.assign(el, attrs); el.onload = res; el.onerror = rej; document.head.appendChild(el); });
+}
+async function initMap() {
+  if (MAPX.state !== 'idle') return;
+  MAPX.state = 'loading';
+  try {
+    await Promise.all([
+      loadAsset('link', { rel: 'stylesheet', href: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' }),
+      loadAsset('script', { src: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js' })]);
+    await Promise.all([
+      loadAsset('link', { rel: 'stylesheet', href: 'https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css' }),
+      loadAsset('script', { src: 'https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js' })]).catch(() => {});
+    buildMap();
+    MAPX.state = 'ready';
+    $('#mapStatus').hidden = true;
+    syncMap();
+    if (MAPX.ratio > .3) startIntro();
+    if (MAPX.pending) { const id = MAPX.pending; MAPX.pending = null; selectSection(id, {}); }
+  } catch (err) {
+    MAPX.state = 'error';
+    $('#mapStatus').textContent = '지도를 불러오지 못했습니다. 목록에서 구간을 고르세요.';
+  }
+}
+function fitPad() {
+  const p = $('#mapPanel'), card = $('#mapCard');
+  const bottom = Math.min(p.offsetHeight, card.offsetHeight * .56) + 64;
+  return { paddingTopLeft: [window.innerWidth <= 640 ? 24 : 64, 28], paddingBottomRight: [28, bottom] };
+}
+function fitTo(list, animate) {
+  if (!list.length) return;
+  const b = window.L.latLngBounds(list.flatMap(segOf)).pad(.04);
+  const opt = { ...fitPad(), maxZoom: 9.5 };
+  if (animate && !reduceMotion) MAPX.map.flyToBounds(b, { ...opt, duration: .9 }); else MAPX.map.fitBounds(b, opt);
+}
+function buildMap() {
+  const L = window.L;
+  const map = L.map('courseMap', {
+    zoomControl: false, keyboard: false, minZoom: 6, maxZoom: 13, zoomSnap: .25,
+    maxBounds: L.latLngBounds([31.6, 122.4], [39.8, 132.6]), maxBoundsViscosity: .8,
+    gestureHandling: true,
+    gestureHandlingOptions: { text: { touch: '두 손가락으로 지도를 움직이세요', scroll: 'Ctrl 키를 누른 채 휠을 돌리면 확대됩니다', scrollMac: '⌘ 키를 누른 채 스크롤하면 확대됩니다' }, duration: 1400 },
+  });
+  if (!map.gestureHandling) map.scrollWheelZoom.disable();
+  MAPX.map = map;
+  L.control.zoom({ position: 'topleft', zoomInTitle: '확대', zoomOutTitle: '축소' }).addTo(map);
+  map.attributionControl.setPrefix(false);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> 기여자',
+  }).addTo(map);
+
+  // 서부 본대: 땅 위 길은 실선, 바다(제주→목포 여객선)는 점선
+  let run = [];
+  const flush = () => { if (run.length > 1) L.polyline(run, { color: AXIS_COLOR.west, weight: 3.5, opacity: .85, lineJoin: 'round', lineCap: 'round', interactive: false, className: 'mroute mroute-west' }).addTo(map); run = []; };
+  WEST.forEach(s => {
+    const ferry = s.sido === '제주' && s.sidoTo !== '제주';
+    if (ferry) { flush(); L.polyline(segOf(s), { color: AXIS_COLOR.west, weight: 2.5, opacity: .8, dashArray: '2 8', lineCap: 'round', interactive: false, className: 'mroute mroute-ferry' }).addTo(map); return; }
+    if (!run.length) run.push(ptLL(s.fk));
+    run.push(ptLL(s.tk));
+  });
+  flush();
+  ['east', 'mid'].forEach(ax => {
+    const pts = SECTIONS.filter(x => x.axis === ax).sort((a, b) => a.id.localeCompare(b.id)).map(x => x.ll);
+    L.polyline(pts, { color: AXIS_COLOR[ax], weight: 2.5, opacity: .9, dashArray: '6 8', lineCap: 'round', interactive: false, className: 'mroute mroute-relay' }).addTo(map);
+  });
+  // 서부 본대 구간마다 누를 수 있는 넓은 선
+  WEST.forEach(s => {
+    MAPX.hits[s.id] = L.polyline(segOf(s), { weight: 18, opacity: 0, className: 'mhit' })
+      .bindTooltip(() => tipHtml(s), { sticky: true, className: 'mtip', opacity: 1, direction: 'top', offset: [0, -10] })
+      .on('click', () => selectSection(s.id, { fromMap: true })).addTo(map);
+  });
+  MAPX.hl = L.polyline([[0, 0], [0, 0]], { weight: 8, opacity: 0, lineCap: 'round', interactive: false }).addTo(map);
+  SECTIONS.forEach((s, i) => {
+    const m = L.circleMarker(startLL(s), { radius: isCeremony(s) ? 6.5 : 4.5, color: AXIS_COLOR[s.axis], weight: 2.5, fillColor: '#fff', fillOpacity: 1, className: 'mdot' })
+      .bindTooltip(() => tipHtml(s), { direction: 'top', offset: [0, -8], className: 'mtip', opacity: 1 })
+      .on('click', () => selectSection(s.id, { fromMap: true })).addTo(map);
+    const el = m.getElement(); if (el) el.style.animationDelay = (reduceMotion ? 0 : 700 + i * 22) + 'ms';
+    MAPX.markers[s.id] = m;
+  });
+  MAPX.ring = L.circleMarker([0, 0], { radius: 13, weight: 2.5, fill: false, opacity: 0, interactive: false, className: 'mpulse' }).addTo(map);
+  MERGES.forEach(g => {
+    const iconEl = L.divIcon({ className: 'mflame', html: '<span class="mflame-ring"></span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-flame"/></svg>', iconSize: [30, 30], iconAnchor: [15, 15] });
+    L.marker(ptLL(g.k), { icon: iconEl, keyboard: false, zIndexOffset: 500, title: g.label })
+      .bindTooltip(g.label, { permanent: true, direction: 'right', offset: [14, 0], className: 'mtip mtip-flame' })
+      .on('click', () => selectSection(g.sec, { fromMap: true })).addTo(map);
+  });
+  // 횃불 불씨가 본대 길을 따라 천천히 간다
+  if (!reduceMotion) {
+    const pts = [ptLL(WEST[0].fk), ...WEST.map(s => ptLL(s.tk))];
+    const dist = [0]; for (let i = 1; i < pts.length; i++) dist.push(dist[i - 1] + L.latLng(pts[i - 1]).distanceTo(pts[i]));
+    const total = dist[dist.length - 1], period = 42000;
+    MAPX.torch = L.circleMarker(pts[0], { radius: 5, weight: 0, fillColor: '#ffb84a', fillOpacity: 1, interactive: false, className: 'mtorch' }).addTo(map);
+    let t0 = null;
+    const step = now => {
+      if (MAPX.live && MAPX.visible) {
+        if (t0 === null) t0 = now + 1600;
+        const u = Math.max(0, (now - t0) % period) / period * total;
+        let j = 1; while (j < dist.length - 1 && dist[j] < u) j++;
+        const f = (u - dist[j - 1]) / Math.max(1, dist[j] - dist[j - 1]), a = pts[j - 1], b = pts[j];
+        MAPX.torch.setLatLng([a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]);
+      }
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  fitTo(SECTIONS, false);
+  MAPX.lastFit = [F.mode, F.area, F.when, F.dist, F.axis].join('|');
+}
+function startIntro() {
+  if (MAPX.live || MAPX.state !== 'ready') return;
+  MAPX.live = true;
+  const card = $('#mapCard');
+  if (!reduceMotion) $$('.mroute-west', card).forEach(p => {
+    const len = p.getTotalLength();
+    p.style.strokeDasharray = `${len} ${len}`; p.style.strokeDashoffset = len;
+    p.getBoundingClientRect();
+    p.style.transition = 'stroke-dashoffset 2.6s cubic-bezier(.22,1,.36,1)'; p.style.strokeDashoffset = '0';
+    p.addEventListener('transitionend', () => { p.style.strokeDasharray = ''; p.style.strokeDashoffset = ''; p.style.transition = ''; }, { once: true });
+  });
+  card.classList.add('is-live');
+}
+function syncMap() {
+  if (MAPX.state !== 'ready') { renderMapPanel(); return; }
+  const ok = new Set(SECTIONS.filter(s => matches(s)).map(s => s.id));
+  SECTIONS.forEach(s => {
+    const m = MAPX.markers[s.id], on = ok.has(s.id), sel = s.id === MAPX.sel, full = isFull(s);
+    const color = full ? '#9aa09b' : AXIS_COLOR[s.axis];
+    m.setStyle({ color, opacity: on ? 1 : .2, fillOpacity: on ? 1 : .2, fillColor: sel ? color : '#fff' });
+    m.setRadius(sel ? 8 : (isCeremony(s) ? 6.5 : 4.5));
+    const el = m.getElement(); if (el) el.style.pointerEvents = on ? '' : 'none';
+    const h = MAPX.hits[s.id]; if (h && h.getElement()) h.getElement().style.pointerEvents = on ? '' : 'none';
+  });
+  if (MAPX.sel && !ok.has(MAPX.sel)) clearSelection(false);
+  const key = [F.mode, F.area, F.when, F.dist, F.axis].join('|');
+  if (key !== MAPX.lastFit) { MAPX.lastFit = key; fitTo(SECTIONS.filter(s => ok.has(s.id)), true); }
+  renderMapPanel();
+}
+function selectSection(id, opt = {}) {
+  const s = SEC[id]; if (!s) return;
+  if (!matches(s)) { Object.assign(F, { mode: 'all', area: 'all', when: 'all', dist: 'all', axis: 'all' }); updateSearchUI(); MAPX.lastFit = [F.mode, F.area, F.when, F.dist, F.axis].join('|'); renderDeps(true); }
+  MAPX.sel = id;
+  markRow(id, opt.fromMap);
+  if (opt.reveal && !splitWide()) $('#mapCard').scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+  if (MAPX.state !== 'ready') { MAPX.pending = id; renderMapPanel(); initMap(); return; }
+  const L = window.L, seg = segOf(s), color = isFull(s) ? '#9aa09b' : AXIS_COLOR[s.axis];
+  MAPX.hl.setLatLngs(seg.length > 1 ? seg : [seg[0], seg[0]]).setStyle({ color, opacity: seg.length > 1 ? .9 : 0 });
+  MAPX.ring.setLatLng(startLL(s)).setStyle({ color, opacity: 1 });
+  syncMap();
+  const b = seg.length > 1 ? L.latLngBounds(seg) : L.latLng(seg[0]).toBounds(9000);
+  MAPX.map.flyToBounds(b, { ...fitPad(), maxZoom: 10.5, duration: reduceMotion ? 0 : .8 });
+}
+function clearSelection(rerender) {
+  MAPX.sel = null;
+  if (MAPX.state === 'ready') { MAPX.hl.setStyle({ opacity: 0 }); MAPX.ring.setStyle({ opacity: 0 }); }
+  $$('#deps .dep.is-selected').forEach(li => li.classList.remove('is-selected'));
+  if (rerender) syncMap();
+}
+function markRow(id, fromMap) {
+  $$('#deps .dep.is-selected').forEach(li => li.classList.remove('is-selected'));
+  let li = $(`#deps .dep[data-sec="${id}"]`);
+  if (!li) {
+    const idx = depRows().findIndex(r => r.t === 'sec' && r.s.id === id);
+    if (idx >= 0) { shown = Math.max(shown, idx + 4); renderDeps(false); li = $(`#deps .dep[data-sec="${id}"]`); }
+  }
+  if (!li) return;
+  li.classList.add('is-selected');
+  if (fromMap && splitWide()) li.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+function stepSection(dir) {
+  const list = SECTIONS.filter(s => matches(s)), i = list.findIndex(s => s.id === MAPX.sel);
+  const next = list[i + dir]; if (!next) return;
+  selectSection(next.id, { fromMap: true });
+  const b = $(`#mapPanel [data-step="${dir}"]`); if (b && !b.disabled) b.focus(); else { const o = $(`#mapPanel [data-step="${-dir}"]`); if (o) o.focus(); }
+}
+function renderMapPanel() {
+  const p = $('#mapPanel'); if (!p) return;
+  const list = SECTIONS.filter(s => matches(s));
+  const was = p.dataset.view, view = MAPX.sel ? 'sel:' + MAPX.sel : 'home';
+  if (!MAPX.sel) {
+    p.innerHTML = `<div class="mp-head"><b>코스 지도</b><span>${list.length}개 구간 · 점이나 길을 누르세요</span></div>
+      <div class="mp-row" role="group" aria-label="길">${[['all', '전체'], ['west', '서부 본대'], ['east', '동부 릴레이'], ['mid', '중부 릴레이']].map(([k, t]) => `<button type="button" class="chip ${F.axis === k ? 'is-on' : ''}" data-max="${k}" aria-pressed="${F.axis === k}">${k === 'all' ? '' : `<i class="dot ${k === 'west' ? '' : k}"></i>`}${t}</button>`).join('')}</div>
+      <div class="mp-row" role="group" aria-label="권역">${FILTERS.area.map(([k, t]) => `<button type="button" class="chip ${F.area === k ? 'is-on' : ''}" data-marea="${k}" aria-pressed="${F.area === k}">${t}</button>`).join('')}</div>
+      <p class="mp-legend"><span><i class="lg-line"></i>본대가 걷는 길</span><span><i class="lg-dash"></i>지역 릴레이</span><span class="lg-flame">${icon('flame')}횃불 합화</span></p>`;
+  } else {
+    const s = SEC[MAPX.sel], i = list.findIndex(x => x.id === s.id);
+    const n = headsOf(s.id), cap = capOf(s), full = isFull(s), pct = Math.min(100, Math.round(n / cap * 100));
+    const sub = s.axis === 'west' ? `${AXIS.west} · ${s.sido === s.sidoTo ? s.sido : s.sido + '→' + s.sidoTo}` : `${AXIS[s.axis]} · ${s.region}`;
+    const title = s.axis === 'west' ? `${esc(s.fromS)}<span class="arr">→</span>${esc(s.toS)}` : esc(s.title);
+    const chips = chipLabels(s).map(c => `<span class="pill">${c}</span>`).join('');
+    p.innerHTML = `<div class="mp-sel">
+      <div class="mp-top"><span class="dep-axis"><i class="dot ${s.axis === 'west' ? '' : s.axis}"></i>${esc(sub)}</span><span class="mp-step">${i + 1} / ${list.length}</span><button class="icon-btn" type="button" data-mclose aria-label="선택 닫기">${icon('x')}</button></div>
+      <div class="mp-mid"><div class="mp-date"><b>${mdDot(s.date)}</b><span>${wd(s.date)}요일</span></div>
+        <div><h3>${title}</h3><div class="mp-meta">${s.km ? `<b>${s.km}</b>km` : '<b>합류</b>'}${s.axis === 'west' ? ` · 누적 ${s.cum}km` : ''}</div></div></div>
+      ${s.event ? `<p class="mp-ev">${chips}${esc(s.event)}</p>` : ''}
+      <div class="mp-bottom"><div class="mp-cap"><div class="cap-bar"><i class="${pct >= 80 ? 'hot' : ''}" style="width:${pct}%"></i></div><small>${full ? '마감되었습니다' : `${fmt(n)} / ${fmt(cap)}명 · 잔여 ${fmt(cap - n)}`}</small></div>
+      <div class="mp-actions"><button class="icon-btn" type="button" data-step="-1" aria-label="이전 구간" ${i <= 0 ? 'disabled' : ''}><svg class="ic" style="transform:rotate(180deg)"><use href="#i-right"/></svg></button>
+        <button class="btn btn-accent sm" type="button" data-apply="${s.id}" ${full ? 'disabled' : ''}>${full ? '마감된 구간' : '이 구간 신청'}</button>
+        <button class="icon-btn" type="button" data-step="1" aria-label="다음 구간" ${i >= list.length - 1 ? 'disabled' : ''}>${icon('right')}</button></div></div></div>`;
+  }
+  p.dataset.view = view;
+  if (was && was !== view) { p.classList.remove('is-entering'); void p.offsetWidth; p.classList.add('is-entering'); }
+}
+$('#mapPanel').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b || b.dataset.apply !== undefined) return;
+  if (b.dataset.max) { F.axis = b.dataset.max; shown = 12; updateSearchUI(); renderDeps(true); }
+  else if (b.dataset.marea) { F.area = b.dataset.marea; shown = 12; updateSearchUI(); renderDeps(true); }
+  else if (b.dataset.step) stepSection(+b.dataset.step);
+  else if (b.dataset.mclose !== undefined) { clearSelection(true); }
+});
+$('#mapCard').addEventListener('keydown', e => {
+  if (!MAPX.sel || Modal.top() || e.target.closest('input,select,textarea')) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); stepSection(1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); stepSection(-1); }
+  else if (e.key === 'Escape') { e.preventDefault(); clearSelection(true); }
+});
+$('#deps').addEventListener('click', e => {
+  const pin = e.target.closest('[data-map]');
+  if (pin) { selectSection(pin.dataset.map, { reveal: true }); return; }
+  if (e.target.closest('button,a,input,label')) return;
+  const li = e.target.closest('.dep[data-sec]');
+  if (li) selectSection(li.dataset.sec, {});
+});
+(() => {
+  const card = $('#mapCard');
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) initMap(); }), { rootMargin: '700px 0px' }).observe(card);
+  new IntersectionObserver(es => es.forEach(e => { MAPX.visible = e.isIntersecting; MAPX.ratio = e.intersectionRatio; if (e.intersectionRatio > .3) startIntro(); }), { threshold: [0, .3, .6] }).observe(card);
+})();
 
 /* ================================================================
    횃불 합화 탭
@@ -1798,6 +2147,7 @@ function route() {
   } else if (wasAdmin) {
     if (REMOTE) loadPublic().then(() => { renderDeps(false); renderDonSum(); }).catch(() => {});
     renderDeps(false); renderDonSum();
+    if (MAPX.map) requestAnimationFrame(() => MAPX.map.invalidateSize());
     requestAnimationFrame(() => { syncSearchH(); onScroll(); });
   }
 }
