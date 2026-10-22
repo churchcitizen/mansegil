@@ -104,23 +104,39 @@ button.chip:active{transform:scale(.96)}
 .brand-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1.5px solid currentColor;opacity:.95}
 .brand-mark svg{width:20px;height:20px}
 .brand small{font-weight:500;opacity:.7;font-size:13px;margin-left:2px}
-.nav{margin-left:auto;display:flex;align-items:center;gap:2px}
-.nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 13px;font-size:15px;font-weight:500;opacity:.86;transition:opacity var(--d-2)}
-.nav a::after{content:"";position:absolute;left:13px;right:13px;bottom:9px;height:1.5px;border-radius:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform var(--d-3) var(--ease-out)}
-.nav a:hover{opacity:1}
-.nav a:hover::after,.nav a.is-current::after{transform:scaleX(1)}
-.header-cta{margin-left:10px}
-.site-header:not(.is-solid) .header-cta{--bg-c:#fff;--fg-c:var(--ink)}
+/* 주 메뉴 — 마우스를 올리면(또는 키보드로 들어오면) 하위 메뉴가 한꺼번에 펼쳐진다 */
+.gnb{margin-left:auto;align-self:stretch}
+.gnb-list{display:flex;height:100%;margin:0;padding:0;list-style:none}
+.gnb-item{position:relative;width:clamp(100px,8.6vw,124px)}
+.gnb-top{position:relative;display:flex;align-items:center;justify-content:center;height:100%;font-size:15.5px;font-weight:600;opacity:.9;transition:opacity var(--d-2)}
+.gnb-top::after{content:"";position:absolute;left:26%;right:26%;bottom:0;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transition:transform var(--d-3) var(--ease-out)}
+.gnb-item:hover .gnb-top,.gnb-item:focus-within .gnb-top{opacity:1}
+.site-header.mega-open .gnb-item:hover .gnb-top::after,.site-header.mega-open .gnb-item:focus-within .gnb-top::after{transform:scaleX(1)}
+.gnb-sub{position:absolute;z-index:1;left:-10px;right:-10px;top:100%;margin:0;padding:16px 0 0;list-style:none;text-align:center;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity var(--d-2) var(--ease-out),transform var(--d-3) var(--ease-out),visibility 0s linear var(--d-2)}
+.gnb-sub a,.gnb-sub button{display:block;width:100%;padding:7px 6px;font-size:14.5px;font-weight:500;line-height:1.4;color:var(--muted);text-align:center;white-space:nowrap;border-radius:8px;transition:color var(--d-2),background-color var(--d-2)}
+.gnb-sub a:hover,.gnb-sub button:hover,.gnb-sub a:focus-visible,.gnb-sub button:focus-visible{color:var(--accent);background:rgba(178,58,44,.06)}
+.mega-bg{position:absolute;z-index:0;left:0;right:0;top:100%;height:var(--mega-h,200px);background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 30px 50px -30px rgba(15,24,20,.35);opacity:0;visibility:hidden;transform-origin:top;transform:scaleY(.96);transition:opacity var(--d-2) var(--ease-out),transform var(--d-3) var(--ease-out),visibility 0s linear var(--d-2)}
+.site-header.mega-open{color:var(--ink);background:var(--paper);border-bottom-color:var(--line);backdrop-filter:none;-webkit-backdrop-filter:none}
+.site-header.mega-open .mega-bg,.site-header.mega-open .gnb-sub{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.hdr-util{display:flex;align-items:center;gap:2px;margin-left:10px;font-size:13.5px}
+.hdr-util a,.hdr-util button{display:inline-flex;align-items:center;min-height:40px;padding:0 9px;opacity:.82;font-weight:500;transition:opacity var(--d-2)}
+.hdr-util a:hover,.hdr-util button:hover{opacity:1}
+.hdr-util span{width:1px;height:12px;background:currentColor;opacity:.3}
+.header-cta{margin-left:8px}
+.site-header:not(.is-solid):not(.mega-open) .header-cta{--bg-c:#fff;--fg-c:var(--ink)}
 .menu-btn{display:none;margin-left:auto;border-color:currentColor;color:inherit;opacity:.9}
-@media (max-width:960px){.nav,.header-cta{display:none}.menu-btn{display:inline-grid}}
+@media (max-width:1240px){.hdr-util{display:none}}
+@media (max-width:1100px){.gnb,.header-cta{display:none}.menu-btn{display:inline-grid}}
 
 /* 모바일 메뉴 시트 */
 .sheet{position:fixed;inset:0;z-index:120;background:rgba(14,18,16,.36);backdrop-filter:blur(2px)}
 .sheet-panel{position:absolute;inset:0 0 auto;max-height:100dvh;overflow:auto;overscroll-behavior:contain;background:var(--glass-light);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);border-bottom:1px solid var(--line);box-shadow:var(--shadow-3);padding:12px var(--gutter) 24px;padding-top:calc(12px + env(safe-area-inset-top,0px))}
 .sheet:not([hidden]) .sheet-panel{animation:sheet-in 280ms var(--ease-out)}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;height:52px;margin-bottom:8px}
-.sheet-nav a{display:flex;align-items:center;justify-content:space-between;min-height:56px;border-bottom:1px solid var(--line);font-size:20px;font-weight:600;letter-spacing:-.02em}
-.sheet-nav a .ic{opacity:.45}
+.sheet-grp{padding:10px 0 12px;border-bottom:1px solid var(--line)}
+.sheet-grp h3{margin:0 0 2px;font-size:12.5px;font-weight:700;letter-spacing:.05em;color:var(--accent)}
+.sheet-grp div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 14px}
+.sheet-grp a,.sheet-grp button{display:flex;align-items:center;min-height:44px;font-size:17px;font-weight:600;letter-spacing:-.02em;text-align:left}
 .sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
 
 /* ===================== 히어로 ===================== */
@@ -478,7 +494,7 @@ button.chip:active{transform:scale(.96)}
 
 /* ===================== 푸터 ===================== */
 .site-footer{margin-top:clamp(72px,9vw,120px);background:var(--ink);color:rgba(255,255,255,.72);padding-block:64px 36px;font-size:14.5px}
-.foot-top{display:grid;grid-template-columns:minmax(0,4fr) repeat(3,minmax(0,2fr));gap:32px}
+.foot-top{display:grid;grid-template-columns:minmax(0,3fr) repeat(4,minmax(0,2fr));gap:28px}
 .site-footer .brand{color:#fff}
 .site-footer p{margin:14px 0 0;max-width:24em}
 .foot-col h4{margin:0 0 14px;color:#fff;font-size:14px}
@@ -497,7 +513,7 @@ button.chip:active{transform:scale(.96)}
 .textarea{min-height:88px;resize:vertical}
 .select{appearance:none;-webkit-appearance:none;padding-right:40px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235d655f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center}
 .input:focus,.select:focus,.textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(20,25,23,.08)}
-.fld.has-error .input,.fld.has-error .select{border-color:var(--bad);box-shadow:0 0 0 3px rgba(163,48,42,.1)}
+.fld.has-error .input,.fld.has-error .select,.fld.has-error .textarea{border-color:var(--bad);box-shadow:0 0 0 3px rgba(163,48,42,.1)}
 .err{font-size:12.5px;color:var(--bad);min-height:0}
 .check{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;line-height:1.5;cursor:pointer}
 .check input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:22px;height:22px;margin:0;border-radius:7px;border:1px solid rgba(20,25,23,.34);background:#fff;display:grid;place-items:center;transition:background-color var(--d-2),border-color var(--d-2);cursor:pointer}
@@ -633,6 +649,75 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   .adm-role .who{display:none}
 }
 @media (max-width:520px){.adm-top .brand .brand-mark{display:none}.adm-top .btn.sm{padding:0 12px}}
+/* 좁은 화면: 역할 표시와 '홈페이지' 단추를 숨긴다(로고를 누르면 홈페이지로 간다) */
+@media (max-width:560px){.adm-role,.adm-top a.btn{display:none}.adm-top .brand{margin-right:auto}}
+
+/* ===================== 참가 안내 ===================== */
+.guide-cta{display:flex;flex-wrap:wrap;gap:10px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);margin:0;padding:0;list-style:none;counter-reset:step}
+.step{padding:22px 22px 24px;border-radius:var(--r-lg);background:var(--paper);border:1px solid var(--line)}
+.step::before{counter-increment:step;content:counter(step,decimal-leading-zero);display:block;margin-bottom:16px;font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--accent)}
+.step h3{margin:0 0 8px;font-size:19px;letter-spacing:-.025em}
+.step p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+.guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);margin-top:clamp(12px,1.6vw,20px)}
+.g-card{padding:24px;border-radius:var(--r-lg);background:var(--paper);border:1px solid var(--line)}
+.g-card h3{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:18px;letter-spacing:-.025em}
+.g-card h3 .ic{color:var(--accent)}
+.g-card ul{margin:0;padding:0;list-style:none}
+.g-card li{position:relative;padding:8px 0 8px 16px;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.g-card li:first-child{border-top:0}
+.g-card li::before{content:"";position:absolute;left:2px;top:17px;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.7}
+.g-card li b{font-weight:600;color:var(--ink)}
+.g-card li small{display:block;color:var(--muted);font-size:13px}
+.g-card .kv{display:flex;justify-content:space-between;gap:10px}
+.g-card .kv span{font-weight:600;white-space:nowrap}
+@media (max-width:980px){.steps{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.guide-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:480px){.steps{grid-template-columns:minmax(0,1fr)}}
+
+/* ===================== 조직도 (공개) ===================== */
+.org-pub{display:grid;gap:clamp(28px,3.4vw,44px)}
+.org-blk h3{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;font-size:18px;letter-spacing:-.025em}
+.org-blk h3 small{font-size:13px;font-weight:500;color:var(--muted)}
+.org-tier{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.org-pos{padding:14px 16px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}
+.org-pos.wide{grid-column:1/-1}
+.org-pos > span{display:block;margin-bottom:6px;font-size:12.5px;font-weight:700;letter-spacing:.02em;color:var(--accent)}
+.org-names{display:flex;flex-wrap:wrap;gap:2px 14px;margin:0;padding:0;list-style:none;font-size:15px;line-height:1.6}
+.org-names small{margin-left:4px;color:var(--muted);font-size:12.5px}
+.org-pos.vacant .org-names{color:var(--faint)}
+.org-chips{display:flex;flex-wrap:wrap;gap:8px}
+.org-chips .chip{background:var(--paper);border-color:var(--line)}
+.org-chips .chip b{font-weight:600;color:var(--ink)}
+.org-empty{margin:0;padding:20px;border-radius:18px;border:1px dashed var(--line-2);color:var(--muted);font-size:14.5px;text-align:center}
+
+/* ===================== 온라인 문의 ===================== */
+.contact{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(24px,5vw,80px)}
+.office{margin:26px 0 0;padding:0;list-style:none;border-top:1px solid var(--line-2);scroll-margin-top:calc(var(--header-h) + 24px)}
+.office li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.office li > span{color:var(--muted)}
+.office small{color:var(--faint)}
+.contact-form{background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:clamp(20px,3vw,32px);box-shadow:var(--shadow-2)}
+.contact-form .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:18px}
+.contact-form .note{flex:1;min-width:200px;font-size:13.5px;color:var(--ok);font-weight:600}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+@media (max-width:860px){.contact{grid-template-columns:minmax(0,1fr)}}
+
+/* 신청 방식 · 신청 확인 · 로그인 */
+.mode-seg{display:flex;width:100%;border-radius:16px}
+.mode-seg button{flex:1;border-radius:12px}
+.lk-list{display:grid;gap:10px;margin-top:18px}
+.lk-item{padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:#fff}
+.lk-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.lk-top b{font-size:15px;letter-spacing:.02em}
+.lk-item p{margin:6px 0 2px;font-size:14.5px;color:var(--ink-2)}
+.lk-item small{color:var(--muted);font-size:13px}
+.lk-act{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.lk-act .warn-q{font-size:13.5px;color:var(--bad);font-weight:600}
+.lk-none{margin-top:18px;padding:18px;border-radius:16px;background:rgba(20,25,23,.05);color:var(--muted);font-size:14.5px}
+.login-find{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted)}
+.login-find a{display:inline-flex;align-items:center;min-height:40px;text-decoration:underline;text-underline-offset:3px}
+.login-find a:hover{color:var(--ink)}
+.foot-info{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:40px;font-size:13px;color:rgba(255,255,255,.55)}
 
 /* ===================== 키프레임 ===================== */
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -685,6 +770,10 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20Z"/></symbol>
   <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7.5 7.5 6 7.5-6"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M4 7.5h16v3a1.5 1.5 0 0 0 0 3v3H4v-3a1.5 1.5 0 0 0 0-3z"/><path d="M14.5 8v1.5M14.5 11.25v1.5M14.5 14.5V16"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 3 19.5h18z"/><path d="M12 10v4.5M12 17.2v.3"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9H4z"/><path d="M10 20v-5h4v5"/></symbol>
 </svg>
 
@@ -698,9 +787,22 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
       <span class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-flame"/></svg></span>
       삼일만세길<small>2027</small>
     </a>
-    <nav class="nav" aria-label="주 메뉴">
-      <a href="#routes">코스</a><a href="#schedule">지도·일정</a><a href="#torch">횃불 합화</a><a href="#news">소식</a><a href="#donate">후원</a><a href="#faq">묻고 답하기</a>
+    <div class="mega-bg" aria-hidden="true"></div>
+    <nav class="gnb" id="gnb" aria-label="주 메뉴">
+      <ul class="gnb-list">
+        <li class="gnb-item"><a class="gnb-top" href="#intro">대회 소개</a>
+          <ul class="gnb-sub"><li><a href="#intro">대회 취지</a></li><li><a href="#why">왜 걷는가</a></li><li><a href="#org">조직도</a></li><li><a href="#quote">그날의 선언</a></li></ul></li>
+        <li class="gnb-item"><a class="gnb-top" href="#routes">코스·일정</a>
+          <ul class="gnb-sub"><li><a href="#routes">세 갈래 길</a></li><li><a href="#schedule">지도·구간 일정</a></li><li><a href="#torch">횃불 합화</a></li><li><a href="map.html" target="_blank" rel="noopener">인쇄용 지도 ↗</a></li></ul></li>
+        <li class="gnb-item"><a class="gnb-top" href="#guide">참가 신청</a>
+          <ul class="gnb-sub"><li><a href="#guide">참가 안내</a></li><li><button type="button" data-apply="">개인 신청</button></li><li><button type="button" data-apply="" data-mode="group">단체 신청</button></li><li><button type="button" data-lookup="">신청 확인·취소</button></li></ul></li>
+        <li class="gnb-item"><a class="gnb-top" href="#news">소식·후원</a>
+          <ul class="gnb-sub"><li><a href="#news">소식과 기록</a></li><li><a href="#subscribe">소식 받기</a></li><li><a href="#donate">1km 1만 원 후원</a></li></ul></li>
+        <li class="gnb-item"><a class="gnb-top" href="#faq">고객센터</a>
+          <ul class="gnb-sub"><li><a href="#faq">묻고 답하기</a></li><li><a href="#contact">온라인 문의</a></li><li><a href="#office">사무국 연락처</a></li></ul></li>
+      </ul>
     </nav>
+    <div class="hdr-util"><button type="button" data-lookup="">신청 확인</button><span aria-hidden="true"></span><a href="#admin">관리자 로그인</a></div>
     <button class="btn sm header-cta" type="button" data-apply="">참가 신청 <svg class="ic go"><use href="#i-right"/></svg></button>
     <button class="icon-btn menu-btn" type="button" id="menuBtn" aria-label="메뉴 열기" aria-haspopup="dialog" aria-controls="menuSheet"><svg class="ic"><use href="#i-menu"/></svg></button>
   </div>
@@ -827,6 +929,47 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   </div>
 </section>
 
+<!-- ---------- 참가 안내 ---------- -->
+<section class="section band-hanji" id="guide">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="reveal">
+        <h2 class="h2">참가 안내.</h2>
+        <p class="lede">개인은 하루 한 구간부터, 교회·학교·단체는 대표자 한 분이 최대 300명까지 한 번에 신청합니다.</p>
+      </div>
+      <div class="guide-cta reveal" style="--i:1"><button class="btn" type="button" data-apply="">개인 신청</button><button class="btn btn-line" type="button" data-apply="" data-mode="group">단체 신청</button><button class="btn btn-line" type="button" data-lookup="">신청 확인·취소</button></div>
+    </div>
+    <ol class="steps">
+      <li class="step reveal" style="--i:0"><h3>구간 고르기</h3><p>지도·일정에서 걷고 싶은 날과 구간을 고릅니다. 하루만 걸어도 됩니다.</p></li>
+      <li class="step reveal" style="--i:1"><h3>신청서 쓰기</h3><p>개인 신청 또는 단체 신청. 만 19세 미만은 보호자 동의가 필요합니다.</p></li>
+      <li class="step reveal" style="--i:2"><h3>접수번호 받기</h3><p>신청하면 접수번호가 바로 나옵니다. 내역은 ‘신청 확인·취소’에서 다시 볼 수 있습니다.</p></li>
+      <li class="step reveal" style="--i:3"><h3>그날 함께 걷기</h3><p>구간 7일 전에 집결지·시간·준비물을 문자로 보내 드립니다. 새벽에 출발합니다.</p></li>
+    </ol>
+    <div class="guide-grid">
+      <div class="g-card reveal" style="--i:0"><h3><svg class="ic"><use href="#i-ticket"/></svg>참가 방식과 참가비</h3><ul>
+        <li><span class="kv"><b>구간 걷기 (개인·단체)</b><span>1인 1만 원</span></span><small>단체 상해보험·기념 손수건·물 포함</small></li>
+        <li><span class="kv"><b>종주단 (전 구간)</b><span>선발</span></span><small>대장 1명·대원 20명 — 면담과 건강 확인</small></li>
+        <li><span class="kv"><b>자원봉사</b><span>참가비 없음</span></span><small>질서유지·차량·의료·음향·사진·숙영 지원</small></li>
+        <li><span class="kv"><b>온라인 참가</b><span>참가비 없음</span></span><small>사는 곳에서 걸은 거리를 ‘나의 만세길’에 더합니다</small></li>
+      </ul></div>
+      <div class="g-card reveal" style="--i:1"><h3><svg class="ic"><use href="#i-bag"/></svg>준비물</h3><ul>
+        <li><b>길들인 운동화</b>와 땀을 잘 빨아들이는 양말</li>
+        <li><b>모자·선크림·물병</b> — 한여름에 걷습니다</li>
+        <li><b>가벼운 우비</b> — 비가 와도 걷는 것이 원칙입니다</li>
+        <li><b>개인 상비약</b>과 신분증</li>
+        <li>기념 손수건과 물은 현장에서 나눠 드립니다</li>
+      </ul></div>
+      <div class="g-card reveal" style="--i:2"><h3><svg class="ic"><use href="#i-alert"/></svg>꼭 지켜 주세요</h3><ul>
+        <li>인솔자·질서유지인의 안내에 따라 <b>갓길 한 줄</b>로 걷습니다</li>
+        <li>폭우·낙뢰·폭염특보 때는 구간을 줄이거나 멈추고 문자로 알립니다</li>
+        <li>몸이 불편하면 바로 가까운 진행 요원에게 알려 주세요</li>
+        <li>쓰레기는 되가져가고, 걷는 동안 술은 마시지 않습니다</li>
+        <li>취소는 걷는 날 전까지 ‘신청 확인·취소’에서 직접 합니다</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
 <!-- ---------- 왜 걷는가 ---------- -->
 <section class="section band-sage" id="why">
   <div class="wrap why">
@@ -866,6 +1009,14 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   </div>
 </section>
 
+<!-- ---------- 조직도 (공개) ---------- -->
+<section class="section band-sage" id="org">
+  <div class="wrap">
+    <div class="sec-head"><div class="reveal"><h2 class="h2">함께 준비하는 사람들.</h2><p class="lede">대회 조직과 분과위원회, 17개 시·도 지역본부입니다. 조직이 꾸려지는 대로 이곳에 올라갑니다.</p></div></div>
+    <div class="org-pub" id="orgPub" aria-live="polite"><p class="org-empty">조직도를 불러오는 중…</p></div>
+  </div>
+</section>
+
 <!-- ---------- 소식 ---------- -->
 <section class="section" id="news">
   <div class="wrap">
@@ -880,7 +1031,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
       <div class="news-side">
         <article class="n-item reveal" style="--i:1"><div class="n-thumb"><img src="img/walkers.jpg" alt="" loading="lazy"></div><div><div class="n-meta"><span>모집</span><span>종주단</span></div><h4>전 구간을 함께 걸을 종주단 대장 1명·대원 20명을 모집합니다</h4></div></article>
         <article class="n-item reveal" style="--i:2"><div class="n-thumb"><img src="img/tapgol-bigak.jpg" alt="" loading="lazy"></div><div><div class="n-meta"><span>행사</span><span>8. 11</span></div><h4>서울 대회 — 탑골공원 선포식과 동·서 횃불 2차 합화</h4></div></article>
-        <div class="subscribe reveal" style="--i:3">
+        <div class="subscribe reveal" style="--i:3" id="subscribe">
           <p><b style="color:var(--ink)">소식 받기</b> — 출범과 접수 소식을 문자로 알려 드립니다.</p>
           <form id="subForm" novalidate>
             <label class="sr-only" for="subPhone">휴대전화</label>
@@ -930,6 +1081,33 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   </div>
 </section>
 
+<!-- ---------- 온라인 문의 ---------- -->
+<section class="section band-hanji" id="contact">
+  <div class="wrap contact">
+    <div class="reveal">
+      <h2 class="h2">사무국에<br>물어보세요.</h2>
+      <p class="lede" style="margin-top:16px">단체 참가, 숙영·차량, 후원과 영수증, 지역본부 참여까지. 남겨 주시면 사무국이 휴대전화로 답해 드립니다.</p>
+      <ul class="office" id="office">
+        <li><span>운영</span><b>사단법인 삼일만세길(가칭) 사무국</b></li>
+        <li><span>대표번호</span><span>000-0000-0000 <small>(개설 예정)</small></span></li>
+        <li><span>이메일</span><span>info@example.org <small>(개설 예정)</small></span></li>
+        <li><span>주소</span><span>사무국을 연 뒤 알려 드립니다</span></li>
+      </ul>
+    </div>
+    <form class="contact-form reveal" style="--i:1" id="inqForm" novalidate>
+      <div class="form-grid">
+        <label class="fld"><span>이름<em>*</em></span><input class="input" name="name" autocomplete="name" maxlength="40" required><span class="err"></span></label>
+        <label class="fld"><span>휴대전화<em>*</em></span><input class="input" name="phone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required><span class="err"></span></label>
+        <label class="fld full"><span>제목<em>*</em></span><input class="input" name="title" maxlength="120" required><span class="err"></span></label>
+        <label class="fld full"><span>내용<em>*</em></span><textarea class="textarea" name="body" rows="5" maxlength="3000" required></textarea><span class="err"></span></label>
+        <label class="hp" aria-hidden="true">비워 두세요<input name="website" tabindex="-1" autocomplete="off"></label>
+        <label class="fld full check-fld"><span class="check"><input type="checkbox" name="agree"> 답변을 위해 이름과 휴대전화를 수집·이용하는 데 동의합니다. (필수)</span><span class="err"></span></label>
+      </div>
+      <div class="foot"><span class="note" id="inqNote" aria-live="polite"></span><button class="btn btn-accent" type="submit" id="inqSubmit">문의 남기기</button></div>
+    </form>
+  </div>
+</section>
+
 <!-- ---------- CTA ---------- -->
 <section class="wrap" aria-label="참가 안내">
   <div class="cta reveal-scale" id="ctaBand">
@@ -947,10 +1125,12 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand"><a class="brand" href="#top"><span class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-flame"/></svg></span>삼일만세길</a><p>1919년의 길을 2027년에 다시 걷습니다. 제주 조천에서 파주 임진각까지.</p></div>
-      <div class="foot-col"><h4>걷기</h4><a href="#routes">세 갈래 길</a><a href="#schedule">구간 일정</a><a href="#torch">횃불 합화</a><a href="#schedule">코스 지도</a><a href="map.html" target="_blank" rel="noopener">인쇄용 전체 지도 ↗</a></div>
-      <div class="foot-col"><h4>함께하기</h4><a href="#" data-apply="">참가 신청</a><a href="#donate">1km 1만 원 후원</a><a href="#news">소식 받기</a><a href="#faq">묻고 답하기</a></div>
-      <div class="foot-col"><h4>사무국</h4><span>사단법인 삼일만세길(가칭)</span><span>대표번호 000-0000-0000</span><span>info@example.org</span><a href="#admin">관리자 모드</a></div>
+      <div class="foot-col"><h4>대회 소개</h4><a href="#intro">대회 취지</a><a href="#why">왜 걷는가</a><a href="#org">조직도</a><a href="#routes">세 갈래 길</a><a href="#schedule">지도·구간 일정</a></div>
+      <div class="foot-col"><h4>참가 신청</h4><a href="#guide">참가 안내</a><a href="#" data-apply="">개인 신청</a><a href="#" data-apply="" data-mode="group">단체 신청</a><a href="#" data-lookup="">신청 확인·취소</a></div>
+      <div class="foot-col"><h4>소식·후원</h4><a href="#news">소식과 기록</a><a href="#subscribe">소식 받기</a><a href="#donate">1km 1만 원 후원</a><a href="map.html" target="_blank" rel="noopener">인쇄용 전체 지도 ↗</a></div>
+      <div class="foot-col"><h4>고객센터</h4><a href="#faq">묻고 답하기</a><a href="#contact">온라인 문의</a><a href="#admin">관리자 로그인</a></div>
     </div>
+    <div class="foot-info"><span>사단법인 삼일만세길(가칭)</span><span>사무국 주소: 개소 후 안내</span><span>대표번호 000-0000-0000 (개설 예정)</span><span>info@example.org (개설 예정)</span></div>
     <div class="foot-bottom"><span>© 2027 사단법인 삼일만세길(가칭) · 기획 시안</span><span>탑골공원 사진 외의 사진은 시안용 AI 생성 이미지이며 현장 사진으로 교체합니다.</span></div>
   </div>
 </footer>
@@ -961,14 +1141,13 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-label="메뉴" tabindex="-1">
     <div class="sheet-head"><span class="brand"><span class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-flame"/></svg></span>삼일만세길</span><button class="icon-btn" type="button" data-close aria-label="메뉴 닫기"><svg class="ic"><use href="#i-x"/></svg></button></div>
     <nav class="sheet-nav" aria-label="모바일 메뉴">
-      <a href="#routes" data-close-nav>코스 <svg class="ic"><use href="#i-right"/></svg></a>
-      <a href="#schedule" data-close-nav>지도·일정 <svg class="ic"><use href="#i-right"/></svg></a>
-      <a href="#torch" data-close-nav>횃불 합화 <svg class="ic"><use href="#i-right"/></svg></a>
-      <a href="#news" data-close-nav>소식 <svg class="ic"><use href="#i-right"/></svg></a>
-      <a href="#donate" data-close-nav>후원 <svg class="ic"><use href="#i-right"/></svg></a>
-      <a href="#faq" data-close-nav>묻고 답하기 <svg class="ic"><use href="#i-right"/></svg></a>
+      <div class="sheet-grp"><h3>대회 소개</h3><div><a href="#intro" data-close-nav>대회 취지</a><a href="#why" data-close-nav>왜 걷는가</a><a href="#org" data-close-nav>조직도</a><a href="#quote" data-close-nav>그날의 선언</a></div></div>
+      <div class="sheet-grp"><h3>코스·일정</h3><div><a href="#routes" data-close-nav>세 갈래 길</a><a href="#schedule" data-close-nav>지도·구간 일정</a><a href="#torch" data-close-nav>횃불 합화</a><a href="map.html" target="_blank" rel="noopener">인쇄용 지도 ↗</a></div></div>
+      <div class="sheet-grp"><h3>참가 신청</h3><div><a href="#guide" data-close-nav>참가 안내</a><button type="button" data-apply="">개인 신청</button><button type="button" data-apply="" data-mode="group">단체 신청</button><button type="button" data-lookup="">신청 확인·취소</button></div></div>
+      <div class="sheet-grp"><h3>소식·후원</h3><div><a href="#news" data-close-nav>소식과 기록</a><a href="#subscribe" data-close-nav>소식 받기</a><a href="#donate" data-close-nav>1km 1만 원 후원</a></div></div>
+      <div class="sheet-grp"><h3>고객센터</h3><div><a href="#faq" data-close-nav>묻고 답하기</a><a href="#contact" data-close-nav>온라인 문의</a><a href="#admin" data-close-nav>관리자 로그인</a></div></div>
     </nav>
-    <div class="sheet-actions"><button class="btn" type="button" data-apply="">참가 신청</button><a class="btn btn-line" href="#admin" data-close-nav>관리자 모드</a></div>
+    <div class="sheet-actions"><button class="btn" type="button" data-apply="">참가 신청</button><button class="btn btn-line" type="button" data-lookup="">신청 확인</button></div>
   </div>
 </div>
 
@@ -976,14 +1155,16 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
 <div class="modal" id="applyModal" hidden>
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="applyTitle" tabindex="-1">
     <div class="modal-head">
-      <div><h2 id="applyTitle">참가 신청</h2><p>구간을 고르고 연락처를 남겨 주세요. 집결지·시간·준비물은 문자로 안내합니다.</p></div>
+      <div><h2 id="applyTitle">참가 신청</h2><p id="applySub">구간을 고르고 연락처를 남겨 주세요. 집결지·시간·준비물은 문자로 안내합니다.</p></div>
       <button class="icon-btn" type="button" data-close aria-label="닫기"><svg class="ic"><use href="#i-x"/></svg></button>
     </div>
     <div class="leave-guard" hidden data-guard><span>작성 중인 내용이 있습니다. 닫을까요?</span><span style="display:flex;gap:8px"><button class="btn xs btn-line" type="button" data-guard-stay>계속 작성</button><button class="btn xs" type="button" data-guard-leave>닫기</button></span></div>
     <form id="applyForm" novalidate style="display:contents">
       <div class="modal-body" id="applyBody">
         <div class="form-grid">
-          <div class="fld full"><span id="typeLabel">참가 유형</span>
+          <div class="fld full" id="modeFld"><div class="seg mode-seg" role="group" aria-label="신청 방식" id="modeSeg"><button type="button" data-mode="solo" aria-pressed="true">개인 신청</button><button type="button" data-mode="group" aria-pressed="false">단체 신청 (2~300명)</button></div></div>
+          <p class="full adm-note" id="groupNote" data-only="group" hidden style="margin:0">교회·학교·단체가 한 구간을 함께 걸을 때 <b>대표자 한 분</b>이 신청합니다. 인원은 대표자를 포함해 2~300명이며, 30명이 넘으면 집결지와 차량을 따로 안내합니다. 보험 가입에 필요한 참가자 명단은 사무국이 따로 받습니다.</p>
+          <div class="fld full" id="typeFld" data-only="solo"><span id="typeLabel">참가 유형</span>
             <div class="type-seg" role="radiogroup" aria-labelledby="typeLabel" id="typeSeg">
               <button type="button" role="radio" data-type="section" aria-checked="true">구간 걷기</button>
               <button type="button" role="radio" data-type="full" aria-checked="false">종주단 지원</button>
@@ -991,16 +1172,16 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
               <button type="button" role="radio" data-type="online" aria-checked="false">온라인 참가</button>
             </div>
           </div>
-          <label class="fld full" data-show="section volunteer"><span>구간 선택<em>*</em></span><select class="select" name="section" id="secSelect"></select><span class="err"></span></label>
+          <label class="fld full" id="secFld" data-show="section volunteer"><span>구간 선택<em>*</em></span><select class="select" name="section" id="secSelect"></select><span class="err"></span></label>
           <label class="fld full" data-show="volunteer"><span>봉사 분야<em>*</em></span><select class="select" name="vrole"><option value="">선택하세요</option><option>질서유지</option><option>차량 지원</option><option>의료·응급</option><option>음향·방송</option><option>사진·기자단</option><option>숙영 지원</option></select><span class="err"></span></label>
           <p class="full adm-note" data-show="full" style="margin:0">종주단은 6.26 제주 출정부터 8.15 임진각까지 전 구간을 걷습니다. 지원서를 받은 뒤 면담과 건강 확인을 거쳐 대장 1명·대원 20명을 선발합니다.</p>
           <p class="full adm-note" data-show="online" style="margin:0">온라인 참가는 내가 사는 곳에서 걸은 거리를 올려 ‘나의 만세길’에 더하는 방식입니다. 참가비는 없습니다.</p>
-          <label class="fld"><span>이름<em>*</em></span><input class="input" name="name" autocomplete="name" required><span class="err"></span></label>
-          <label class="fld"><span>생년월일<em>*</em></span><input class="input" name="birth" type="date" required min="1920-01-01" max="2025-12-31"><span class="err"></span></label>
-          <label class="fld"><span>휴대전화<em>*</em></span><input class="input" name="phone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required><span class="err"></span></label>
-          <label class="fld"><span>이메일</span><input class="input" name="email" type="email" autocomplete="email" placeholder="선택"><span class="err"></span></label>
-          <label class="fld"><span>소속 (교회·단체·학교)</span><input class="input" name="org" placeholder="예: ○○교회 / 광복회 ○○지부" list="orgList"><span class="err"></span></label>
-          <label class="fld" data-show="section"><span>함께 오는 인원 (본인 포함)</span><input class="input" name="heads" type="number" min="1" max="50" value="1" inputmode="numeric"><span class="err"></span></label>
+          <label class="fld"><span><span class="lbl" data-solo="이름" data-group="대표자 이름">이름</span><em>*</em></span><input class="input" name="name" autocomplete="name" required><span class="err"></span></label>
+          <label class="fld"><span><span class="lbl" data-solo="생년월일" data-group="대표자 생년월일">생년월일</span><em>*</em></span><input class="input" name="birth" type="date" required min="1920-01-01" max="2025-12-31"><span class="err"></span></label>
+          <label class="fld"><span><span class="lbl" data-solo="휴대전화" data-group="대표자 휴대전화">휴대전화</span><em>*</em></span><input class="input" name="phone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required><span class="err"></span></label>
+          <label class="fld" id="emailFld"><span>이메일</span><input class="input" name="email" type="email" autocomplete="email" placeholder="선택"><span class="err"></span></label>
+          <label class="fld" id="orgFld"><span><span class="lbl" data-solo="소속 (교회·단체·학교)" data-group="단체 이름">소속 (교회·단체·학교)</span><em data-only="group" hidden>*</em></span><input class="input" name="org" placeholder="예: ○○교회 / 광복회 ○○지부" list="orgList" maxlength="80"><span class="err"></span></label>
+          <label class="fld" id="headsFld" data-show="section"><span><span class="lbl" data-solo="함께 오는 인원 (본인 포함)" data-group="참가 인원 (대표자 포함)">함께 오는 인원 (본인 포함)</span><em data-only="group" hidden>*</em></span><input class="input" name="heads" type="number" min="1" max="50" value="1" inputmode="numeric"><span class="err"></span></label>
           <label class="fld" data-show="section volunteer full"><span>비상 연락처<em>*</em></span><input class="input" name="emg" inputmode="tel" placeholder="가족·보호자 연락처"><span class="err"></span></label>
           <div class="fld full" id="guardianBox" hidden>
             <span>보호자 동의 <em>*</em> <small style="font-weight:500;color:var(--muted)">— 만 19세 미만 참가자</small></span>
@@ -1024,6 +1205,21 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
   </div>
 </div>
 <datalist id="orgList"></datalist>
+
+<!-- 신청 확인·취소 -->
+<div class="modal" id="lookupModal" hidden>
+  <div class="modal-panel sm" role="dialog" aria-modal="true" aria-labelledby="lookupTitle" tabindex="-1">
+    <div class="modal-head"><div><h2 id="lookupTitle">신청 확인·취소</h2><p>신청할 때 적은 이름(단체는 대표자 이름)과 휴대전화로 찾습니다.</p></div><button class="icon-btn" type="button" data-close aria-label="닫기"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="modal-body">
+      <form id="lookupForm" class="form-grid" novalidate>
+        <label class="fld"><span>이름<em>*</em></span><input class="input" name="name" autocomplete="name" required><span class="err"></span></label>
+        <label class="fld"><span>휴대전화<em>*</em></span><input class="input" name="phone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required><span class="err"></span></label>
+        <div class="fld full"><button class="btn" type="submit" id="lookupSubmit">신청 내역 찾기</button></div>
+      </form>
+      <div id="lookupResult" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ===================================================== 관리자 ===================================================== -->
 <div id="adminView" class="adm" hidden>
@@ -1060,17 +1256,17 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
 <!-- 관리자: 로그인 (서버 모드) -->
 <div class="modal" id="loginModal" hidden>
   <div class="modal-panel sm" role="dialog" aria-modal="true" aria-labelledby="loginTitle" tabindex="-1">
-    <div class="modal-head"><div><h2 id="loginTitle">관리자 로그인</h2><p>ccn24.com 회원 계정으로 로그인합니다.</p></div><button class="icon-btn" type="button" data-close aria-label="닫기"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="modal-head"><div><h2 id="loginTitle">관리자 로그인</h2><p>ccn24.com과 같은 아이디(또는 이메일)와 비밀번호로 로그인합니다.</p></div><button class="icon-btn" type="button" data-close aria-label="닫기"><svg class="ic"><use href="#i-x"/></svg></button></div>
     <form id="loginForm" novalidate style="display:contents">
       <div class="modal-body">
         <div class="form-grid">
-          <label class="fld full"><span>이메일</span><input class="input" id="loginEmail" type="email" autocomplete="username" required></label>
+          <label class="fld full"><span>아이디 또는 이메일</span><input class="input" id="loginEmail" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="ccn24.com 아이디" required></label>
           <label class="fld full"><span>비밀번호</span><input class="input" id="loginPw" type="password" autocomplete="current-password" required></label>
         </div>
         <p class="err" id="loginErr" aria-live="polite" style="margin:10px 0 0"></p>
         <p class="adm-note" style="margin:14px 0 0">계정이 없으면 <a class="link-arrow" href="https://ccn24.com/member/login" target="_blank" rel="noopener" style="display:inline;padding:0">ccn24.com</a>에서 먼저 가입한 뒤, 총괄 관리자에게 권한을 받으세요.</p>
       </div>
-      <div class="modal-foot"><button class="btn btn-line sm" type="button" id="loginReset">비밀번호 재설정 메일</button><button class="btn" type="submit" id="loginSubmit">로그인</button></div>
+      <div class="modal-foot"><span class="login-find"><a href="https://ccn24.com/member/find-id" target="_blank" rel="noopener">아이디 찾기</a><span aria-hidden="true">·</span><a href="https://ccn24.com/member/find-pw" target="_blank" rel="noopener">비밀번호 찾기</a></span><button class="btn" type="submit" id="loginSubmit">로그인</button></div>
     </form>
   </div>
 </div>
@@ -1148,6 +1344,7 @@ const S = {
   groups: DB.get('groups', []),    // 참여 단체 {id,name,rep,sido,heads,donation,secs,memo}
   prayer: DB.get('prayer', {}),    // 기도 릴레이 {date:{who,topic}}
   logs: DB.get('logs', []),        // 알림 발송 기록
+  inqs: DB.get('inqs', []),        // 온라인 문의 {id,name,phone,title,body,status,memo,ts}
 };
 
 /* ================================================================
@@ -1164,8 +1361,8 @@ const num = v => (v === '' || v == null || isNaN(Number(v))) ? null : Number(v);
 const clean = o => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== null && v !== undefined && v !== ''));
 const DEFS = {
   apps: { table: 'mansegil_applications', key: 'id', order: 'created_at', select: true,
-    to: a => ({ id: a.id, no: a.no || null, type: a.type, section_id: a.section, name: a.name, birth: a.birth || null, phone: a.phone, email: a.email || '', org: a.org || '', heads: Math.max(1, Number(a.heads) || 1), emg: a.emg || '', guardian: a.guardian || '', guardian_phone: a.guardianPhone || '', note: a.note || '', vrole: a.vrole || '', insure: !!a.insure, status: a.status || '접수', sample: !!a.sample }),
-    from: r => ({ id: r.id, no: r.no, type: r.type, section: r.section_id, name: r.name, birth: r.birth || '', phone: r.phone, email: r.email, org: r.org, heads: r.heads, emg: r.emg, guardian: r.guardian, guardianPhone: r.guardian_phone, note: r.note, vrole: r.vrole, insure: r.insure, status: r.status, ts: r.created_at, sample: r.sample }) },
+    to: a => ({ id: a.id, no: a.no || null, type: a.type, section_id: a.section, name: a.name, birth: a.birth || null, phone: a.phone, email: a.email || '', org: a.org || '', heads: Math.max(1, Number(a.heads) || 1), emg: a.emg || '', guardian: a.guardian || '', guardian_phone: a.guardianPhone || '', note: a.note || '', vrole: a.vrole || '', insure: !!a.insure, is_group: !!a.isGroup, status: a.status || '접수', sample: !!a.sample }),
+    from: r => ({ id: r.id, no: r.no, type: r.type, section: r.section_id, name: r.name, birth: r.birth || '', phone: r.phone, email: r.email, org: r.org, heads: r.heads, emg: r.emg, guardian: r.guardian, guardianPhone: r.guardian_phone, note: r.note, vrole: r.vrole, insure: r.insure, isGroup: !!r.is_group, status: r.status, ts: r.created_at, sample: r.sample }) },
   dons: { table: 'mansegil_donations', key: 'id', order: 'created_at', select: true,
     to: d => ({ id: d.id, name: d.name, phone: d.phone, km: Number(d.km) || 1, receipt: !!d.receipt, status: d.status || '약정', sample: !!d.sample }),
     from: r => ({ id: r.id, name: r.name, phone: r.phone, km: r.km, amount: r.amount, receipt: r.receipt, status: r.status, sample: r.sample, ts: r.created_at }) },
@@ -1188,6 +1385,9 @@ const DEFS = {
   hq: { table: 'mansegil_hq', key: 'sido', order: 'sido', map: true,
     to: (k, m) => ({ sido: k, head: m.head || '', title: m.title || '', phone: m.phone || '', orgs: m.orgs || '', status: m.status || '미지정', memo: m.memo || '' }),
     from: r => [r.sido, { head: r.head, title: r.title, phone: r.phone, orgs: r.orgs, status: r.status, memo: r.memo }] },
+  inqs: { table: 'mansegil_inquiries', key: 'id', order: 'created_at',
+    to: q => ({ id: q.id, name: q.name, phone: q.phone, title: q.title, body: q.body, status: q.status || '접수', memo: q.memo || '' }),
+    from: r => ({ id: r.id, name: r.name, phone: r.phone, title: r.title, body: r.body, status: r.status, memo: r.memo, ts: r.created_at }) },
   prayer: { table: 'mansegil_prayer', key: 'date', order: 'date', map: true,
     to: (k, m) => ({ date: k, who: m.who || '', topic: m.topic || '' }),
     from: r => [r.date, { who: r.who, topic: r.topic }] },
@@ -1371,7 +1571,7 @@ const Modal = (() => {
   function selectorFor(el) {
     if (!el || el === document.body) return '';
     if (el.id) return '#' + CSS.escape(el.id);
-    const keys = ['apply', 'act', 'sec', 'hq', 'comm', 'group', 'id', 'pos', 'tab', 'go'].filter(k => el.dataset[k] !== undefined);
+    const keys = ['apply', 'lookup', 'act', 'sec', 'hq', 'comm', 'group', 'inq', 'id', 'pos', 'tab', 'go'].filter(k => el.dataset[k] !== undefined);
     return keys.length ? keys.map(k => `[data-${k}="${CSS.escape(el.dataset[k])}"]`).join('') : '';
   }
   function wire(root) {
@@ -1399,7 +1599,7 @@ const Modal = (() => {
   });
   return { open, close, requestClose, wire, isOpen: root => stack.some(e => e.root === root), top: () => stack[stack.length - 1] };
 })();
-['#menuSheet', '#applyModal', '#roleModal', '#loginModal', '#formModal', '#secDrawer'].forEach(s => Modal.wire($(s)));
+['#menuSheet', '#applyModal', '#lookupModal', '#roleModal', '#loginModal', '#formModal', '#secDrawer'].forEach(s => Modal.wire($(s)));
 
 /* ================================================================
    헤더 상태 · 히어로 드리프트 대체 · 등장 모션
@@ -1458,6 +1658,40 @@ $('#kmRange').max = TOTAL_KM;
    ================================================================ */
 $('#menuBtn').addEventListener('click', () => Modal.open($('#menuSheet')));
 $('#menuSheet').addEventListener('click', e => { if (e.target.closest('[data-close-nav]')) Modal.close($('#menuSheet')); });
+
+/* ================================================================
+   주 메뉴 (넓은 화면) — 마우스를 올리거나 키보드로 들어오면 하위 메뉴 전체가 펼쳐진다.
+   하나를 누르면 접히고, 헤더 밖으로 나갔다 오거나 Tab·↓ 키로 다시 펼친다.
+   ================================================================ */
+const gnb = $('#gnb');
+let megaHold = false, megaTimer;
+function megaOpen(on) {
+  clearTimeout(megaTimer);
+  if (on && megaHold) return;
+  if (on) header.style.setProperty('--mega-h', Math.max(...$$('.gnb-sub', gnb).map(u => u.offsetHeight)) + 22 + 'px');
+  header.classList.toggle('mega-open', on);
+}
+gnb.addEventListener('mouseenter', () => megaOpen(true));
+header.addEventListener('mouseenter', () => { clearTimeout(megaTimer); megaHold = false; });
+header.addEventListener('mouseleave', () => { megaHold = false; megaTimer = setTimeout(() => megaOpen(false), 140); });
+gnb.addEventListener('focusin', () => megaOpen(true));
+gnb.addEventListener('focusout', e => { if (!gnb.contains(e.relatedTarget)) megaOpen(false); });
+gnb.addEventListener('click', e => {
+  const el = e.target.closest('a,button'); if (!el) return;
+  megaHold = true; megaOpen(false);
+  // 마우스로 눌렀으면 초점을 놓고, 키보드면 그 메뉴의 윗단으로 초점을 옮겨 둔다(창을 닫으면 그리로 돌아온다)
+  if (e.detail) el.blur(); else { const top = $('.gnb-top', el.closest('.gnb-item')); if (top && top !== el) top.focus({ preventScroll: true }); }
+});
+gnb.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (!header.classList.contains('mega-open')) return;
+    e.preventDefault(); megaHold = true; megaOpen(false);
+    const top = $('.gnb-top', e.target.closest('.gnb-item')); if (top) top.focus({ preventScroll: true });
+    return;
+  }
+  if (e.key === 'ArrowDown' || (megaHold && e.key === 'Tab')) { megaHold = false; megaOpen(true); if (e.key === 'ArrowDown' && e.target.matches('.gnb-top')) { e.preventDefault(); const sub = $('.gnb-sub a,.gnb-sub button', e.target.closest('.gnb-item')); if (sub) sub.focus(); } }
+});
+document.addEventListener('pointerdown', e => { if (!header.contains(e.target)) megaOpen(false); });
 
 /* ================================================================
    히어로 필터 (리스트박스) + 일정 목록
@@ -1926,7 +2160,8 @@ const FAQ = [
   ['주일에도 걷나요?', '아니요. 주일에는 걷지 않고 머무는 지역에서 예배하고 쉽니다. 일정표의 회색 줄이 쉬는 날입니다.'],
   ['날씨가 나쁘면 어떻게 되나요?', '비가 와도 걷는 것이 원칙이며, 폭우·낙뢰나 폭염특보 때는 구간을 줄이거나 멈추고 문자로 바로 알립니다. 여름이라 새벽에 출발해 오전 11시 전에 주요 구간을 마칩니다.'],
   ['미성년자도 참가할 수 있나요?', '참가할 수 있습니다. 만 19세 미만은 신청서에 보호자 이름과 연락처를 적고 보호자 동의를 받아야 합니다.'],
-  ['교회나 단체로 함께 신청할 수 있나요?', '신청서의 ‘함께 오는 인원’에 본인을 포함한 인원을 적으면 됩니다. 30명이 넘는 단체는 사무국에 미리 알려 주시면 집결지와 차량을 따로 준비합니다.'],
+  ['교회나 단체로 함께 신청할 수 있나요?', '‘단체 신청’에서 대표자 한 분이 단체 이름과 인원(대표자 포함 2~300명)을 적으면 한 번에 신청됩니다. 30명이 넘는 단체는 집결지와 차량을 따로 안내합니다. 50명 이하라면 개인 신청의 ‘함께 오는 인원’으로도 됩니다.'],
+  ['신청 내역을 확인하거나 취소하려면?', '‘신청 확인·취소’에서 신청할 때 적은 이름(단체는 대표자 이름)과 휴대전화로 찾을 수 있고, 걷는 날 전까지 직접 취소할 수 있습니다.'],
   ['후원금은 어디에 쓰이나요?', '독립유공자 후손의 주거 개선과 지역 만세길 정비에 쓰이며, 사단법인 명의 기부금영수증을 발급합니다. 사용 내역은 분기마다 홈페이지에 공개합니다.'],
 ];
 $('#faqList').innerHTML = FAQ.map(([q, a], i) => `<div class="acc-item"><h3 style="margin:0"><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-${i}" id="faqb-${i}">${esc(q)}<span class="acc-icon">${icon('plus')}</span></button></h3><div class="acc-panel" id="faq-${i}" role="region" aria-labelledby="faqb-${i}"><div><p>${esc(a)}</p></div></div></div>`).join('');
@@ -1941,7 +2176,7 @@ $('#faqList').addEventListener('click', e => {
    참가 신청
    ================================================================ */
 const applyModal = $('#applyModal'), applyForm = $('#applyForm');
-let applyType = 'section', applyBusy = false, applyDirty = false;
+let applyType = 'section', applyBusy = false, applyDirty = false, applyGroup = false, lastApplied = null;
 function fillSecSelect(selected) {
   const sel = $('#secSelect');
   const groups = Object.keys(AXIS).map(ax => `<optgroup label="${AXIS[ax]}">` + SECTIONS.filter(s => s.axis === ax).map(s => {
@@ -1954,7 +2189,7 @@ function setApplyType(t) {
   applyType = t;
   $$('#typeSeg button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.type === t)));
   $$('[data-show]', applyForm).forEach(el => { el.hidden = !el.dataset.show.split(' ').includes(t); });
-  $('#feeNote').textContent = { section: '구간 참가비 1만 원 (보험·기념 손수건·물 포함)', full: '종주단은 서류 확인과 면담 뒤 확정됩니다', volunteer: '자원봉사자는 참가비가 없고 보험에 가입합니다', online: '온라인 참가는 참가비가 없습니다' }[t];
+  $('#feeNote').textContent = applyGroup && t === 'section' ? '구간 참가비 1인 1만 원 (보험·기념 손수건·물 포함) · 안내 문자는 대표자에게' : { section: '구간 참가비 1만 원 (보험·기념 손수건·물 포함)', full: '종주단은 서류 확인과 면담 뒤 확정됩니다', volunteer: '자원봉사자는 참가비가 없고 보험에 가입합니다', online: '온라인 참가는 참가비가 없습니다' }[t];
   checkMinor();
 }
 $('#typeSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { setApplyType(b.dataset.type); applyDirty = true; } });
@@ -1963,11 +2198,30 @@ $('#typeSeg').addEventListener('keydown', e => {
   e.preventDefault(); const types = ['section', 'full', 'volunteer', 'online'];
   const t = types[(types.indexOf(applyType) + k + 4) % 4]; setApplyType(t); $(`#typeSeg [data-type="${t}"]`).focus();
 });
+// 개인 / 단체 신청 — 단체는 구간 걷기만, 단체 이름·인원(2~300명)이 위로 올라온다
+function setApplyMode(m) {
+  applyGroup = m === 'group';
+  if (applyGroup) applyType = 'section';
+  $$('#modeSeg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === (applyGroup ? 'group' : 'solo'))));
+  const org = $('#orgFld'), heads = $('#headsFld');
+  if (applyGroup) { $('#modeFld').after($('#groupNote')); $('#secFld').after(org, heads); } else $('#emailFld').after(org, heads);
+  $$('[data-only]', applyModal).forEach(el => { el.hidden = el.dataset.only !== (applyGroup ? 'group' : 'solo'); });
+  $$('.lbl', applyForm).forEach(el => { el.textContent = el.dataset[applyGroup ? 'group' : 'solo']; });
+  const h = applyForm.elements.heads;
+  h.min = applyGroup ? 2 : 1; h.max = applyGroup ? 300 : 50; h.placeholder = applyGroup ? '예: 25' : '';
+  if (applyGroup && Number(h.value) < 2) h.value = '';
+  if (!applyGroup && !(Number(h.value) >= 1 && Number(h.value) <= 50)) h.value = '1';
+  ['heads', 'org'].forEach(n => { const f = applyForm.elements[n].closest('.fld'); f.classList.remove('has-error'); $('.err', f).textContent = ''; });
+  $('#applyTitle').textContent = applyGroup ? '단체 참가 신청' : '참가 신청';
+  $('#applySub').textContent = applyGroup ? '대표자 한 분이 단체 이름과 인원을 적어 신청합니다. 집결지·시간은 대표자에게 문자로 안내합니다.' : '구간을 고르고 연락처를 남겨 주세요. 집결지·시간·준비물은 문자로 안내합니다.';
+  setApplyType(applyType);
+}
+$('#modeSeg').addEventListener('click', e => { const b = e.target.closest('button[data-mode]'); if (b && (b.dataset.mode === 'group') !== applyGroup) setApplyMode(b.dataset.mode); });
 function ageAt(birth, iso) { const b = dObj(birth), d = dObj(iso); let a = d.getFullYear() - b.getFullYear(); if (d.getMonth() < b.getMonth() || (d.getMonth() === b.getMonth() && d.getDate() < b.getDate())) a--; return a; }
 function checkMinor() {
   const birth = applyForm.birth.value;
   const s = SEC[applyForm.section.value];
-  const minor = !!birth && ageAt(birth, s ? s.date : '2027-06-26') < 19 && applyType !== 'online';
+  const minor = !applyGroup && !!birth && ageAt(birth, s ? s.date : '2027-06-26') < 19 && applyType !== 'online';
   $('#guardianBox').hidden = !minor;
   return minor;
 }
@@ -1975,23 +2229,23 @@ applyForm.addEventListener('input', e => { applyDirty = true; const f = e.target
 applyForm.addEventListener('change', e => { if (['birth', 'section'].includes(e.target.name)) checkMinor(); });
 $$('input[inputmode="tel"]').forEach(inp => inp.addEventListener('blur', () => { inp.value = fmtPhone(inp.value); }));
 
-function openApply(secId) {
+function openApply(secId, mode) {
   applyForm.reset(); applyDirty = false; applyBusy = false;
   $$('.fld.has-error', applyForm).forEach(f => f.classList.remove('has-error'));
   $$('.err', applyForm).forEach(e => e.textContent = '');
   fillSecSelect(secId || '');
-  setApplyType('section');
+  applyType = 'section'; setApplyMode(mode === 'group' ? 'group' : 'solo');
   applyForm.hidden = false; $('#applyDone').hidden = true; applyForm.style.display = 'contents';
   $('#applySubmit').classList.remove('is-busy'); $('#applySubmit').disabled = false;
   $('#orgList').innerHTML = [...new Set(S.groups.map(g => g.name).concat(S.apps.map(a => a.org)).filter(Boolean))].slice(0, 80).map(o => `<option value="${esc(o)}">`).join('');
-  Modal.open(applyModal, { focus: secId ? 'input[name=name]' : '#secSelect', isDirty: () => applyDirty && !applyBusy && !$('#applyForm').hidden });
+  Modal.open(applyModal, { focus: secId ? (applyGroup ? 'input[name=org]' : 'input[name=name]') : '#secSelect', isDirty: () => applyDirty && !applyBusy && !$('#applyForm').hidden });
   if (REMOTE) loadPublic().then(() => { if (!applyDirty) fillSecSelect($('#secSelect').value || secId || ''); }).catch(() => {});
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-apply]'); if (!b) return;
   e.preventDefault();
   if (Modal.isOpen($('#menuSheet'))) Modal.close($('#menuSheet'));
-  openApply(b.dataset.apply);
+  openApply(b.dataset.apply, b.dataset.mode);
 });
 function fieldError(name, msg) {
   const el = applyForm.elements[name]; if (!el) return;
@@ -2004,12 +2258,13 @@ function validateApply() {
     need('section', '구간을 골라 주세요');
     const s = SEC[f.section.value];
     if (s && applyType === 'section') {
-      const h = Number(f.heads.value) || 1;
-      if (h < 1 || h > 50) { fieldError('heads', '1~50명 사이로 적어 주세요'); errs.push('heads'); }
+      const h = Number(f.heads.value) || (applyGroup ? 0 : 1);
+      if (applyGroup ? (h < 2 || h > 300) : (h < 1 || h > 50)) { fieldError('heads', applyGroup ? '2~300명 사이로 적어 주세요' : '1~50명 사이로 적어 주세요 (더 많으면 ‘단체 신청’)'); errs.push('heads'); }
       else if (h > remainOf(s)) { fieldError('heads', `남은 자리가 ${remainOf(s)}명입니다`); errs.push('heads'); }
     }
   }
   if (applyType === 'volunteer') need('vrole', '봉사 분야를 골라 주세요');
+  if (applyGroup) need('org', '단체 이름을 적어 주세요');
   need('name', '이름을 적어 주세요');
   need('birth', '생년월일을 적어 주세요');
   if (!PHONE_RE.test(f.phone.value.trim())) { fieldError('phone', '010-0000-0000 형식으로 적어 주세요'); errs.push('phone'); }
@@ -2034,12 +2289,12 @@ applyForm.addEventListener('submit', async e => {
   try {
     const secId = (applyType === 'section' || applyType === 'volunteer') ? v.section : (applyType === 'full' ? 'ALL' : 'ONLINE');
     const s = SEC[secId];
-    const heads = applyType === 'section' ? Math.max(1, Number(v.heads) || 1) : 1;
+    const heads = applyType === 'section' ? Math.max(applyGroup ? 2 : 1, Number(v.heads) || 1) : 1;
     const base = { type: applyType, section: secId, name: v.name.trim(), birth: v.birth, phone: fmtPhone(v.phone.trim()), email: v.email || '', org: (v.org || '').trim(),
-      heads, emg: v.emg || '', guardian: v.guardian || '', guardianPhone: v.guardianPhone || '', note: v.note || '', vrole: v.vrole || '', insure: !!v.insure };
+      heads, emg: v.emg || '', guardian: v.guardian || '', guardianPhone: v.guardianPhone || '', note: v.note || '', vrole: v.vrole || '', insure: !!v.insure, isGroup: applyGroup };
     let app;
     if (REMOTE) {
-      const { data, error } = await sb.rpc('mansegil_apply', { p: { ...base, section: v.section || '', agree: !!v.agree, guardianOk: !!v.guardianOk } });
+      const { data, error } = await sb.rpc('mansegil_apply', { p: { ...base, group: applyGroup, section: v.section || '', agree: !!v.agree, guardianOk: !!v.guardianOk } });
       if (error) throw new Error(error.message);
       app = { ...base, id: data.id, no: data.no };
       await loadPublic();
@@ -2052,12 +2307,14 @@ applyForm.addEventListener('submit', async e => {
     }
     applyDirty = false;
     const where = s ? `${secLabel(s)}${s.km ? ` · ${s.km}km` : ''}` : (applyType === 'full' ? '종주단 (전 구간)' : '온라인 참가 — 나의 만세길');
-    $('#applyDone').innerHTML = `<div class="success"><div class="ok-mark">${icon('check')}</div><h3>신청이 접수되었습니다</h3><p>${esc(app.name)}님, 함께 걸어 주셔서 고맙습니다. 구간 7일 전에 집결지·시간·준비물을 문자로 보내 드립니다.</p>
+    $('#applyDone').innerHTML = `<div class="success"><div class="ok-mark">${icon('check')}</div><h3>${applyGroup ? '단체 신청이 접수되었습니다' : '신청이 접수되었습니다'}</h3><p>${applyGroup ? `${esc(app.org)} ${fmt(app.heads)}명, 함께 걸어 주셔서 고맙습니다. 구간 7일 전에 대표자 ${esc(app.name)}님께 집결지·시간·준비물을 문자로 보내 드립니다.` : `${esc(app.name)}님, 함께 걸어 주셔서 고맙습니다. 구간 7일 전에 집결지·시간·준비물을 문자로 보내 드립니다.`}</p>
       <div class="receipt"><span>접수번호</span><b>${esc(app.no)}</b><span>${esc(where)}${app.heads > 1 ? ` · ${app.heads}명` : ''}</span></div>
       <p style="font-size:13px;color:var(--faint)">시안: 문자 발송은 아직 연결되지 않았습니다.</p>
-      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px"><button class="btn btn-line" type="button" id="applyAgain">다른 구간도 신청</button><button class="btn" type="button" data-close>닫기</button></div></div>`;
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px"><button class="btn btn-line" type="button" id="applyAgain">다른 구간도 신청</button><button class="btn btn-line" type="button" data-lookup="last">신청 내역 보기</button><button class="btn" type="button" data-close>닫기</button></div></div>`;
     applyForm.hidden = true; applyForm.style.display = 'none'; $('#applyDone').hidden = false;
-    $('#applyAgain').addEventListener('click', () => { Modal.close(applyModal); setTimeout(() => openApply(''), 200); });
+    lastApplied = { name: app.name, phone: app.phone };
+    const againMode = applyGroup ? 'group' : 'solo';
+    $('#applyAgain').addEventListener('click', () => { Modal.close(applyModal); setTimeout(() => openApply('', againMode), 200); });
     $('#applyDone [data-close]').focus();
     renderDeps(false);
   } catch (err) {
@@ -2124,6 +2381,162 @@ $('#subForm').addEventListener('submit', async e => {
 });
 
 /* ================================================================
+   신청 확인·취소 — 이름(단체는 대표자) + 휴대전화가 모두 맞는 신청만 보여 준다
+   ================================================================ */
+const lookupModal = $('#lookupModal'), lookupForm = $('#lookupForm');
+const TYPE_PUB = { section: '구간 걷기', full: '종주단 지원', volunteer: '자원봉사', online: '온라인 참가' };
+let lookupBusy = false, cancelBusy = false, lookupQ = null;
+function openLookup(pre) {
+  lookupForm.reset(); lookupQ = null; $('#lookupResult').innerHTML = '';
+  $$('.fld.has-error', lookupForm).forEach(f => f.classList.remove('has-error')); $$('.err', lookupForm).forEach(x => { x.textContent = ''; });
+  if (pre) { lookupForm.elements.name.value = pre.name; lookupForm.elements.phone.value = pre.phone; }
+  Modal.open(lookupModal, { focus: 'input[name=name]' });
+  if (pre) doLookup();
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-lookup]'); if (!b) return;
+  e.preventDefault();
+  if (Modal.isOpen($('#menuSheet'))) Modal.close($('#menuSheet'));
+  if (Modal.isOpen(applyModal)) Modal.close(applyModal);
+  openLookup(b.dataset.lookup === 'last' ? lastApplied : null);
+});
+async function runLookup() {
+  const { name, phone } = lookupQ;
+  let rows;
+  if (REMOTE) {
+    const { data, error } = await sb.rpc('mansegil_lookup', { p_name: name, p_phone: phone });
+    if (error) throw new Error(error.message);
+    rows = data || [];
+  } else {
+    await sleep(400);
+    const d = phone.replace(/\D/g, '');
+    rows = S.apps.filter(a => a.name === name && String(a.phone).replace(/\D/g, '') === d)
+      .map(a => ({ no: a.no, type: a.type, section_id: a.section, heads: a.heads, status: a.status || '접수', is_group: !!a.isGroup, org: a.org, created_at: a.ts }));
+  }
+  renderLookup(rows);
+}
+function renderLookup(rows) {
+  const box = $('#lookupResult');
+  if (!rows.length) { box.innerHTML = '<p class="lk-none">맞는 신청이 없습니다. 이름(단체는 대표자 이름)과 휴대전화가 신청할 때와 같은지 확인해 주세요.</p>'; return; }
+  box.innerHTML = `<div class="lk-list">${rows.map(r => {
+    const s = SEC[r.section_id];
+    const where = s ? `${secLabel(s)}${s.km ? ` · ${s.km}km` : ''}` : (r.section_id === 'ALL' ? '전 구간' : '나의 만세길');
+    const past = !!s && dday(s.date) < 0;
+    const act = r.status === '취소' ? '' : past ? '<div class="lk-act"><small>지난 구간은 취소할 수 없습니다</small></div>'
+      : `<div class="lk-act"><button class="btn xs btn-line" type="button" data-cancel="${esc(r.no)}">신청 취소</button></div>`;
+    return `<div class="lk-item"><div class="lk-top"><b>${esc(r.no)}</b><span class="pill ${{ 승인: 'ok', 대기: 'warn', 취소: 'bad' }[r.status] || ''}">${esc(r.status)}</span></div>
+      <p>${r.is_group ? `<span class="pill">단체</span> ${esc(r.org)} · ` : ''}${esc(TYPE_PUB[r.type] || r.type)} — ${esc(where)}${r.heads > 1 ? ` · ${fmt(r.heads)}명` : ''}</p>
+      <small>접수 ${r.created_at ? new Date(r.created_at).toLocaleDateString('ko-KR') : ''}</small>${act}</div>`;
+  }).join('')}</div>`;
+}
+async function doLookup() {
+  if (lookupBusy) return;
+  const f = lookupForm, name = f.elements.name.value.trim(), phone = fmtPhone(f.elements.phone.value.trim());
+  $$('.fld.has-error', f).forEach(x => x.classList.remove('has-error')); $$('.err', f).forEach(x => { x.textContent = ''; });
+  const bad = [];
+  const mark = (el, m) => { const fl = el.closest('.fld'); fl.classList.add('has-error'); $('.err', fl).textContent = m; bad.push(el); };
+  if (!name) mark(f.elements.name, '이름을 적어 주세요');
+  if (!PHONE_RE.test(phone)) mark(f.elements.phone, '010-0000-0000 형식으로 적어 주세요');
+  if (bad.length) { bad[0].focus(); return; }
+  lookupBusy = true; const btn = $('#lookupSubmit'); btn.classList.add('is-busy'); btn.disabled = true;
+  lookupQ = { name, phone };
+  try { await runLookup(); }
+  catch (err) { $('#lookupResult').innerHTML = `<p class="lk-none">${esc(err.message || '찾지 못했습니다. 잠시 뒤 다시 시도해 주세요.')}</p>`; }
+  finally { lookupBusy = false; btn.classList.remove('is-busy'); btn.disabled = false; }
+}
+lookupForm.addEventListener('submit', e => { e.preventDefault(); doLookup(); });
+lookupForm.addEventListener('input', e => { const fl = e.target.closest('.fld'); if (fl) { fl.classList.remove('has-error'); $('.err', fl).textContent = ''; } });
+$('#lookupResult').addEventListener('click', async e => {
+  const c = e.target.closest('[data-cancel]'), no = e.target.closest('[data-cancel-no]'), yes = e.target.closest('[data-cancel-yes]');
+  if (c) {
+    const act = c.closest('.lk-act');
+    act.innerHTML = `<span class="warn-q">이 신청을 취소할까요?</span><button class="btn xs" type="button" data-cancel-yes="${esc(c.dataset.cancel)}">예, 취소합니다</button><button class="btn xs btn-line" type="button" data-cancel-no="${esc(c.dataset.cancel)}">아니요</button>`;
+    $('[data-cancel-no]', act).focus(); return;
+  }
+  if (no) { const act = no.closest('.lk-act'); act.innerHTML = `<button class="btn xs btn-line" type="button" data-cancel="${esc(no.dataset.cancelNo)}">신청 취소</button>`; $('[data-cancel]', act).focus(); return; }
+  if (!yes || cancelBusy || !lookupQ) return;
+  cancelBusy = true; yes.classList.add('is-busy'); yes.disabled = true;
+  try {
+    if (REMOTE) {
+      const { error } = await sb.rpc('mansegil_cancel', { p_no: yes.dataset.cancelYes, p_name: lookupQ.name, p_phone: lookupQ.phone });
+      if (error) throw new Error(error.message);
+      await loadPublic().catch(() => {});
+    } else {
+      await sleep(400);
+      const a = S.apps.find(x => x.no === yes.dataset.cancelYes); if (a) { a.status = '취소'; save('apps'); }
+    }
+    toast('신청을 취소했습니다');
+    renderDeps(false);
+    await runLookup().catch(() => {});
+    $('#lookupSubmit').focus();
+  } catch (err) { toast(err.message || '취소하지 못했습니다. 다시 시도해 주세요.'); }
+  finally { cancelBusy = false; if (document.contains(yes)) { yes.classList.remove('is-busy'); yes.disabled = false; } }
+});
+
+/* ================================================================
+   공개 조직도 — 이름·직분·소속만 (연락처·메모는 서버가 내주지 않는다)
+   ================================================================ */
+function renderPublicOrg(rows) {
+  const pos = rows.filter(r => r.kind === 'pos'), comm = rows.filter(r => r.kind === 'comm'), hq = rows.filter(r => r.kind === 'hq');
+  const who = r => `<li>${esc(r.name)}${r.title ? ' ' + esc(r.title) : ''}${r.aff ? `<small>${esc(r.aff)}</small>` : ''}</li>`;
+  const grps = [...POSITIONS.filter(p => pos.some(r => r.grp === p)), ...new Set(pos.map(r => r.grp).filter(g => !POSITIONS.includes(g)))];
+  const posHtml = grps.length
+    ? `<div class="org-tier">${grps.map(g => { const list = pos.filter(r => r.grp === g); return `<div class="org-pos ${list.length > 6 ? 'wide' : ''}"><span>${esc(g)}</span><ul class="org-names">${list.map(who).join('')}</ul></div>`; }).join('')}</div>`
+    : '<p class="org-empty">대회장과 준비위원회를 꾸리고 있습니다. 정해지는 대로 이곳에 올립니다.</p>';
+  const commHtml = `<div class="org-chips">${COMMITTEES.map(c => { const r = comm.find(x => x.grp === c); return `<span class="chip">${esc(c)}${r ? ` · <b>${esc(r.name)}${r.title ? ' ' + esc(r.title) : ''}</b>` : ''}</span>`; }).join('')}</div>`;
+  const hqHtml = `<div class="org-tier">${SIDO.map(sd => { const list = hq.filter(x => x.grp === sd); return `<div class="org-pos ${list.length ? '' : 'vacant'}"><span>${esc(sd)}지역본부</span><ul class="org-names">${list.length ? list.map(who).join('') : '<li>구성 중</li>'}</ul></div>`; }).join('')}</div>`;
+  $('#orgPub').innerHTML = `<div class="org-blk"><h3>대회 조직 <small>${pos.length ? fmt(pos.length) + '명' : '구성 중'}</small></h3>${posHtml}</div>
+    <div class="org-blk"><h3>분과위원회 <small>${COMMITTEES.length}개 분과${comm.length ? ` · 위원장 ${comm.length}명` : ''}</small></h3>${commHtml}</div>
+    <div class="org-blk"><h3>시·도 지역본부 <small>17곳${hq.length ? ` · 본부장 ${hq.length}명` : ''}</small></h3>${hqHtml}</div>`;
+}
+async function loadPublicOrg() {
+  try {
+    let rows;
+    if (REMOTE) { const { data, error } = await sb.rpc('mansegil_public_org'); if (error) throw error; rows = data || []; }
+    else rows = [
+      ...S.people.map(p => ({ kind: 'pos', grp: p.pos, name: p.name, title: p.title, aff: p.aff })),
+      ...Object.entries(S.comms).filter(([, v]) => v.chair).map(([k, v]) => ({ kind: 'comm', grp: k, name: v.chair, title: v.title, aff: '' })),
+      ...Object.entries(S.hq).filter(([, v]) => v.head).map(([k, v]) => ({ kind: 'hq', grp: k, name: v.head, title: v.title, aff: '' })),
+    ];
+    renderPublicOrg(rows);
+  } catch (err) { $('#orgPub').innerHTML = '<p class="org-empty">조직도를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</p>'; }
+}
+
+/* ================================================================
+   온라인 문의
+   ================================================================ */
+const inqForm = $('#inqForm');
+let inqBusy = false, inqDirty = false;
+inqForm.addEventListener('input', e => {
+  inqDirty = true; $('#inqNote').textContent = '';
+  const fl = e.target.closest('.fld'); if (fl) { fl.classList.remove('has-error'); const er = $('.err', fl); if (er) er.textContent = ''; }
+});
+inqForm.addEventListener('submit', async e => {
+  e.preventDefault(); if (inqBusy) return;
+  const el = inqForm.elements;
+  const v = { name: el.name.value.trim(), phone: fmtPhone(el.phone.value.trim()), title: el.title.value.trim(), body: el.body.value.trim(), agree: el.agree.checked };
+  const bad = [];
+  const mark = (x, m) => { const fl = x.closest('.fld'); fl.classList.add('has-error'); $('.err', fl).textContent = m; bad.push(x); };
+  if (!v.name) mark(el.name, '이름을 적어 주세요');
+  if (!PHONE_RE.test(v.phone)) mark(el.phone, '010-0000-0000 형식으로 적어 주세요');
+  if (!v.title) mark(el.title, '제목을 적어 주세요');
+  if (!v.body) mark(el.body, '내용을 적어 주세요');
+  if (!v.agree) mark(el.agree, '동의가 필요합니다');
+  if (bad.length) { bad[0].focus(); return; }
+  inqBusy = true; const btn = $('#inqSubmit'); btn.classList.add('is-busy'); btn.disabled = true;
+  try {
+    if (el.website.value) await sleep(600);           // 자동 입력 프로그램이 채운 글은 조용히 버린다
+    else if (REMOTE) { const { error } = await sb.rpc('mansegil_inquire', { p: v }); if (error) throw new Error(error.message); }
+    else { await sleep(500); S.inqs.push({ id: uid(), name: v.name, phone: v.phone, title: v.title, body: v.body, status: '접수', memo: '', ts: new Date().toISOString() }); save('inqs'); }
+    inqForm.reset(); inqDirty = false;
+    $('#inqNote').textContent = '문의를 접수했습니다. 사무국이 휴대전화로 답해 드립니다.';
+    toast('문의를 접수했습니다');
+  } catch (err) { toast(err.message || '보내지 못했습니다. 다시 시도해 주세요.'); }
+  finally { inqBusy = false; btn.classList.remove('is-busy'); btn.disabled = false; }
+});
+addEventListener('beforeunload', e => { if (inqDirty && (inqForm.elements.title.value.trim() || inqForm.elements.body.value.trim())) { e.preventDefault(); e.returnValue = ''; } });
+
+/* ================================================================
    ===================== 관리자 모드 =====================
    ================================================================ */
 const POSITIONS = ['고문', '증경대회장', '명예대회장', '대회장', '연합단체장', '공동대회장', '연합단체 사무총장', '부대회장', '준비위원장', '공동준비위원장', '특별위원장', '전문위원장', '특별대외협력위원장', '특별기도회위원장', '국토순례특별위원장', '재정감사위원장', '사무총장', '공동사무총장', '대변인', '종주단 대장', '종주단 대원', '팀장', '간사'];
@@ -2137,7 +2550,7 @@ const HQ_STATUS = ['미지정', '구성중', '발족'];
 const HQ_PILL = { 미지정: 'bad', 구성중: 'warn', 발족: 'ok' };
 const ADM_TABS = [
   ['dash', '총괄 대시보드', 'grid'], ['apps', '참가자', 'users'], ['secs', '구간·정원', 'route'], ['org', '조직 관리', 'org'],
-  ['prayer', '기도 릴레이', 'pray'], ['docs', '공문·집회신고', 'doc'], ['notify', '알림 발송', 'bell'], ['dons', '후원', 'heart'], ['accounts', '관리자 계정', 'users'], ['data', '데이터', 'db'],
+  ['prayer', '기도 릴레이', 'pray'], ['docs', '공문·집회신고', 'doc'], ['notify', '알림 발송', 'bell'], ['dons', '후원', 'heart'], ['inqs', '문의', 'mail'], ['accounts', '관리자 계정', 'users'], ['data', '데이터', 'db'],
 ];
 const REGION_TABS = ['dash', 'apps', 'secs', 'org', 'docs', 'notify'];
 let role = REMOTE ? null : (() => { try { return JSON.parse(sessionStorage.getItem('smg2_role')); } catch (e) { return null; } })();
@@ -2167,7 +2580,7 @@ function route() {
     window.scrollTo(0, 0);
   } else if (wasAdmin) {
     if (REMOTE) loadPublic().then(() => { renderDeps(false); renderDonSum(); }).catch(() => {});
-    renderDeps(false); renderDonSum();
+    renderDeps(false); renderDonSum(); loadPublicOrg();
     if (MAPX.map) requestAnimationFrame(() => MAPX.map.invalidateSize());
     requestAnimationFrame(() => { syncSearchH(); onScroll(); });
   }
@@ -2236,22 +2649,26 @@ async function signOut() {
 }
 $('#loginForm').addEventListener('submit', async e => {
   e.preventDefault(); if (loginBusy) return;
-  const email = $('#loginEmail').value.trim(), pw = $('#loginPw').value;
-  if (!email || !pw) { $('#loginErr').textContent = '이메일과 비밀번호를 적어 주세요'; return; }
+  const id = $('#loginEmail').value.trim(), pw = $('#loginPw').value;
+  if (!id || !pw) { $('#loginErr').textContent = '아이디(또는 이메일)와 비밀번호를 적어 주세요'; return; }
   loginBusy = true; const btn = $('#loginSubmit'); btn.classList.add('is-busy'); btn.disabled = true;
+  const BAD = '아이디(이메일) 또는 비밀번호가 맞지 않습니다';
   try {
+    let email = id;
+    // ccn24.com과 같은 방식: '@'가 없으면 아이디로 보고, 서버가 비밀번호를 확인한 뒤 가입 이메일을 알려 준다
+    if (!id.includes('@')) {
+      const { data, error } = await sb.rpc('resolve_login', { p_username: id, p_password: pw });
+      if (error) { $('#loginErr').textContent = error.message; return; }
+      if (!data) { $('#loginErr').textContent = BAD; return; }
+      email = data;
+    }
     const { error } = await sb.auth.signInWithPassword({ email, password: pw });
-    if (error) { $('#loginErr').textContent = /invalid/i.test(error.message) ? '이메일 또는 비밀번호가 맞지 않습니다' : error.message; return; }
+    if (error) { $('#loginErr').textContent = /invalid/i.test(error.message) ? BAD : /confirm/i.test(error.message) ? '이메일 인증이 끝나지 않은 계정입니다. ccn24.com에서 인증을 마쳐 주세요.' : error.message; return; }
     ADM.authed = true; $('#loginPw').value = '';
     Modal.close(loginModal);
     await enterAdminRemote();
-  } finally { loginBusy = false; btn.classList.remove('is-busy'); btn.disabled = false; }
-});
-$('#loginReset').addEventListener('click', async () => {
-  const email = $('#loginEmail').value.trim();
-  if (!email) { $('#loginErr').textContent = '먼저 이메일을 적어 주세요'; $('#loginEmail').focus(); return; }
-  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.href.split('#')[0] });
-  $('#loginErr').textContent = error ? error.message : '비밀번호 재설정 메일을 보냈습니다. 메일의 링크를 눌러 주세요.';
+  } catch (err) { $('#loginErr').textContent = '서버에 연결하지 못했습니다. 잠시 뒤 다시 시도해 주세요.'; }
+  finally { loginBusy = false; btn.classList.remove('is-busy'); btn.disabled = false; }
 });
 if (REMOTE) {
   $('#roleSwitch').textContent = '로그아웃';
@@ -2271,9 +2688,9 @@ if (REMOTE) {
 function renderAdmin() {
   $('#roleBadge').textContent = role ? roleText() : '역할 선택 전';
   const tabs = ADM_TABS.filter(t => (!role || isHQ() || REGION_TABS.includes(t[0])) && (t[0] !== 'accounts' || (REMOTE && isHQ())));
-  const counts = { apps: scopeApps().filter(a => a.status === '접수').length };
+  const counts = { apps: scopeApps().filter(a => a.status === '접수').length, inqs: isHQ() ? S.inqs.filter(q => q.status === '접수').length : 0 };
   $('#admNav').innerHTML = tabs.map(([id, t, ic]) => `<button type="button" data-tab="${id}" ${admTab === id ? 'aria-current="page"' : ''}>${icon(ic)}${id === 'dash' && role && !isHQ() ? '대시보드' : t}${counts[id] ? `<span class="n">${counts[id]}</span>` : ''}</button>`).join('');
-  const fn = { dash: admDash, apps: admApps, secs: admSecs, org: admOrg, prayer: admPrayer, docs: admDocs, notify: admNotify, dons: admDons, accounts: admAccounts, data: admData }[admTab] || admDash;
+  const fn = { dash: admDash, apps: admApps, secs: admSecs, org: admOrg, prayer: admPrayer, docs: admDocs, notify: admNotify, dons: admDons, inqs: admInqs, accounts: admAccounts, data: admData }[admTab] || admDash;
   $('#admMain').innerHTML = `<div class="adm-panel">${role ? fn() : '<p class="adm-sub">역할을 고르면 관리 화면이 열립니다.</p>'}</div>`;
   if (admTab === 'docs') genDoc();
   if (admTab === 'notify') genNotify();
@@ -2358,7 +2775,7 @@ function admApps() {
     <button class="btn xs btn-line" type="button" data-act="csv-apps">CSV 내려받기</button>
   </div>
   <div class="tbl-wrap"><table class="tbl"><thead><tr><th><label class="check"><input type="checkbox" id="chkAll" aria-label="모두 선택"></label></th><th>접수번호</th><th>유형</th><th>구간</th><th>이름</th><th class="num">인원</th><th>연락처</th><th>소속</th><th>상태</th><th>처리</th></tr></thead><tbody>
-  ${rows.length ? rows.map(a => { const s = SEC[a.section]; return `<tr data-app="${a.id}"><td><label class="check"><input type="checkbox" class="chk" value="${a.id}" aria-label="${esc(a.name)} 선택"></label></td><td class="nowrap">${esc(a.no || '')}</td><td>${TYPE_KO[a.type] || a.type}${a.vrole ? `<br><small style="color:var(--muted)">${esc(a.vrole)}</small>` : ''}</td><td>${s ? esc(secLabel(s)) : (a.section === 'ALL' ? '전 구간' : '온라인')}</td><td><button class="link-arrow" type="button" data-act="edit-app" data-id="${a.id}" style="padding:0">${esc(a.name)}</button>${a.guardian ? ' <span class="pill warn">미성년</span>' : ''}${a.sample ? ' <span class="pill">예시</span>' : ''}</td><td class="num">${a.heads || 1}</td><td class="nowrap">${esc(a.phone)}</td><td>${esc(a.org || '')}</td><td><span class="pill ${STATUS_PILL[a.status] || ''}">${a.status}</span></td><td class="nowrap"><button class="btn xs" type="button" data-st="승인" data-id="${a.id}">승인</button> <button class="btn xs btn-line" type="button" data-st="취소" data-id="${a.id}">취소</button></td></tr>`; }).join('')
+  ${rows.length ? rows.map(a => { const s = SEC[a.section]; return `<tr data-app="${a.id}"><td><label class="check"><input type="checkbox" class="chk" value="${a.id}" aria-label="${esc(a.name)} 선택"></label></td><td class="nowrap">${esc(a.no || '')}</td><td>${TYPE_KO[a.type] || a.type}${a.isGroup ? ' <span class="pill">단체</span>' : ''}${a.vrole ? `<br><small style="color:var(--muted)">${esc(a.vrole)}</small>` : ''}</td><td>${s ? esc(secLabel(s)) : (a.section === 'ALL' ? '전 구간' : '온라인')}</td><td><button class="link-arrow" type="button" data-act="edit-app" data-id="${a.id}" style="padding:0">${esc(a.name)}</button>${a.guardian ? ' <span class="pill warn">미성년</span>' : ''}${a.sample ? ' <span class="pill">예시</span>' : ''}</td><td class="num">${a.heads || 1}</td><td class="nowrap">${esc(a.phone)}</td><td>${esc(a.org || '')}</td><td><span class="pill ${STATUS_PILL[a.status] || ''}">${a.status}</span></td><td class="nowrap"><button class="btn xs" type="button" data-st="승인" data-id="${a.id}">승인</button> <button class="btn xs btn-line" type="button" data-st="취소" data-id="${a.id}">취소</button></td></tr>`; }).join('')
     : `<tr><td colspan="10">${empty('아직 신청이 없습니다', '홈페이지에서 신청하거나 ‘현장 등록’으로 추가하세요.')}</td></tr>`}
   </tbody></table></div>`;
 }
@@ -2467,6 +2884,7 @@ function admOrg() {
   if (!tabs.find(t => t[0] === orgTab)) orgTab = tabs[0][0];
   const body = { chart: orgChart, comms: orgComms, hq: orgHq, groups: orgGroups }[orgTab]();
   return `<h2>조직 관리</h2><p class="adm-sub">${isHQ() ? '대회 조직도와 분과위원회, 17개 시·도 지역본부, 참여 교회·단체를 한곳에서 관리합니다.' : role.sido + '지역본부와 우리 지역 참여 단체를 관리합니다.'}</p>
+  <div class="adm-note">조직도·분과위원장·지역본부장의 <b>이름·직분·소속</b>은 홈페이지 ‘함께 준비하는 사람들’에 바로 공개됩니다. 연락처와 메모는 공개되지 않습니다. 본인 동의를 받은 뒤 올려 주세요.</div>
   <div class="seg subtabs" role="tablist">${tabs.map(([k, t]) => `<button type="button" role="tab" data-org="${k}" aria-selected="${orgTab === k}">${t}</button>`).join('')}</div>${body}`;
 }
 function orgChart() {
@@ -2673,6 +3091,26 @@ function admDons() {
   </tbody></table></div>`;
 }
 
+/* --- 온라인 문의 --- */
+function admInqs() {
+  const rows = S.inqs.slice().reverse();
+  const open = S.inqs.filter(q => q.status === '접수').length;
+  return `<h2>온라인 문의</h2><p class="adm-sub">홈페이지 ‘사무국에 물어보세요’로 들어온 글입니다. 휴대전화로 답한 뒤 ‘답변완료’로 바꾸세요.</p>
+  <div class="kpis">${kpi('전체 문의', S.inqs.length + '건')}${kpi('답변 대기', open + '건')}</div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>일시</th><th>제목</th><th>이름</th><th>연락처</th><th>상태</th></tr></thead><tbody>
+  ${rows.length ? rows.map(q => `<tr><td class="nowrap">${q.ts ? new Date(q.ts).toLocaleString('ko-KR', { dateStyle: 'short', timeStyle: 'short' }) : ''}</td><td><button class="link-arrow" type="button" data-inq="${q.id}">${esc(q.title)}</button></td><td>${esc(q.name)}</td><td class="nowrap">${esc(q.phone)}</td><td><span class="pill ${q.status === '접수' ? 'warn' : 'ok'}">${esc(q.status)}</span></td></tr>`).join('')
+    : `<tr><td colspan="5">${empty('아직 문의가 없습니다', '홈페이지 아래쪽 ‘사무국에 물어보세요’에서 들어옵니다.')}</td></tr>`}
+  </tbody></table></div>`;
+}
+function inqEdit(q) {
+  openForm({ title: q.title, sub: `${q.name} · ${q.phone}${q.ts ? ' · ' + new Date(q.ts).toLocaleString('ko-KR') : ''}`,
+    fields: [{ name: 'status', label: '상태', type: 'select', options: [['접수', '접수 (답변 대기)'], ['답변완료', '답변완료']], value: q.status },
+      { name: 'memo', label: '처리 메모 (내부용)', type: 'textarea', full: true, rows: 3, value: q.memo }],
+    extra: `<div class="adm-note" style="margin:16px 0 0;white-space:pre-wrap;color:var(--ink)">${esc(q.body)}</div>`,
+    onDelete: () => { S.inqs = S.inqs.filter(x => x.id !== q.id); save('inqs'); renderAdmin(); toast('문의를 삭제했습니다'); },
+    onSubmit: v => { Object.assign(q, v); save('inqs'); renderAdmin(); toast('저장했습니다'); } });
+}
+
 /* --- 관리자 계정 (서버) --- */
 function admAccounts() {
   return `<h2>관리자 계정</h2><p class="adm-sub">ccn24.com에 가입한 계정에 삼일만세길 관리 권한을 줍니다. 지역본부장은 자기 시·도 구간의 신청자·숙영지·질서유지인만 보고 고칩니다.</p>
@@ -2718,7 +3156,7 @@ function admData() {
   </div>
   ${REMOTE ? '' : `<div class="card"><h3>전체 초기화</h3><p style="margin:0 0 14px;font-size:14px;color:var(--muted)">이 브라우저에 저장된 신청·조직·구간·후원 정보를 모두 지웁니다. 먼저 백업을 내려받으세요.</p><button class="btn sm btn-line" type="button" data-act="wipe" id="wipeBtn">전체 초기화</button></div>`}`;
 }
-const TABLES = ['apps', 'dons', 'subs', 'meta', 'people', 'comms', 'hq', 'groups', 'prayer', 'logs'];
+const TABLES = ['apps', 'dons', 'subs', 'meta', 'people', 'comms', 'hq', 'groups', 'prayer', 'logs', 'inqs'];
 function seedSamples() {
   const fam = '김이박최정강조윤장임한오서신권황안송류홍전고문양손배백허유남심노하곽성차주우구민진나지엄채원천방공현함변염여추도소석선설마길연위표명기반왕금옥육인맹제모탁국어은편용'.split('');
   const giv = ['민준', '서연', '지호', '하은', '도윤', '수아', '예준', '지우', '현우', '서윤', '성민', '영숙', '정희', '상철', '은주', '동현', '미경', '재훈', '순자', '태호', '경민', '혜진', '준서', '유진', '광수'];
@@ -2803,7 +3241,7 @@ $('#admMain').addEventListener('input', e => {
 });
 document.addEventListener('click', e => {
   if ($('#adminView').hidden) return;
-  const t = e.target.closest('[data-act],[data-go],[data-st],[data-bulk],[data-sec],[data-org],[data-comm],[data-hq],[data-group],[data-don]');
+  const t = e.target.closest('[data-act],[data-go],[data-st],[data-bulk],[data-sec],[data-org],[data-comm],[data-hq],[data-group],[data-don],[data-inq]');
   if (!t) return;
   if (t.dataset.go) { if (Modal.top()) return; admTab = t.dataset.go; renderAdmin(); return; }
   if (t.dataset.st) { setStatus([t.dataset.id], t.dataset.st); if (Modal.isOpen($('#secDrawer'))) openDrawer(drawerSec); return; }
@@ -2812,6 +3250,7 @@ document.addEventListener('click', e => {
   if (t.dataset.comm) { commForm(t.dataset.comm); return; }
   if (t.dataset.hq) { hqForm(t.dataset.hq); return; }
   if (t.dataset.group) { groupForm(S.groups.find(g => g.id === t.dataset.group)); return; }
+  if (t.dataset.inq) { const q = S.inqs.find(x => x.id === t.dataset.inq); if (q) inqEdit(q); return; }
   if (t.dataset.don) { const d = S.dons.find(x => x.id === t.dataset.don); if (d) { d.status = t.dataset.dst; save('dons'); renderAdmin(); toast(`${d.name} — ${t.dataset.dst}`); } return; }
   if (t.dataset.sec && !t.dataset.act) { if (e.target.closest('button,a,input,label')) return; openDrawer(t.dataset.sec); return; }
   const id = t.dataset.id;
@@ -2875,7 +3314,7 @@ function restorePick(file) {
 /* ================================================================
    시작
    ================================================================ */
-updateSearchUI(); renderDeps(true); renderTorch(false); renderDonSum(); setKm(10);
+updateSearchUI(); renderDeps(true); renderTorch(false); renderDonSum(); setKm(10); loadPublicOrg();
 syncSearchH(); onScroll(); observeReveals();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncSearchH);
 if (REMOTE) {
