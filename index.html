@@ -293,6 +293,8 @@ button.chip:active{transform:scale(.96)}
 .hero-ctrl{position:absolute;right:var(--gutter);top:calc(var(--header-h) + 14px);z-index:3;display:flex;gap:8px}
 .hero-ctrl button{min-height:34px;padding:0 14px;border-radius:999px;background:rgba(20,14,6,.42);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:12.5px;font-weight:600;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background-color var(--d-2),color var(--d-2)}
 .hero-ctrl button:hover{background:rgba(20,14,6,.62)}
+.hero-hint{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:999px;background:rgba(20,14,6,.42);color:#fff;font-size:12.5px;font-weight:600;opacity:.9;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:soft-in 600ms var(--ease-out) both}
+@media (max-width:560px){.hero-hint{display:none}}
 .hero-ctrl button[aria-pressed="true"]{background:#fff;color:var(--ink)}
 @media (max-width:760px){
   .fx-route::before{background:linear-gradient(180deg,rgba(14,11,7,.78) 0,rgba(14,11,7,.3) 32%,rgba(14,11,7,0) 50%)}
@@ -1077,7 +1079,7 @@ textarea.doc{width:100%;min-height:340px;padding:14px;border-radius:14px;border:
     </div>
     <span class="fx-fly" id="fxFly"><svg viewBox="0 0 24 24"><use href="#i-flame"/></svg></span>
   </div>
-  <div class="hero-ctrl"><button type="button" id="heroSound" aria-pressed="true">소리 끄기</button><button type="button" id="heroSkip">건너뛰기</button></div>
+  <div class="hero-ctrl"><span class="hero-hint" id="heroHint" hidden>화면을 한 번 누르면 소리가 나옵니다</span><button type="button" id="heroSound" aria-pressed="true">소리 끄기</button><button type="button" id="heroSkip">건너뛰기</button></div>
   <form class="hero-search" id="heroSearch" role="search" aria-label="걷고 싶은 구간 찾기">
     <div class="wrap search-in">
       <div class="field"><span class="f-label" id="fl-mode">참가 방식</span><button type="button" class="f-trigger" data-filter="mode" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fl-mode fv-mode"><span id="fv-mode">모든 구간</span><svg class="ic"><use href="#i-down"/></svg></button></div>
@@ -1969,7 +1971,8 @@ function countUp(el) {
 const ROUTE_AT = 24000;   // 히어로 영상에서 코스 장면이 시작하는 때(ms). 선언서는 18초에 풀이가 나오고 6초 머문다
 const HeroSound = (() => {
   let ctx = null, master = null, verb = null, sonar = null, buf = null;
-  const api = { on: (() => { try { return localStorage.getItem('mansegil-sound') !== 'off'; } catch (e) { return true; } })(), unlocked: false, start, stop };
+  const api = { on: (() => { try { return localStorage.getItem('mansegil-sound') !== 'off'; } catch (e) { return true; } })(), unlocked: false, start, stop,
+    wake() { if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {}); }, state: () => ctx ? ctx.state : 'none' };
   // 화음(낮은 음 → 높은 음)과 베이스 뿌리음(Hz)
   const CH = {
     Dm: { n: [146.83, 174.61, 220, 293.66], b: 73.42 }, Bb: { n: [116.54, 146.83, 174.61, 233.08], b: 58.27 },
@@ -2038,7 +2041,7 @@ const HeroSound = (() => {
   function start(elapsedMs) {
     stop();
     const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
-    ctx = new AC();
+    ctx = new AC(); if (ctx.state === 'suspended') ctx.resume().catch(() => {});
     const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 4;
     master = ctx.createGain(); master.gain.value = .75; master.connect(comp).connect(ctx.destination);
     verb = makeVerb(); const vg = ctx.createGain(); vg.gain.value = .9; verb.connect(vg).connect(master);
@@ -2256,9 +2259,9 @@ const HeroMotion = (() => {
     cityGs.forEach((g, i) => g.classList.toggle('now', i === k));
     setCap('108년 뒤, 그 길을 다시', c.name, c.date, c.hist);
   }
-  function travel(k, dur) {        // k-1번째 도시에서 k번째 도시로, 카메라가 횃불을 따라간다
-    const d0 = CITIES[k - 1].d, d1 = CITIES[k].d, w = followW();
-    tween(dur, t => { const d = d0 + (d1 - d0) * ease(t); placeTorch(d); setCam(camOn(torchAt, w)); });
+  function travel(k, dur) {        // k-1번째 도시에서 k번째 도시로: 지도는 그대로, 선과 횃불만 나아간다
+    const d0 = CITIES[k - 1].d, d1 = CITIES[k].d;
+    tween(dur, t => placeTorch(d0 + (d1 - d0) * ease(t)));
   }
   function typeLine(text, per) {
     const el = $('#fxType'); el.textContent = '';
@@ -2297,7 +2300,7 @@ const HeroMotion = (() => {
     stopAll(); resetFx();
     heroEl.classList.remove('s2', 's3', 's4'); setP(0);
     $$('[data-hk]', heroEl).forEach(el => { el.textContent = '0'; });
-    playing = true; t0 = performance.now(); skipBtn.textContent = '건너뛰기';
+    playing = true; t0 = performance.now(); skipBtn.textContent = '건너뛰기'; if (typeof showHint === 'function') showHint();
     if (HeroSound.on && HeroSound.unlocked) HeroSound.start(0);
     const T = (ms, fn) => timers.push(setTimeout(fn, ms));
     T(4200, () => { heroEl.classList.add('s2'); count(1700); });                 // 만세가 작아지고 숫자가 오른다
@@ -2313,13 +2316,11 @@ const HeroMotion = (() => {
       heroEl.classList.replace('s5', 's6'); measure(); setCam(fullCam()); placeTorch(0);
       setCap('108년 뒤, 그 길을 다시', '제주에서 임진각까지', '2027. 6. 26 – 8. 15', `서부 본대 ${fmt(TOTAL_KM)}km · ${D.west.length}일, 1919년 만세의 자리를 잇습니다`);
     });
-    T(R + 1800, () => camTween(camOn(CITIES[0].xy, followW()), 1200));
     T(R + 3000, () => showCity(0));
     for (let k = 1; k < CITIES.length; k++) {                                   // 도시마다 1.2초 이동 + 1.8초 머묾
       T(R + 4200 + (k - 1) * 3000, () => travel(k, 1200));
       T(R + 5400 + (k - 1) * 3000, () => showCity(k));
     }
-    T(R + 31200, () => camTween(fullCam(), 1400));                               // 다시 전체 지도로
     T(R + 33000, () => { heroEl.classList.replace('s6', 's7'); fx.classList.add('flames'); cityGs.forEach(g => g.classList.remove('now')); setCap('열일곱 개의 불이 하나로', '2027. 8. 15', '파주 임진각에서 만납니다', '17개 시·도에서 채화한 횃불이 하나 된 불로 타오릅니다'); });
     T(R + 34200, () => { fx.classList.add('merge'); sfs.forEach(g => { g.style.transform = `translate(${END[0].toFixed(1)}px,${END[1].toFixed(1)}px)`; }); });
     T(R + 36000, land);                                                           // 하나 된 불이 로고에 내려앉는다
@@ -2327,10 +2328,13 @@ const HeroMotion = (() => {
   }
   skipBtn.addEventListener('click', () => { if (playing) finish(); else play(); });
   // 브라우저는 사람이 한 번 누르기 전에는 소리를 막는다: 첫 누름·키 입력 때 영상의 지금 시점부터 소리를 잇는다
-  const UNLOCK = ['pointerdown', 'keydown', 'touchstart'];
-  function unlock() {
-    if (HeroSound.unlocked) return;
-    HeroSound.unlocked = true; UNLOCK.forEach(ev => removeEventListener(ev, unlock, true));
+  const UNLOCK = ['pointerdown', 'pointerup', 'mousedown', 'click', 'keydown', 'touchend'];
+  const hint = $('#heroHint');
+  function showHint() { hint.hidden = !(HeroSound.on && !HeroSound.unlocked && playing); }
+  function unlock(e) {
+    if (e && e.type === 'keydown' && (e.key === 'Escape' || e.ctrlKey || e.metaKey || e.altKey)) return;   // 단축키는 브라우저가 인정하지 않는다
+    if (HeroSound.unlocked) { HeroSound.wake(); return; }
+    HeroSound.unlocked = true; hint.hidden = true;
     if (HeroSound.on && playing) HeroSound.start(performance.now() - t0);
   }
   UNLOCK.forEach(ev => addEventListener(ev, unlock, true));
@@ -2338,13 +2342,13 @@ const HeroMotion = (() => {
     const on = !HeroSound.on;
     HeroSound.on = on; soundBtn.setAttribute('aria-pressed', String(on)); soundBtn.textContent = on ? '소리 끄기' : '소리 켜기';
     try { localStorage.setItem('mansegil-sound', on ? 'on' : 'off'); } catch (e) {}
-    HeroSound.unlocked = true;
+    HeroSound.unlocked = true; hint.hidden = true;
     if (!on) HeroSound.stop(); else if (playing) HeroSound.start(performance.now() - t0); else play();
   });
   // 히어로를 벗어나면 마지막 장면으로 정리한다
   new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting && playing) finish(); }), { threshold: 0.2 }).observe(heroEl);
   if (!HeroSound.on) { soundBtn.setAttribute('aria-pressed', 'false'); soundBtn.textContent = '소리 켜기'; }
-  if (reduceMotion) { $('.hero-ctrl').hidden = true; finish(); } else play();
+  if (reduceMotion) { $('.hero-ctrl').hidden = true; finish(); } else { play(); showHint(); }
   return { play, finish };
 })();
 
